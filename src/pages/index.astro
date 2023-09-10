@@ -1,0 +1,133 @@
+---
+import Icon from "astro-icon";
+import Layout from "../layouts/Layout.astro";
+import EducationElement from "../components/EducationElement.astro";
+import ProjectElement from "../components/ProjectElement.astro";
+---
+
+<Layout title="vsahni">
+  <main
+    class="mx-auto max-w-screen-md font-sans text-white print:text-black print:max-w-none py-8 px-4 print:px-0 print:py-0 drop-shadow-xl print:drop-shadow-none"
+  >
+    <h1 class="text-4xl font-bold">
+      <span class="print:hidden"
+        >Hi 👋 <br />
+        <div class="font-medium">
+          I'm <span class="text-orange-500">Varun Sahni</span>
+        </div></span
+      >
+      <span class="hidden print:block print:text-center">Varun Sahni</span>
+      <span
+        class="hidden print:block print:text-center text-base font-light relative left-1"
+        >Gurugram, India</span
+      >
+    </h1>
+    <hr class="print:hidden" />
+    <div
+      id="socials"
+      class="print:hidden flex items-center gap-4 mt-3 child:underline child:underline-offset-2 child:text-blue-300 child:duration-200 child-hover:text-amber-500 child-hover:scale-125 child:w-[28px] shadow-amber-400 child-hover:drop-shadow-[0_2px_8px_#fbbf24aa]"
+    >
+      <a href="https://github.com/notskamr" title="GitHub"
+        ><Icon name="ri:github-line" /></a
+      >
+      <a href="/blog" title="Blog"><Icon name="icomoon-free:blog" /></a>
+    </div>
+    <hr />
+    <p class="print:hidden">
+      I'm a high school student from India. I love everything computers from
+      web-dev to computer engineering to networking and so on... I'm also a huge
+      fan of open-source software and I try to contribute to it as much as I
+      can. My main interest nowadays is Computer Engineering, specifically
+      Computer Architecture - I just find learning how computers work extremely
+      fascinating and I'm trying to learn as much as I can about it <i
+        >(there's so much abstraction!)</i
+      >
+    </p>
+    <hr class="print:hidden" />
+    <section id="education">
+      <h2
+        class="text-2xl md:text-3xl text-yellow-500 print:text-black font-semibold underline underline-offset-[8px] mb-2"
+      >
+        Education/Courses
+      </h2>
+      <div id="education-content">
+        <EducationElement
+          name="The Shri Ram School, Moulsari"
+          subline={`- IBDP Year 1 Student <br> - Completed IGCSE, 9 A*s`}
+          dates="2019-Present"
+          location="Gurugram, HR, IN"
+        />
+        <EducationElement
+          name={`<a class="underline underline-offset-2 print:no-underline" href="https://courses.edx.org/certificates/42202c295c1e4969b6543af1026b86d3" target="_blank" rel="noopener noreferrer">Harvard's CS50x</a>`}
+          dates="2022"
+          location="Online"
+          subline={`Finished with verified certificate. Created <a class="underline underline-offset-2 print:no-underline" href="https://firewood.vsahni.me/" target="_blank" rel="noopener noreferrer">Firewood</a> as a final project.`}
+          sublineMobile="Verified certificate completion"
+        />
+        <EducationElement
+          name="Plaksha University, Young Tech Scholars"
+          dates="June 2022"
+          location=""
+          subline="Attended Plaksha's two-week YTS Program"
+        />
+        <EducationElement
+          name="University of California, Berkeley"
+          dates="June 2023-August 2023"
+          location="Berkeley, CA, USA"
+          subline="Completed CS61C and DATA 8 at UC Berkeley's pre-college summer program with a 3.5 GPA (A- and B+ respectively)"
+          sublineMobile="Summer program: CS61C, DATA8; 3.5GPA"
+        />
+      </div>
+    </section>
+    <hr />
+    <section id="projects">
+      <h2
+        class="text-2xl md:text-3xl text-yellow-500 print:text-black font-semibold underline underline-offset-[8px] mb-[min(2.3vh,2.5rem)]"
+      >
+        Projects
+      </h2>
+      <div
+        id="projects-content"
+        class="grid md:grid-cols-2 print:grid-cols-2 gap-4"
+      >
+        <ProjectElement
+          name="Firewood"
+          subline="A super-simple video calling website"
+          imgURL="https://firewood.vsahni.me/"
+        />
+        <ProjectElement
+          name="Firewood"
+          subline="A super-simple video calling website"
+          imgURL="https://firewood.vsahni.me/"
+        />
+        <ProjectElement
+          name="Firewood"
+          subline="A super-simple video calling website"
+          imgURL="https://firewood.vsahni.me/"
+        />
+        <ProjectElement
+          name="Firewood"
+          subline="A super-simple video calling website"
+          imgURL="https://firewood.vsahni.me/"
+        />
+      </div>
+    </section>
+    <hr />
+    <section id="awards">
+      <h2
+        class="text-2xl md:text-3xl text-yellow-500 print:text-black font-semibold underline underline-offset-[8px] mb-2"
+      >
+        Awards
+      </h2>
+      <ol class="list-disc pl-5">
+        <li>1st Place ShriTeq Hackathon Winner</li>
+      </ol>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  hr {
+    @apply w-full border-[1px] border-neutral-700 print:border-neutral-500 mt-4 mb-4 rounded-full;
+  }
+</style>

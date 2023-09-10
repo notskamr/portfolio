@@ -1,0 +1,27 @@
+---
+interface Props {
+  name: string;
+  subline: string;
+  sublineMobile?: string;
+  dates: string;
+  location: string;
+}
+const { name, subline, sublineMobile = "", dates, location } = Astro.props;
+---
+
+<div class="flex justify-between items-center py-4 gap-12">
+  <div>
+    <h3 class="text-base md:text-lg font-medium">
+      <span set:html={name} />
+    </h3>
+    <p class="text-[1rem] font-light hidden md:block" set:html={subline} />
+    <p class="text-sm font-light block md:hidden" set:html={sublineMobile} />
+  </div>
+  <div class="text-right">
+    <p class="text-sm md:text-base font-normal italic md:whitespace-nowrap">
+      {dates}
+    </p>
+    <p class="text-sm md:text-base font-light whitespace-nowrap">{location}</p>
+  </div>
+</div>
+<style></style>
