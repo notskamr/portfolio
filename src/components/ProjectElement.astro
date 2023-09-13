@@ -2,28 +2,49 @@
 interface Props {
   name: string;
   subline: string;
+  href: string;
   imgURL: string;
+  invertLogoOnHover?: boolean;
+  invertLogoWhenPrint?: boolean;
+  rootDivClass?: string;
 }
-const { name, subline, imgURL } = Astro.props;
+const {
+  name,
+  subline,
+  href,
+  imgURL,
+  invertLogoOnHover = true,
+  invertLogoWhenPrint = false,
+  rootDivClass = "",
+} = Astro.props;
 ---
 
-<a href={imgURL}
+<a href={href} target="_blank" rel="noopener noreferrer"
   ><div
-    class="duration-200 bg-neutral-800 print:bg-transparent shadow-2xl print:shadow-none px-4 hover:invert flex items-center text-xl sm:text-lg h-[100px] print:h-fit print:py-2"
+    class={"duration-200 bg-neutral-800 hover:bg-neutral-200 print:bg-transparent shadow-2xl hover:shadow-white/60 print:shadow-none px-4 py-2 group flex items-center text-xl sm:text-lg print:h-fit " +
+      rootDivClass}
   >
-    <div class="border-2 h-[80%] md:h-fit border-gray-600 overflow-hidden mr-4">
+    <div
+      class={"min-w-[80px] h-[80px] w-[80px] border-gray-600 overflow-hidden mr-4 drop-shadow-[2px_2px_2px_#000F] duration-200 " +
+        (invertLogoOnHover
+          ? " group-hover:child:invert group-hover:drop-shadow-[2px_2px_12px_#0007]"
+          : "") +
+        (invertLogoWhenPrint ? " print:invert" : "")}
+    >
       <img
-        src="https://placehold.co/100x100"
+        src={imgURL}
         alt="Logo"
         width="1"
         height="1"
-        class="h-full w-full object-cover object-center"
+        class="h-full w-full object-cover object-center duration-200"
       />
     </div>
-    <div class="flex flex-col items-start justify-center text-left">
-      <div class="text-base sm:text-lg font-semibold">{name}</div>
+    <div
+      class="flex flex-col items-start justify-center text-left gap-y-[2px] group-hover:invert duration-200 drop-shadow-[2px_2px_1px_#000] group-hover:drop-shadow-none"
+    >
+      <div class="text-sm sm:text-md font-semibold">{name}</div>
       <div
-        class="text-sm sm:text-base font-light relative bottom-[4px] text-white/90 print:text-black/90"
+        class="text-xs sm:text-sm font-light relative bottom-[4px] text-white/90 print:text-black/90"
       >
         {subline}
       </div>

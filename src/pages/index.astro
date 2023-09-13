@@ -31,6 +31,14 @@ import ProjectElement from "../components/ProjectElement.astro";
         ><Icon name="ri:github-line" /></a
       >
       <a href="/blog" title="Blog"><Icon name="icomoon-free:blog" /></a>
+      <button
+        class="w-[30px!important]"
+        type="button"
+        title="Print Resume"
+        id="print-resume"
+      >
+        <Icon name="mi:print" />
+      </button>
     </div>
     <hr />
     <p class="print:hidden">
@@ -54,7 +62,8 @@ import ProjectElement from "../components/ProjectElement.astro";
         <EducationElement
           name="The Shri Ram School, Moulsari"
           subline={`- IBDP Year 1 Student <br> - Completed IGCSE, 9 A*s`}
-          dates="2019-Present"
+          sublineMobile={`- IBDP Year 1 Student <br> - Completed IGCSE, 9 A*s`}
+          dates="2018-Present"
           location="Gurugram, HR, IN"
         />
         <EducationElement
@@ -75,7 +84,7 @@ import ProjectElement from "../components/ProjectElement.astro";
           dates="June 2023-August 2023"
           location="Berkeley, CA, USA"
           subline="Completed CS61C and DATA 8 at UC Berkeley's pre-college summer program with a 3.5 GPA (A- and B+ respectively)"
-          sublineMobile="Summer program: CS61C, DATA8; 3.5GPA"
+          sublineMobile="Summer program: CS61C (A-), DATA8 (B+); 3.5GPA"
         />
       </div>
     </section>
@@ -93,22 +102,18 @@ import ProjectElement from "../components/ProjectElement.astro";
         <ProjectElement
           name="Firewood"
           subline="A super-simple video calling website"
-          imgURL="https://firewood.vsahni.me/"
+          href="https://firewood.vsahni.me/"
+          imgURL="/assets/fw-logo.png"
+          invertLogoOnHover={false}
+          rootDivClass="hover:bg-amber-500 hover:shadow-amber-700"
         />
         <ProjectElement
-          name="Firewood"
-          subline="A super-simple video calling website"
-          imgURL="https://firewood.vsahni.me/"
-        />
-        <ProjectElement
-          name="Firewood"
-          subline="A super-simple video calling website"
-          imgURL="https://firewood.vsahni.me/"
-        />
-        <ProjectElement
-          name="Firewood"
-          subline="A super-simple video calling website"
-          imgURL="https://firewood.vsahni.me/"
+          name="Parallelized"
+          subline="Organized an interschool code optimization competition"
+          href="https://parallelized.in"
+          imgURL="/assets/parallelized-small.svg"
+          invertLogoOnHover={true}
+          invertLogoWhenPrint={true}
         />
       </div>
     </section>
@@ -121,9 +126,16 @@ import ProjectElement from "../components/ProjectElement.astro";
       </h2>
       <ol class="list-disc pl-5">
         <li>1st Place ShriTeq Hackathon Winner</li>
+        <li>"The Shri Ram School, Moulsari" Innovator Award 2023 x 2</li>
+        <li>DIGEX 2023 Hi-Res (Documentary Competition) Runner's Up</li>
       </ol>
     </section>
   </main>
+  <script>
+    document.getElementById("print-resume").addEventListener("click", () => {
+      window.print();
+    });
+  </script>
 </Layout>
 
 <style>
