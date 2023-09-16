@@ -31,8 +31,11 @@ import ProjectElement from "../components/ProjectElement.astro";
         ><Icon name="ri:github-line" /></a
       >
       <a href="/blog" title="Blog"><Icon name="icomoon-free:blog" /></a>
+      <a href="mailto:contact@vsahni.me" title="E-mail" class="!w-[30px]"
+        ><Icon name="ic:outline-mail" /></a
+      >
       <button
-        class="w-[30px!important]"
+        class="!w-[30px]"
         type="button"
         title="Print Resume"
         id="print-resume"
@@ -71,13 +74,14 @@ import ProjectElement from "../components/ProjectElement.astro";
           dates="2022"
           location="Online"
           subline={`Finished with verified certificate. Created <a class="underline underline-offset-2 print:no-underline" href="https://firewood.vsahni.me/" target="_blank" rel="noopener noreferrer">Firewood</a> as a final project.`}
-          sublineMobile="Verified certificate completion"
+          sublineMobile={`Finished with verified certificate. Created <a class="underline underline-offset-2 print:no-underline" href="https://firewood.vsahni.me/" target="_blank" rel="noopener noreferrer">Firewood</a> as a final project.`}
         />
         <EducationElement
           name="Plaksha University, Young Tech Scholars"
           dates="June 2022"
           location=""
-          subline="Attended Plaksha's two-week YTS Program"
+          subline="Attended Plaksha's two-week YTS Program. Built a self-navigating robot using LIDAR, ultrasound and infrared sensors with Arduino and C++ from scratch."
+          sublineMobile="Summer program: Built a self-navigating robot using LIDAR, ultrasound and infrared sensors with Arduino and C++ from scratch."
         />
         <EducationElement
           name="University of California, Berkeley"
@@ -105,7 +109,8 @@ import ProjectElement from "../components/ProjectElement.astro";
           href="https://firewood.vsahni.me/"
           imgURL="/assets/fw-logo.png"
           invertLogoOnHover={false}
-          rootDivClass="hover:bg-amber-500 hover:shadow-amber-700"
+          rootDivClass="hover:!bg-amber-500 hover:!shadow-amber-700 relative z-[99]"
+          imgDivClass="drop-shadow-[2px_2px_2px_#000F]"
         />
         <ProjectElement
           name="Parallelized"
@@ -114,6 +119,42 @@ import ProjectElement from "../components/ProjectElement.astro";
           imgURL="/assets/parallelized-small.svg"
           invertLogoOnHover={true}
           invertLogoWhenPrint={true}
+          rootDivClass="relative z-[98]"
+          imgDivClass="drop-shadow-[2px_2px_2px_#000F]"
+        />
+        <ProjectElement
+          name="CS61CPU"
+          subline="My favorite project from CS61C at UC Berkeley; RISC-V CPU in Logisim"
+          href="https://inst.eecs.berkeley.edu/~cs61c/su23/projects/proj3/"
+          imgURL="/assets/cs61c.webp"
+          invertLogoOnHover={false}
+          rootDivClass="hover:!bg-teal-300 hover:!shadow-teal-600 relative z-[97]"
+          imgDivClass="group-hover:child:saturate-200 drop-shadow-[0px_2px_1px_#000F]"
+        />
+        <ProjectElement
+          name="kNN Movie Classification"
+          subline="My favourite DATA8 project; kNN movie classifier based on word usage"
+          href="#"
+          imgURL="/assets/data8.webp"
+          invertLogoOnHover={false}
+          rootDivClass="hover:!bg-blue-400 hover:!shadow-blue-500 relative z-[96]"
+          imgDivClass="group-hover:child:saturate-200 drop-shadow-[2px_2px_2px_#000F]"
+        />
+        <ProjectElement
+          name="CortX"
+          subline={'Medical management web-app, won ShriTeq Hackathon 2022.<br> <i class="text-xs print:hidden">I made the logo</i>'}
+          href="https://urls.vsahni.me/cortx"
+          imgURL="/assets/cortx.webp"
+          invertLogoOnHover={false}
+          rootDivClass="hover:!bg-rose-400 hover:!shadow-rose-500 relative z-[95]"
+          imgDivClass="child:!object-contain drop-shadow-[2px_2px_2px_#000F]"
+        />
+        <ProjectElement
+          name="MusicAI 2023"
+          subline="Quiz-based game for awareness about AI-generated music, played by 150+ students"
+          href="https://urls.vsahni.me/musicai2023"
+          imgURL="/assets/musicai-white.svg"
+          imgDivClass="child:!object-contain"
         />
       </div>
     </section>

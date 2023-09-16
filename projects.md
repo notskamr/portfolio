@@ -1,0 +1,10 @@
+- Firewood
+- Parallelized
+- CS61C
+- DATA8 KNN
+- CortX
+- MusicAI
+- Minecraft mod (KageMod)
+- Created a website for video editing resources used by over 150k people
+- Intelliger
+- SoulBeats
