@@ -109,17 +109,17 @@ import ProjectElement from "../components/ProjectElement.astro";
           href="https://firewood.vsahni.me/"
           imgURL="/assets/fw-logo.png"
           invertLogoOnHover={false}
-          rootDivClass="hover:!bg-amber-500 hover:!shadow-amber-700 relative z-[99]"
+          rootDivClass="hover:!bg-amber-300 hover:!shadow-amber-400 relative z-[99]"
           imgDivClass="drop-shadow-[2px_2px_2px_#000F]"
         />
         <ProjectElement
           name="Parallelized"
-          subline="Organized an interschool code optimization competition"
+          subline="Interschool code optimization competition"
           href="https://parallelized.in"
           imgURL="/assets/parallelized-small.svg"
           invertLogoOnHover={true}
           invertLogoWhenPrint={true}
-          rootDivClass="relative z-[98]"
+          rootDivClass="hover:!bg-violet-200 hover:!shadow-violet-300 relative z-[98]"
           imgDivClass="drop-shadow-[2px_2px_2px_#000F]"
         />
         <ProjectElement
@@ -128,7 +128,7 @@ import ProjectElement from "../components/ProjectElement.astro";
           href="https://inst.eecs.berkeley.edu/~cs61c/su23/projects/proj3/"
           imgURL="/assets/cs61c.webp"
           invertLogoOnHover={false}
-          rootDivClass="hover:!bg-teal-300 hover:!shadow-teal-600 relative z-[97]"
+          rootDivClass="hover:!bg-teal-200 hover:!shadow-teal-400 relative z-[97]"
           imgDivClass="group-hover:child:saturate-200 drop-shadow-[0px_2px_1px_#000F]"
         />
         <ProjectElement
@@ -137,25 +137,50 @@ import ProjectElement from "../components/ProjectElement.astro";
           href="#"
           imgURL="/assets/data8.webp"
           invertLogoOnHover={false}
-          rootDivClass="hover:!bg-blue-400 hover:!shadow-blue-500 relative z-[96]"
+          rootDivClass="hover:!bg-blue-300 hover:!shadow-blue-400 relative z-[96]"
           imgDivClass="group-hover:child:saturate-200 drop-shadow-[2px_2px_2px_#000F]"
         />
         <ProjectElement
           name="CortX"
-          subline={'Medical management web-app, won ShriTeq Hackathon 2022.<br> <i class="text-xs print:hidden">I made the logo</i>'}
+          subline={"Medical management web-app, won ShriTeq Hackathon 2022."}
           href="https://urls.vsahni.me/cortx"
           imgURL="/assets/cortx.webp"
           invertLogoOnHover={false}
-          rootDivClass="hover:!bg-rose-400 hover:!shadow-rose-500 relative z-[95]"
-          imgDivClass="child:!object-contain drop-shadow-[2px_2px_2px_#000F]"
+          rootDivClass="hover:!bg-rose-300 hover:!shadow-rose-400 !py-[1ex] relative z-[95]"
+          imgDivClass="drop-shadow-[2px_2px_2px_#000F]"
         />
         <ProjectElement
           name="MusicAI 2023"
           subline="Quiz-based game for awareness about AI-generated music, played by 150+ students"
           href="https://urls.vsahni.me/musicai2023"
           imgURL="/assets/musicai-white.svg"
-          imgDivClass="child:!object-contain"
+          rootDivClass="relative z-[94]"
+          imgDivClass=""
         />
+        <ProjectElement
+          name="KageMod: Minecraft Mod"
+          subline="Minecraft mod with ~20K downloads"
+          href="https://www.curseforge.com/minecraft/mc-mods/kagemod"
+          imgURL="/assets/kagemod.webp"
+          invertLogoOnHover={false}
+          rootDivClass="hover:!bg-slate-200 hover:!shadow-slate-300 relative z-[93]"
+          imgDivClass="p-1"
+        />
+        <ProjectElement
+          name="Editing Community"
+          subline="VFX and Editing Community with 100k+ site visits"
+          href=""
+          rootAnchorClass="active:pointer-events-none"
+          imgURL="/assets/editing-community.webp"
+        />
+        <!-- <ProjectElement
+          name="Intelliger"
+          subline="Productivity app for students with a pomodoro timer, to-do list, notes and more"
+          href="#"
+          rootAnchorClass="active:pointer-events-none"
+          imgURL="/assets/intelliger.webp"
+          rootDivClass="relative z-[91]"
+        /> -->
       </div>
     </section>
     <hr />
@@ -166,9 +191,23 @@ import ProjectElement from "../components/ProjectElement.astro";
         Awards
       </h2>
       <ol class="list-disc pl-5">
-        <li>1st Place ShriTeq Hackathon Winner</li>
+        <li>1st Place, ShriTeq Hack-a-thon 2022</li>
         <li>"The Shri Ram School, Moulsari" Innovator Award 2023 x 2</li>
         <li>DIGEX 2023 Hi-Res (Documentary Competition) Runner's Up</li>
+      </ol>
+    </section>
+    <hr />
+    <section id="interests">
+      <h2
+        class="text-2xl md:text-3xl text-yellow-500 print:text-black font-semibold underline underline-offset-[8px] mb-2"
+      >
+        Interests
+      </h2>
+      <ol class="list-disc pl-5">
+        <li>Gaming</li>
+        <li>Music</li>
+        <li>VFX/Editing</li>
+        <li>YouTube</li>
       </ol>
     </section>
   </main>

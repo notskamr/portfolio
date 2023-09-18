@@ -1,4 +1,8 @@
 ---
+interface IMGDims {
+  width: number;
+  height: number;
+}
 interface Props {
   name: string;
   subline: string;
@@ -8,6 +12,7 @@ interface Props {
   invertLogoWhenPrint?: boolean;
   rootDivClass?: string;
   imgDivClass?: string;
+  customImgDims?: IMGDims;
   rootAnchorClass?: string;
 }
 const {
@@ -20,6 +25,7 @@ const {
   rootDivClass = "",
   imgDivClass = "",
   rootAnchorClass = "",
+  customImgDims = { width: 1, height: 1 },
 } = Astro.props;
 ---
 
@@ -39,13 +45,13 @@ const {
       <img
         src={imgURL}
         alt="Logo"
-        width="1"
-        height="1"
-        class="h-full w-full object-cover object-center duration-200"
+        width={customImgDims?.width}
+        height={customImgDims?.height}
+        class="h-full w-full object-contain object-center duration-200"
       />
     </div>
     <div
-      class="flex flex-col items-start justify-center text-left gap-y-[2px] group-hover:invert duration-200 transition-all drop-shadow-[2px_2px_1px_#000] group-hover:drop-shadow-none print:drop-shadow-none"
+      class="flex flex-col items-start justify-center text-left gap-y-[2px] invert-0 group-hover:invert duration-200 transition-all drop-shadow-[2px_2px_1px_#000] group-hover:drop-shadow-none print:drop-shadow-none"
     >
       <div class="text-sm sm:text-md font-semibold">{name}</div>
       <div
