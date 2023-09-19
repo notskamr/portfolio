@@ -7,13 +7,19 @@ import ProjectElement from "../components/ProjectElement.astro";
 
 <Layout title="vsahni">
   <main
-    class="mx-auto max-w-screen-md font-sans text-white print:text-black print:max-w-none py-8 px-4 print:px-0 print:py-0 drop-shadow-xl print:drop-shadow-none"
+    class="mx-auto max-w-screen-md scroll-smooth motion-reduce:scroll-auto font-sans text-white print:text-black print:max-w-none py-8 px-4 print:px-0 print:py-0 drop-shadow-xl print:drop-shadow-none"
   >
     <h1 class="text-4xl font-bold">
       <span class="print:hidden"
         >Hi 👋 <br />
         <div class="font-medium">
-          I'm <span class="text-orange-500">Varun Sahni</span>
+          I'm <span
+            class="text-orange-500 sm:inline-flex sm:flex-row sm:items-end"
+            >Varun Sahni<br /><span
+              class="hidden sm:inline sm:pl-2 sm:pb-1 text-xl text-neutral-500 font-mono italic"
+              >(aka skamr)</span
+            ></span
+          >
         </div></span
       >
       <span class="hidden print:block print:text-center">Varun Sahni</span>
@@ -53,6 +59,10 @@ import ProjectElement from "../components/ProjectElement.astro";
       fascinating and I'm trying to learn as much as I can about it <i
         >(there's so much abstraction!)</i
       >
+      <br />
+      <br />
+       I'm also a huge fan of music, film, VFX and editing. See more about it in
+      my <a href="interests">Interests</a>
     </p>
     <hr class="print:hidden" />
     <section id="education">
@@ -154,7 +164,7 @@ import ProjectElement from "../components/ProjectElement.astro";
           subline="Quiz-based game for awareness about AI-generated music, played by 150+ students"
           href="https://urls.vsahni.me/musicai2023"
           imgURL="/assets/musicai-white.svg"
-          rootDivClass="relative z-[94]"
+          rootDivClass="hover:!bg-red-200 hover:!shadow-red-300 relative z-[94]"
           imgDivClass=""
         />
         <ProjectElement
@@ -163,15 +173,17 @@ import ProjectElement from "../components/ProjectElement.astro";
           href="https://www.curseforge.com/minecraft/mc-mods/kagemod"
           imgURL="/assets/kagemod.webp"
           invertLogoOnHover={false}
-          rootDivClass="hover:!bg-slate-200 hover:!shadow-slate-300 relative z-[93]"
+          rootDivClass="hover:!bg-blue-200 hover:!shadow-slate-500 relative z-[93]"
           imgDivClass="p-1"
         />
         <ProjectElement
           name="Editing Community"
           subline="VFX and Editing Community with 100k+ site visits"
-          href=""
-          rootAnchorClass="active:pointer-events-none"
+          href="javascript:void(0);"
+          inNewTab={false}
           imgURL="/assets/editing-community.webp"
+          rootAnchorClass="cursor-default"
+          rootDivClass="hover:!bg-white hover:!shadow-white !shadow-3xl relative z-[92]"
         />
         <!-- <ProjectElement
           name="Intelliger"
@@ -186,11 +198,11 @@ import ProjectElement from "../components/ProjectElement.astro";
     <hr />
     <section id="awards">
       <h2
-        class="text-2xl md:text-3xl text-yellow-500 print:text-black font-semibold underline underline-offset-[8px] mb-2"
+        class="text-2xl md:text-3xl text-yellow-500 print:text-black font-semibold underline underline-offset-[8px] mb-5"
       >
         Awards
       </h2>
-      <ol class="list-disc pl-5">
+      <ol class="list-['🏅'] pl-5 text-base md:text-lg child:pl-2 child:mb-2">
         <li>1st Place, ShriTeq Hack-a-thon 2022</li>
         <li>"The Shri Ram School, Moulsari" Innovator Award 2023 x 2</li>
         <li>DIGEX 2023 Hi-Res (Documentary Competition) Runner's Up</li>
@@ -199,16 +211,42 @@ import ProjectElement from "../components/ProjectElement.astro";
     <hr />
     <section id="interests">
       <h2
-        class="text-2xl md:text-3xl text-yellow-500 print:text-black font-semibold underline underline-offset-[8px] mb-2"
+        class="text-2xl md:text-3xl text-yellow-500 print:text-black font-semibold underline underline-offset-[8px] mb-4"
       >
         Interests
       </h2>
-      <ol class="list-disc pl-5">
-        <li>Gaming</li>
-        <li>Music</li>
-        <li>VFX/Editing</li>
-        <li>YouTube</li>
-      </ol>
+      <div class="pl-1 print:pl-0 relative bottom-[14px] -mb-[14px]">
+        <div
+          class="border-l-yellow-500 print:border-none border-l-[5px] h-[8px] pt-6 print:pt-2"
+        >
+        </div>
+        <div
+          class="border-l-orange-500 print:border-none border-l-[5px] h-fit flex flex-row"
+        >
+          <div
+            class="h-[38px] w-[38px] md:h-[48px] md:w-[48px] relative right-[21px] md:right-[26px] print:hidden bg-orange-600 rounded-full"
+          >
+            <Icon
+              name="uil:music"
+              class="h-[38px] md:h-[48px] p-2 object-contain drop-shadow-[2px_2px_0px_#000F] relative right-[1px] bottom-[1px]"
+            />
+          </div>
+          <div class="relative right-[13px] print:right-0 flex flex-col pt-2">
+            <h2 class="text-xl md:text-2xl font-bold">Music</h2>
+            <ol class="pl-5 text-base md:text-lg child:pl-2 child:mb-2 pt-1">
+              <li class="list-['🎸']">I love most genres of music</li>
+              <li class="list-['🎤']">
+                I like to sing! Currently in Grade 3 of Rockschool Vocals.
+              </li>
+              <li class="list-['👨🏼‍🎤']">
+                My favourite artists are always changing; right now they're
+                probably Coldplay, RHCP, Dominic Fike, James Blake, and Carter
+                Ace (that's a lot!)
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
     </section>
   </main>
   <script>

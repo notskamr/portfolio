@@ -14,6 +14,7 @@ interface Props {
   imgDivClass?: string;
   customImgDims?: IMGDims;
   rootAnchorClass?: string;
+  inNewTab?: boolean;
 }
 const {
   name,
@@ -25,11 +26,16 @@ const {
   rootDivClass = "",
   imgDivClass = "",
   rootAnchorClass = "",
+  inNewTab = true,
   customImgDims = { width: 1, height: 1 },
 } = Astro.props;
 ---
 
-<a href={href} target="_blank" rel="noopener noreferrer" class={rootAnchorClass}
+<a
+  href={href}
+  target={inNewTab ? "_blank" : "_self"}
+  rel={inNewTab ? "noopener noreferrer" : ""}
+  class={rootAnchorClass}
   ><div
     class={"duration-200 bg-neutral-800 hover:bg-neutral-200 print:bg-transparent shadow-2xl hover:shadow-white/60 print:shadow-none px-4 py-2 group flex items-center text-xl sm:text-lg print:h-fit print:!drop-shadow-none " +
       rootDivClass}
