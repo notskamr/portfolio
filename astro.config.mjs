@@ -7,7 +7,7 @@ import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
-  output: "hybrid",
+  output: "server",
   site: "https://vsahni.me",
   integrations: [tailwind(), robots(), sitemap()],
   adapter: vercel({
