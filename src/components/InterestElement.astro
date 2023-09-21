@@ -1,0 +1,53 @@
+---
+type BulletPoint = {
+  content: string;
+  listStyleType: string;
+};
+
+interface Props {
+  name: string;
+  iconName: string;
+  bullets: BulletPoint[];
+  iconClasses?: string;
+}
+
+import Icon from "astro-icon";
+
+const { name, iconName, bullets, iconClasses = null } = Astro.props;
+---
+
+<div
+  class="border-l-orange-500 print:border-none border-l-[5px] h-fit flex flex-row interest-container"
+>
+  <div
+    class="h-[38px] w-[38px] md:h-[48px] md:w-[48px] relative right-[21px] md:right-[26px] print:hidden bg-orange-600 rounded-full"
+  >
+    <Icon
+      name={iconName}
+      class:list={[
+        "h-[38px] md:h-[48px] p-2 object-contain drop-shadow-[2px_2px_0px_#000F]",
+        iconClasses,
+      ]}
+    />
+  </div>
+  <div class="relative right-[5px] print:right-0 flex flex-col pt-2">
+    <h2 class="text-xl md:text-2xl font-bold">{name}</h2>
+    <ol
+      class="pl-5 text-base md:text-lg child:pl-2 child:mb-2 pt-1 print:child:!list-disc"
+    >
+      {
+        bullets.map(({ content, listStyleType }) => (
+          <li style={"list-style-type: " + listStyleType} set:html={content} />
+        ))
+      }
+    </ol>
+  </div>
+</div>
+<div
+  class="w-[20px] h-[20px] rounded-full bg-yellow-500 z-[99] scale-[105%] relative right-[7px]"
+>
+</div>
+<div
+  class="border-l-yellow-500 print:border-none border-l-[5px] h-[8px] pt-6 print:pt-2"
+>
+</div>

@@ -3,6 +3,7 @@ import Icon from "astro-icon";
 import Layout from "../layouts/Layout.astro";
 import EducationElement from "../components/EducationElement.astro";
 import ProjectElement from "../components/ProjectElement.astro";
+import InterestElement from "../components/InterestElement.astro";
 ---
 
 <Layout title="vsahni">
@@ -220,41 +221,46 @@ import ProjectElement from "../components/ProjectElement.astro";
           class="border-l-yellow-500 print:border-none border-l-[5px] h-[8px] pt-6 print:pt-2"
         >
         </div>
-        <div
-          class="border-l-orange-500 print:border-none border-l-[5px] h-fit flex flex-row"
-        >
-          <div
-            class="h-[38px] w-[38px] md:h-[48px] md:w-[48px] relative right-[21px] md:right-[26px] print:hidden bg-orange-600 rounded-full"
-          >
-            <Icon
-              name="uil:music"
-              class="h-[38px] md:h-[48px] p-2 object-contain drop-shadow-[2px_2px_0px_#000F] relative right-[1px] bottom-[1px]"
-            />
-          </div>
-          <div class="relative right-[13px] print:right-0 flex flex-col pt-2">
-            <h2 class="text-xl md:text-2xl font-bold">Music</h2>
-            <ol class="pl-5 text-base md:text-lg child:pl-2 child:mb-2 pt-1">
-              <li class="list-['🎸']">I love most genres of music</li>
-              <li class="list-['🎤']">
-                I like to sing! Currently in Grade 3 of Rockschool Vocals.
-              </li>
-              <li class="list-['👨🏼‍🎤']">
-                My favourite artists are always changing; right now they're
-                probably Coldplay, RHCP, Dominic Fike, James Blake, and Carter
-                Ace (that's a lot!)
-              </li>
-            </ol>
-          </div>
-        </div>
+        <InterestElement
+          name="Music"
+          iconName="uil:music"
+          iconClasses={"relative right-[1px] bottom-[1px]"}
+          bullets={[
+            {
+              content: "I love most genres of music",
+              listStyleType: "'🎸'",
+            },
+            {
+              content:
+                "I like to sing! Currently in Grade 3 of Rockschool Vocals",
+              listStyleType: "'🎤'",
+            },
+            {
+              content:
+                "My favourite artists are always changing; right now they're probably Coldplay, RHCP, Dominic Fike, James Blake, and Carter Ace (that's a lot!)",
+              listStyleType: "'👨🏼‍🎤'",
+            },
+          ]}
+        />
+        <InterestElement
+          name="Gaming"
+          iconName="icons8:controller"
+          bullets={[
+            {
+              content: "My favourite games of all time are Minecraft and RDR2",
+              listStyleType: "'🤠'",
+            },
+          ]}
+        />
       </div>
     </section>
   </main>
-  <script>
-    document.getElementById("print-resume").addEventListener("click", () => {
-      window.print();
-    });
-  </script>
 </Layout>
+<script>
+  document.getElementById("print-resume").addEventListener("click", () => {
+    window.print();
+  });
+</script>
 
 <style>
   hr {
