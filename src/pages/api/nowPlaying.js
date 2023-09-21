@@ -1,3 +1,6 @@
+export const config = {
+  runtime: "serverless",
+};
 import spotifyWebApi from "spotify-web-api-node";
 
 var spotifyApi = new spotifyWebApi({
