@@ -280,7 +280,7 @@ import { SEO } from "astro-seo";
   });
 </script>
 <script>
-  fetch("/api/nowPlaying").then((data) => {
+  fetch("https://np.vsahni.me/").then((data) => {
     let nowPlayingLoading = document.getElementById("nowPlayingLoading");
     let nowPlaying = document.getElementById("nowPlaying");
     data.json().then((json) => {
