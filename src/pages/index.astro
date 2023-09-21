@@ -274,32 +274,32 @@ import { SEO } from "astro-seo";
     </section>
   </main>
 </Layout>
-<script>
-  document.getElementById("print-resume").addEventListener("click", () => {
-    window.print();
-  });
+<script defer>
+document.getElementById("print-resume").addEventListener("click", () => {
+  window.print();
+});
 </script>
-<script>
-  fetch("https://np.vsahni.me/").then((data) => {
-    let nowPlayingLoading = document.getElementById("nowPlayingLoading");
-    let nowPlaying = document.getElementById("nowPlaying");
-    data.json().then((json) => {
-      if (json.statusCode !== 200) {
-        nowPlaying.innerText = "Nothing now :(";
-      } else if (json.statusCode === 200) {
-        let artists = json.track.artists
-          .map((artist: any) => artist.name)
-          .join(", ");
-        nowPlaying.innerText = " " + json.track.name + " by " + artists;
-        nowPlaying.setAttribute("href", json.track.external_urls.spotify);
-      }
-      nowPlayingLoading.style.opacity = "0";
-      nowPlaying.style.opacity = "1";
-      setTimeout(() => {
-        nowPlayingLoading.style.display = "none";
-      }, 600);
-    });
+<script defer>
+fetch("https://np.vsahni.me").then((data) => {
+  let nowPlayingLoading = document.getElementById("nowPlayingLoading");
+  let nowPlaying = document.getElementById("nowPlaying");
+  data.json().then((json) => {
+    if (json.statusCode !== 200) {
+      nowPlaying.innerText = "Nothing now :(";
+    } else if (json.statusCode === 200) {
+      let artists = json.track.artists
+        .map((artist) => artist.name)
+        .join(", ");
+      nowPlaying.innerText = " " + json.track.name + " by " + artists;
+      nowPlaying.setAttribute("href", json.track.external_urls.spotify);
+    }
+    nowPlayingLoading.style.opacity = "0";
+    nowPlaying.style.opacity = "1";
+    setTimeout(() => {
+      nowPlayingLoading.style.display = "none";
+    }, 600);
   });
+});
 </script>
 <style>
   hr {
