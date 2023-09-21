@@ -294,6 +294,9 @@ import { SEO } from "astro-seo";
       }
       nowPlayingLoading.style.opacity = "0";
       nowPlaying.style.opacity = "1";
+      setTimeout(() => {
+        nowPlayingLoading.style.display = "none";
+      }, 600);
     });
   });
 </script>
