@@ -71,6 +71,17 @@ import { SEO } from "astro-seo";
        I'm also a huge fan of music, film, VFX and editing. See more about it in
       my <a href="interests">Interests</a>
     </p>
+    <div class="mt-4 print:hidden">
+      <span class="font-bold">Currently listening to:</span>
+      <span id="nowPlayingLoading" class="ml-2 absolute duration-500"
+        >Loading...</span
+      >
+      <a
+        id="nowPlaying"
+        class="ml-2 absolute duration-500 opacity-0 hover:duration-0 hover:text-orange-500"
+        rel="noreferrer noopener"
+        target="_blank"></a>
+    </div>
     <hr class="print:hidden" />
     <section id="education">
       <h2
@@ -267,7 +278,25 @@ import { SEO } from "astro-seo";
     window.print();
   });
 </script>
-
+<script>
+  fetch("/api/nowPlaying").then((data) => {
+    let nowPlayingLoading = document.getElementById("nowPlayingLoading");
+    let nowPlaying = document.getElementById("nowPlaying");
+    data.json().then((json) => {
+      if (json.statusCode !== 200) {
+        nowPlaying.innerText = "Nothing now :(";
+      } else if (json.statusCode === 200) {
+        let artists = json.track.artists
+          .map((artist: any) => artist.name)
+          .join(", ");
+        nowPlaying.innerText = json.track.name + " by " + artists;
+        nowPlaying.setAttribute("href", json.track.external_urls.spotify);
+      }
+      nowPlayingLoading.style.opacity = "0";
+      nowPlaying.style.opacity = "1";
+    });
+  });
+</script>
 <style>
   hr {
     @apply w-full border-[1px] border-neutral-700 print:border-neutral-500 mt-4 mb-4 rounded-full;
