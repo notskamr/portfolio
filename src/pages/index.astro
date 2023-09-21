@@ -285,7 +285,7 @@ fetch("https://np.vsahni.me").then((data) => {
   let nowPlaying = document.getElementById("nowPlaying");
   data.json().then((json) => {
     if (json.statusCode !== 200) {
-      nowPlaying.innerText = "Nothing now :(";
+      nowPlaying.innerText = " Silence...";
     } else if (json.statusCode === 200) {
       let artists = json.track.artists
         .map((artist) => artist.name)
