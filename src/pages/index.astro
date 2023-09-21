@@ -78,7 +78,7 @@ import { SEO } from "astro-seo";
       >
       <a
         id="nowPlaying"
-        class="ml-2 absolute duration-500 opacity-0 hover:duration-0 hover:text-orange-500"
+        class="duration-500 opacity-0 hover:duration-0 hover:text-orange-500"
         rel="noreferrer noopener"
         target="_blank"></a>
     </div>
@@ -289,7 +289,7 @@ import { SEO } from "astro-seo";
         let artists = json.track.artists
           .map((artist: any) => artist.name)
           .join(", ");
-        nowPlaying.innerText = json.track.name + " by " + artists;
+        nowPlaying.innerText = " " + json.track.name + " by " + artists;
         nowPlaying.setAttribute("href", json.track.external_urls.spotify);
       }
       nowPlayingLoading.style.opacity = "0";
