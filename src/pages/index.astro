@@ -68,8 +68,8 @@ import { SEO } from "astro-seo";
       >
       <br />
       <br />
-       I'm also a huge fan of music, film, VFX and editing. See more about it in
-      my <a href="interests">Interests</a>
+       I'm also a huge fan of music, film, VFX and editing. See more about my
+      interests <a href="#interests" class="underline">here</a>
     </p>
     <div class="mt-4 print:hidden">
       <span class="font-bold">Currently listening to:</span>
@@ -284,7 +284,10 @@ fetch("https://np.vsahni.me").then((data) => {
   let nowPlayingLoading = document.getElementById("nowPlayingLoading");
   let nowPlaying = document.getElementById("nowPlaying");
   data.json().then((json) => {
-    if (json.statusCode !== 200) {
+    if (
+      json.statusCode !== 200 ||
+      json.track.external_urls.spotify === undefined
+    ) {
       nowPlaying.innerText = " Silence...";
     } else if (json.statusCode === 200) {
       let artists = json.track.artists
