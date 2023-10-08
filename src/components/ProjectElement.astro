@@ -35,13 +35,13 @@ const {
   href={href}
   target={inNewTab ? "_blank" : "_self"}
   rel={inNewTab ? "noopener noreferrer" : ""}
-  class={rootAnchorClass}
+  class={"will-change-[filter] relative " + rootAnchorClass}
   ><div
     class={"duration-200 bg-neutral-800 hover:bg-neutral-200 print:bg-transparent shadow-2xl hover:shadow-white/60 print:shadow-none px-4 py-2 group flex items-center text-xl sm:text-lg print:h-fit print:!drop-shadow-none " +
       rootDivClass}
   >
     <div
-      class={"min-w-[80px] h-[80px] w-[80px] border-gray-600 overflow-hidden mr-4 duration-200 print:!drop-shadow-none " +
+      class={"min-w-[80px] h-[80px] w-[80px] border-gray-600 overflow-visible mr-4 transition-all duration-200 print:!drop-shadow-none " +
         imgDivClass +
         (invertLogoOnHover
           ? " group-hover:child:invert group-hover:!drop-shadow-[2px_2px_12px_#0007]"
@@ -54,13 +54,15 @@ const {
         loading="lazy"
         width={customImgDims?.width}
         height={customImgDims?.height}
-        class="h-full w-full object-contain object-center duration-200"
+        class="h-full w-full object-contain object-center duration-200 transition-all"
       />
     </div>
     <div
       class="flex flex-col items-start justify-center text-left gap-y-[2px] invert-0 group-hover:invert duration-200 transition-all drop-shadow-[2px_2px_1px_#000] group-hover:drop-shadow-none print:drop-shadow-none"
     >
-      <div class="text-sm sm:text-md font-semibold">{name}</div>
+      <div class="text-sm sm:text-md font-semibold">
+        {name}
+      </div>
       <div
         class="text-xs sm:text-sm font-light relative bottom-[4px] text-white/90 print:text-black/90"
       >

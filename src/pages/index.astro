@@ -38,7 +38,7 @@ import { SEO } from "astro-seo";
     <hr class="print:hidden" />
     <div
       id="socials"
-      class="print:hidden flex items-center gap-4 mt-3 child:underline child:underline-offset-2 child:text-blue-300 child:duration-200 child-hover:text-amber-500 child-hover:scale-125 child:w-[28px] shadow-amber-400 child-hover:drop-shadow-[0_2px_8px_#fbbf24aa]"
+      class="print:hidden flex items-center gap-4 mt-3 child:underline child:underline-offset-2 child:text-blue-300 child:duration-200 child-hover:text-amber-500 child-hover:scale-125 child:w-[28px] shadow-amber-400 child-hover:drop-shadow-[0_2px_8px_#fbbf24aa] child:will-change-transform"
     >
       <a href="https://github.com/notskamr" title="GitHub"
         ><Icon name="ri:github-line" /></a
@@ -98,6 +98,13 @@ import { SEO } from "astro-seo";
           location="Gurugram, HR, IN"
         />
         <EducationElement
+          name="University of California, Berkeley"
+          dates="June 2023-August 2023"
+          location="Berkeley, CA, USA"
+          subline="Completed CS61C and DATA 8 at UC Berkeley's pre-college summer program with a 3.5 GPA (A- and B+ respectively)"
+          sublineMobile="Summer program: CS61C (A-), DATA8 (B+); 3.5GPA"
+        />
+        <EducationElement
           name={`<a class="underline underline-offset-2 print:no-underline" href="https://courses.edx.org/certificates/42202c295c1e4969b6543af1026b86d3" target="_blank" rel="noopener noreferrer">Harvard's CS50x</a>`}
           dates="2022"
           location="Online"
@@ -110,13 +117,6 @@ import { SEO } from "astro-seo";
           location=""
           subline="Attended Plaksha's two-week YTS Program. Built a self-navigating robot using LIDAR, ultrasound and infrared sensors with Arduino and C++ from scratch."
           sublineMobile="Summer program: Built a self-navigating robot using LIDAR, ultrasound and infrared sensors with Arduino and C++ from scratch."
-        />
-        <EducationElement
-          name="University of California, Berkeley"
-          dates="June 2023-August 2023"
-          location="Berkeley, CA, USA"
-          subline="Completed CS61C and DATA 8 at UC Berkeley's pre-college summer program with a 3.5 GPA (A- and B+ respectively)"
-          sublineMobile="Summer program: CS61C (A-), DATA8 (B+); 3.5GPA"
         />
       </div>
     </section>
@@ -137,7 +137,8 @@ import { SEO } from "astro-seo";
           href="https://firewood.vsahni.me/"
           imgURL="/assets/fw-logo.png"
           invertLogoOnHover={false}
-          rootDivClass="hover:!bg-amber-300 hover:!shadow-amber-400 relative z-[99]"
+          rootAnchorClass="z-[99]"
+          rootDivClass="hover:!bg-amber-300 hover:!shadow-amber-400"
           imgDivClass="drop-shadow-[2px_2px_2px_#000F]"
         />
         <ProjectElement
@@ -147,7 +148,8 @@ import { SEO } from "astro-seo";
           imgURL="/assets/parallelized-small.svg"
           invertLogoOnHover={true}
           invertLogoWhenPrint={true}
-          rootDivClass="hover:!bg-violet-200 hover:!shadow-violet-300 relative z-[98]"
+          rootAnchorClass="z-[98]"
+          rootDivClass="hover:!bg-violet-200 hover:!shadow-violet-300"
           imgDivClass="drop-shadow-[2px_2px_2px_#000F]"
         />
         <ProjectElement
@@ -156,7 +158,8 @@ import { SEO } from "astro-seo";
           href="https://inst.eecs.berkeley.edu/~cs61c/su23/projects/proj3/"
           imgURL="/assets/cs61c.webp"
           invertLogoOnHover={false}
-          rootDivClass="hover:!bg-teal-200 hover:!shadow-teal-400 relative z-[97]"
+          rootAnchorClass="z-[97]"
+          rootDivClass="hover:!bg-teal-200 hover:!shadow-teal-400"
           imgDivClass="group-hover:child:saturate-200 drop-shadow-[0px_2px_1px_#000F]"
         />
         <ProjectElement
@@ -165,7 +168,8 @@ import { SEO } from "astro-seo";
           href="#"
           imgURL="/assets/data8.webp"
           invertLogoOnHover={false}
-          rootDivClass="hover:!bg-blue-300 hover:!shadow-blue-400 relative z-[96]"
+          rootAnchorClass="z-[96]"
+          rootDivClass="hover:!bg-blue-300 hover:!shadow-blue-400"
           imgDivClass="group-hover:child:saturate-200 drop-shadow-[2px_2px_2px_#000F]"
         />
         <ProjectElement
@@ -183,7 +187,8 @@ import { SEO } from "astro-seo";
           href="https://urls.vsahni.me/musicai2023"
           imgURL="/assets/musicai-white.svg"
           customImgDims={{ width: 782, height: 173 }}
-          rootDivClass="hover:!bg-red-200 hover:!shadow-red-300 relative z-[94]"
+          rootAnchorClass="z-[94]"
+          rootDivClass="hover:!bg-red-200 hover:!shadow-red-300"
           imgDivClass=""
         />
         <ProjectElement
@@ -192,7 +197,8 @@ import { SEO } from "astro-seo";
           href="https://www.curseforge.com/minecraft/mc-mods/kagemod"
           imgURL="/assets/kagemod.webp"
           invertLogoOnHover={false}
-          rootDivClass="hover:!bg-blue-200 hover:!shadow-slate-500 relative z-[93]"
+          rootAnchorClass="z-[91]"
+          rootDivClass="hover:!bg-blue-200 hover:!shadow-slate-500"
           imgDivClass="p-1"
         />
         <ProjectElement
@@ -201,8 +207,8 @@ import { SEO } from "astro-seo";
           href="javascript:void(0);"
           inNewTab={false}
           imgURL="/assets/editing.webp"
-          rootAnchorClass="cursor-default"
-          rootDivClass="hover:!bg-white hover:!shadow-white !shadow-3xl relative z-[92]"
+          rootAnchorClass="cursor-default z-[92]"
+          rootDivClass="hover:!bg-white !shadow-3xl hover:!shadow-white"
         />
         <!-- <ProjectElement
           name="Intelliger"
