@@ -122,11 +122,14 @@ import { SEO } from "astro-seo";
     </section>
     <hr />
     <section id="projects">
-      <h2
-        class="text-2xl md:text-3xl text-yellow-500 print:text-black font-semibold underline underline-offset-[8px] mb-[min(2.3vh,2.5rem)]"
-      >
-        Projects
-      </h2>
+      <div class="flex gap-2 items-baseline">
+        <h2
+          class="text-2xl md:text-3xl text-yellow-500 print:text-black font-semibold underline underline-offset-[8px] mb-[min(2.3vh,2.5rem)]"
+        >
+          Projects
+        </h2>
+        <span class="text-base italic text-white/80">(click to see more!)</span>
+      </div>
       <div
         id="projects-content"
         class="grid md:grid-cols-2 print:grid-cols-2 gap-4"
