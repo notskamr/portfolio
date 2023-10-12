@@ -1,19 +1,27 @@
 ---
 type BulletPoint = {
   content: string;
-  listStyleType: string;
+  listStyleType?: string;
 };
 
 interface Props {
   name: string;
   iconName: string;
+  defaultBulletListStyleType?: string;
   bullets: BulletPoint[];
   iconClasses?: string;
 }
 
 import Icon from "astro-icon";
+import marked from "marked";
 
-const { name, iconName, bullets, iconClasses = null } = Astro.props;
+const {
+  name,
+  iconName,
+  bullets,
+  iconClasses = null,
+  defaultBulletListStyleType = null,
+} = Astro.props;
 ---
 
 <div
@@ -40,7 +48,17 @@ const { name, iconName, bullets, iconClasses = null } = Astro.props;
     >
       {
         bullets.map(({ content, listStyleType }) => (
-          <li style={"list-style-type: " + listStyleType} set:html={content} />
+          <li
+            style={
+              "list-style-type: " +
+              (listStyleType
+                ? listStyleType
+                : defaultBulletListStyleType
+                ? defaultBulletListStyleType
+                : "disc")
+            }
+            set:html={marked.parse(content)}
+          />
         ))
       }
     </ol>

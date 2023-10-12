@@ -5,6 +5,8 @@ import EducationElement from "../components/EducationElement.astro";
 import ProjectElement from "../components/ProjectElement.astro";
 import InterestElement from "../components/InterestElement.astro";
 
+import { Awards } from "../config/Awards";
+
 import { SEO } from "astro-seo";
 ---
 
@@ -231,9 +233,13 @@ import { SEO } from "astro-seo";
         Awards
       </h2>
       <ol class="list-['🏅'] pl-5 text-base md:text-lg child:pl-2 child:mb-2">
-        <li>1st Place, ShriTeq Hack-a-thon 2022</li>
-        <li>"The Shri Ram School, Moulsari" Innovator Award 2023 x 2</li>
-        <li>DIGEX 2023 Hi-Res (Documentary Competition) Runner's Up</li>
+        {
+          Awards.map((award) => (
+            <li style={award?.icon ? "list-style-type: " + award.icon : ""}>
+              {award.text}
+            </li>
+          ))
+        }
       </ol>
     </section>
     <hr />
@@ -276,6 +282,10 @@ import { SEO } from "astro-seo";
             {
               content: "My favourite games of all time are Minecraft and RDR2",
               listStyleType: "'🤠'",
+            },
+            {
+              content: "",
+              listStyleType: "'🎮'",
             },
           ]}
         />
