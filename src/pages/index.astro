@@ -73,7 +73,7 @@ import { SEO } from "astro-seo";
        I'm also a huge fan of music, film, VFX and editing. See more about my
       interests <a href="#interests" class="underline">here</a>
     </p>
-    <div class="mt-4 print:hidden">
+    <div class="mt-6 print:hidden">
       <span class="font-bold">Currently listening to:</span>
       <span id="nowPlayingLoading" class="ml-1 absolute duration-500"
         >Loading...</span
@@ -94,8 +94,7 @@ import { SEO } from "astro-seo";
       <div id="education-content">
         <EducationElement
           name="The Shri Ram School, Moulsari"
-          subline={`- IBDP Year 1 Student <br> - Completed IGCSE, 9 A*s`}
-          sublineMobile={`- IBDP Year 1 Student <br> - Completed IGCSE, 9 A*s`}
+          subline={`\- IBDP Year 1 Student\n \- Completed IGCSE with A*s in all 9 subjects \n \- Secretary of Information, Communication and Technology (ICT)`}
           dates="2018-Present"
           location="Gurugram, HR, IN"
         />
@@ -111,7 +110,6 @@ import { SEO } from "astro-seo";
           dates="2022"
           location="Online"
           subline={`Finished with verified certificate. Created <a class="underline underline-offset-2 print:no-underline" href="https://firewood.vsahni.me/" target="_blank" rel="noopener noreferrer">Firewood</a> as a final project.`}
-          sublineMobile={`Finished with verified certificate. Created <a class="underline underline-offset-2 print:no-underline" href="https://firewood.vsahni.me/" target="_blank" rel="noopener noreferrer">Firewood</a> as a final project.`}
         />
         <EducationElement
           name="Plaksha University, Young Tech Scholars"
@@ -183,7 +181,8 @@ import { SEO } from "astro-seo";
           href="https://urls.vsahni.me/cortx"
           imgURL="/assets/cortx.webp"
           invertLogoOnHover={false}
-          rootDivClass="hover:!bg-rose-300 hover:!shadow-rose-400 !py-[1ex] relative z-[95]"
+          rootDivClass="hover:!bg-rose-300 hover:!shadow-rose-400 !py-[1ex] relative"
+          rootAnchorClass="z-[95]"
           imgDivClass="drop-shadow-[2px_2px_2px_#000F]"
         />
         <ProjectElement
@@ -214,6 +213,18 @@ import { SEO } from "astro-seo";
           imgURL="/assets/editing.webp"
           rootAnchorClass="cursor-default z-[92]"
           rootDivClass="hover:!bg-white !shadow-3xl hover:!shadow-white"
+        />
+        <ProjectElement
+          name="Hack Club"
+          subline="Leader of school Hack Club"
+          href="/assets/hackclub.svg"
+          inNewTab={true}
+          imgURL="https://assets.hackclub.com/icon-rounded.svg"
+          invertTextOnHover={false}
+          invertLogoOnHover={false}
+          rootAnchorClass="z-[91]"
+          rootDivClass="hover:!bg-[#ec3750] hover:!shadow-[#ec3750]"
+          customImgDims={{ width: 1, height: 1 }}
         />
         <!-- <ProjectElement
           name="Intelliger"
@@ -270,7 +281,7 @@ import { SEO } from "astro-seo";
             },
             {
               content:
-                "My favourite artists are always changing; right now they're probably Coldplay, RHCP, Dominic Fike, James Blake, and Carter Ace (that's a lot!)",
+                "My favourite artists are always changing; right now they're probably [Coldplay](#), [RHCP](#), [Dominic Fike](#), [James Blake](#), and [Carter Ace](#) (that's a lot!)",
               listStyleType: "'👨🏼‍🎤'",
             },
           ]}
@@ -283,9 +294,20 @@ import { SEO } from "astro-seo";
               content: "My favourite games of all time are Minecraft and RDR2",
               listStyleType: "'🤠'",
             },
+            // {
+            //   content: "",
+            //   listStyleType: "'🎮'",
+            // },
+          ]}
+        />
+        <InterestElement
+          name="Social Work"
+          iconName="healthicons:social-work-outline"
+          defaultBulletListStyleType="disc"
+          bullets={[
             {
-              content: "",
-              listStyleType: "'🎮'",
+              content: "**Pure Hearts:**",
+              listStyleType: "'❤️'",
             },
           ]}
         />

@@ -6,7 +6,9 @@ interface Props {
   dates: string;
   location: string;
 }
-const { name, subline, sublineMobile = "", dates, location } = Astro.props;
+import marked from "marked";
+
+const { name, subline, sublineMobile = null, dates, location } = Astro.props;
 ---
 
 <div class="flex justify-between items-center py-4 gap-12">
@@ -14,8 +16,16 @@ const { name, subline, sublineMobile = "", dates, location } = Astro.props;
     <h3 class="text-base md:text-lg font-medium">
       <span set:html={name} />
     </h3>
-    <p class="text-[1rem] font-light hidden md:block" set:html={subline} />
-    <p class="text-sm font-light block md:hidden" set:html={sublineMobile} />
+    <div
+      class="text-[1rem] font-light hidden md:block [&>ul]:list-disc [&>ul]:pl-4"
+      set:html={marked.parse(subline)}
+    />
+    <div
+      class="text-sm font-light block md:hidden [&>ul]:list-disc [&>ul]:pl-4"
+      set:html={sublineMobile
+        ? marked.parse(sublineMobile)
+        : marked.parse(subline)}
+    />
   </div>
   <div class="text-right">
     <p class="text-sm md:text-base font-normal italic md:whitespace-nowrap">
