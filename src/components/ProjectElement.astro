@@ -1,4 +1,5 @@
 ---
+import { marked } from "marked";
 interface IMGDims {
   width: number;
   height: number;
@@ -37,7 +38,7 @@ const {
   href={href}
   target={inNewTab ? "_blank" : "_self"}
   rel={inNewTab ? "noopener noreferrer" : ""}
-  class={"will-change-[filter] relative " + rootAnchorClass}
+  class={"will-change-[filter] relative child:transform-gpu " + rootAnchorClass}
   ><div
     class={"duration-200 bg-neutral-800 hover:bg-neutral-200 print:bg-transparent shadow-2xl hover:shadow-white/60 print:shadow-none px-4 py-2 group flex items-center text-xl sm:text-lg print:h-fit print:!drop-shadow-none " +
       rootDivClass}
@@ -56,20 +57,20 @@ const {
         loading="lazy"
         width={customImgDims?.width}
         height={customImgDims?.height}
-        class="h-full w-full object-contain object-center duration-200 transition-all"
+        class="h-full w-full object-contain object-center duration-200 transition-all transform-gpu"
       />
     </div>
     <div
       class={"flex flex-col items-start justify-center text-left gap-y-[2px] invert-0 duration-200 transition-all drop-shadow-[2px_2px_1px_#000] group-hover:drop-shadow-none print:drop-shadow-none " +
         (invertTextOnHover ? "group-hover:invert" : "")}
     >
-      <div class="text-sm sm:text-md font-semibold">
+      <div class="text-sm sm:text-md font-semibold transform-gpu">
         {name}
       </div>
       <div
-        class="text-xs sm:text-sm font-light relative bottom-[4px] text-white/90 print:text-black/90"
+        class="text-xs sm:text-sm font-light relative bottom-[4px] text-white/90 print:text-black/90 transform-gpu"
       >
-        <p set:html={subline} />
+        <p set:html={marked.parse(subline)} />
       </div>
     </div>
   </div></a

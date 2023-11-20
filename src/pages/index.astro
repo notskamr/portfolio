@@ -10,13 +10,13 @@ import { Awards } from "../config/Awards";
 import { SEO } from "astro-seo";
 ---
 
-<Layout title="Varun Sahni">
+<Layout title="Varun Sahni" bodyClass="transform-gpu">
   <SEO
     slot="headTop"
     description="I'm a high school student from India passionate about computer engineering, web development, and open-source software - and anything related to computers! - with a specific interest in Computer Architecture; see my portfolio here!"
   />
   <main
-    class="mx-auto max-w-screen-md scroll-smooth motion-reduce:scroll-auto font-sans text-white print:text-black print:max-w-none py-8 px-4 print:px-0 print:py-0 drop-shadow-xl print:drop-shadow-none"
+    class="mx-auto max-w-screen-md scroll-smooth motion-reduce:scroll-auto font-sans text-white print:text-black print:max-w-none py-8 px-4 print:px-0 print:py-0 drop-shadow-xl print:drop-shadow-none child:transform-gpu"
   >
     <h1 class="text-4xl font-bold">
       <span class="print:hidden"
@@ -91,7 +91,7 @@ import { SEO } from "astro-seo";
       >
         Education/Courses
       </h2>
-      <div id="education-content">
+      <div id="education-content" class="child:transform-gpu">
         <EducationElement
           name="The Shri Ram School, Moulsari"
           subline={`\- IBDP Year 1 Student\n \- Completed IGCSE with A*s in all 9 subjects \n \- Secretary of Information, Communication and Technology (ICT)`}
@@ -146,7 +146,7 @@ import { SEO } from "astro-seo";
         />
         <ProjectElement
           name="Parallelized"
-          subline="Interschool code optimization competition"
+          subline="Interschool code optimization/development competition _(see the site)_"
           href="https://parallelized.in"
           imgURL="/assets/parallelized-small.svg"
           invertLogoOnHover={true}
@@ -269,14 +269,14 @@ import { SEO } from "astro-seo";
           name="Music"
           iconName="uil:music"
           iconClasses={"relative right-[1px] bottom-[1px]"}
-          bullets={[
+          content={[
             {
-              content: "I love most genres of music",
+              content: "I love most genres of music.",
               listStyleType: "'🎸'",
             },
             {
               content:
-                "I like to sing! Currently in Grade 3 of Rockschool Vocals",
+                "I like to sing! Currently in Grade 3 of Rockschool Vocals.",
               listStyleType: "'🎤'",
             },
             {
@@ -286,64 +286,67 @@ import { SEO } from "astro-seo";
             },
           ]}
         />
-        <!-- <InterestElement
+        <InterestElement
           name="Gaming"
           iconName="icons8:controller"
-          bullets={[
+          content={[
             {
-              content: "My favourite games of all time are Minecraft and RDR2",
+              content: "My favourite games of all time are Minecraft and RDR2.",
               listStyleType: "'🤠'",
             },
-            // {
-            //   content: "",
-            //   listStyleType: "'🎮'",
-            // },
           ]}
         />
         <InterestElement
           name="Social Work"
           iconName="healthicons:social-work-outline"
           defaultBulletListStyleType="disc"
-          bullets={[
+          last={true}
+          content={[
             {
-              content: "**Pure Hearts:**",
-              listStyleType: "'❤️'",
+              title: "Pure Hearts",
+              emoji: "'❤️'",
+              bullets: [
+                {
+                  content:
+                    "Co-founder of Pure Hearts: a non-profit children's initiative that aims to do good and improve the community.",
+                },
+              ],
             },
           ]}
-        /> -->
+        />
       </div>
     </section>
   </main>
 </Layout>
 <script defer>
-document.getElementById("print-resume").addEventListener("click", () => {
-  window.print();
-});
+  document.getElementById("print-resume").addEventListener("click", () => {
+    window.print();
+  });
 </script>
 <script defer>
-fetch("https://np.vsahni.me").then((data) => {
-  let nowPlayingLoading = document.getElementById("nowPlayingLoading");
-  let nowPlaying = document.getElementById("nowPlaying");
-  data.json().then((json) => {
-    if (
-      json.statusCode !== 200 ||
-      json.track.external_urls.spotify === undefined
-    ) {
-      nowPlaying.innerText = " Silence...";
-    } else if (json.statusCode === 200) {
-      let artists = json.track.artists
-        .map((artist) => artist.name)
-        .join(", ");
-      nowPlaying.innerText = " " + json.track.name + " by " + artists;
-      nowPlaying.setAttribute("href", json.track.external_urls.spotify);
-    }
-    nowPlayingLoading.style.opacity = "0";
-    nowPlaying.style.opacity = "1";
-    setTimeout(() => {
-      nowPlayingLoading.style.display = "none";
-    }, 600);
+  fetch("https://np.vsahni.me").then((data) => {
+    let nowPlayingLoading = document.getElementById("nowPlayingLoading");
+    let nowPlaying = document.getElementById("nowPlaying");
+    data.json().then((json) => {
+      if (
+        json.statusCode !== 200 ||
+        json.track.external_urls.spotify === undefined
+      ) {
+        nowPlaying.innerText = " Silence...";
+      } else if (json.statusCode === 200) {
+        let artists = json.track.artists
+          .map((artist) => artist.name)
+          .join(", ");
+        nowPlaying.innerText = " " + json.track.name + " by " + artists;
+        nowPlaying.setAttribute("href", json.track.external_urls.spotify);
+      }
+      nowPlayingLoading.style.opacity = "0";
+      nowPlaying.style.opacity = "1";
+      setTimeout(() => {
+        nowPlayingLoading.style.display = "none";
+      }, 600);
+    });
   });
-});
 </script>
 <style>
   hr {

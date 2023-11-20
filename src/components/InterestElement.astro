@@ -1,31 +1,83 @@
 ---
+type Content = BulletPoint[] | SubContent[];
+
 type BulletPoint = {
   content: string;
   listStyleType?: string;
+};
+
+type SubContent = {
+  title: string;
+  emoji?: string;
+  bullets: { listStyleType?: never } & BulletPoint[];
 };
 
 interface Props {
   name: string;
   iconName: string;
   defaultBulletListStyleType?: string;
-  bullets: BulletPoint[];
+  content: Content;
   iconClasses?: string;
+  last?: boolean;
 }
 
 import Icon from "astro-icon";
+import { string } from "astro/zod";
 import { marked } from "marked";
 
-const {
+let {
   name,
   iconName,
-  bullets,
+  content,
   iconClasses = null,
   defaultBulletListStyleType = null,
+  last = false,
 } = Astro.props;
+
+// Type guard function for BulletPoint
+function isBulletPoint(obj: any): obj is BulletPoint {
+  return (
+    typeof obj === "object" &&
+    "content" in obj &&
+    typeof obj.content === "string"
+  );
+}
+
+// Type guard function for SubContent
+function isSubContent(obj: any): obj is SubContent {
+  return (
+    typeof obj === "object" &&
+    "title" in obj &&
+    typeof obj.title === "string" &&
+    "subcontent" in obj
+  );
+}
+
+// Type guard function for BulletPoint
+function isBulletPointArray(arr: any[]): arr is BulletPoint[] {
+  return (
+    Array.isArray(arr) &&
+    arr.every((item) => typeof item === "object" && "content" in item)
+  );
+}
+
+// Type guard function for SubContent
+function isSubContentArray(arr: any[]): arr is SubContent[] {
+  return (
+    Array.isArray(arr) &&
+    arr.every(
+      (item) =>
+        typeof item === "object" &&
+        "title" in item &&
+        typeof item.title === "string" &&
+        "subcontent" in item
+    )
+  );
+}
 ---
 
 <div
-  class="border-l-orange-500 print:border-none border-l-[5px] h-fit flex flex-row interest-container"
+  class="border-l-orange-500 print:border-none border-l-[5px] h-fit flex flex-row interest-container child:transform-gpu"
 >
   <div
     class="h-[38px] w-[38px] md:h-[48px] md:w-[48px] relative right-[21px] md:right-[26px] print:hidden bg-orange-600 rounded-full"
@@ -36,7 +88,10 @@ const {
       ]}
     >
       <Icon
-        class:list={["h-[38px] md:h-[48px] p-2 object-contain", iconClasses]}
+        class:list={[
+          "transform-gpu h-[38px] md:h-[48px] p-2 object-contain",
+          iconClasses,
+        ]}
         name={iconName}
       />
     </div>
@@ -47,17 +102,26 @@ const {
       class="pl-5 text-base md:text-lg child:pl-2 child:mb-2 pt-1 print:child:!list-disc"
     >
       {
-        bullets.map(({ content, listStyleType }) => (
+        content.map((content: any) => (
           <li
             style={
               "list-style-type: " +
-              (listStyleType
-                ? listStyleType
-                : defaultBulletListStyleType
-                ? defaultBulletListStyleType
-                : "disc")
+              (content?.emoji ??
+                content?.listStyleType ??
+                defaultBulletListStyleType ??
+                "disc")
             }
-            set:html={marked.parse(content)}
+            set:html={
+              isBulletPoint(content)
+                ? marked.parse(content.content)
+                : marked.parse(
+                    `**${content.title}:** <div class="child:list-disc child:pl-4 relative">\n` +
+                      content.bullets
+                        .map((bullet) => `- ${bullet.content}`)
+                        .join("\n") +
+                      "</div>"
+                  )
+            }
           />
         ))
       }
@@ -69,6 +133,7 @@ const {
 >
 </div>
 <div
-  class="border-l-yellow-500 print:border-none border-l-[5px] h-[8px] pt-6 print:pt-2"
+  class={"border-l-yellow-500 print:border-none border-l-[5px] h-[16px] print:pt-2 " +
+    (last ? "rounded-b-md !h-[12px]" : "")}
 >
 </div>
