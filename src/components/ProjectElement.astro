@@ -40,14 +40,14 @@ const {
   rel={inNewTab ? "noopener noreferrer" : ""}
   class={"will-change-[filter] relative child:transform-gpu " + rootAnchorClass}
   ><div
-    class={"duration-200 bg-neutral-800 hover:bg-neutral-200 print:bg-transparent shadow-2xl hover:shadow-white/60 print:shadow-none px-4 py-2 group flex items-center text-xl sm:text-lg print:h-fit print:!drop-shadow-none " +
+    class={"duration-200 bg-transparent dark:border-none border-[2px] shadow-[3px_3px_0_0_#0002] border-rose-400 hover:border-rose-500 rounded-md dark:rounded-none stroke-1 dark:bg-neutral-800 hover:bg-neutral-200 print:bg-transparent dark:shadow-2xl hover:shadow-white/60 print:shadow-none px-4 py-2 group flex items-center text-xl sm:text-lg print:h-fit print:!drop-shadow-none " +
       rootDivClass}
   >
     <div
       class={"min-w-[80px] h-[80px] w-[80px] border-gray-600 overflow-visible mr-4 transition-all duration-200 print:!drop-shadow-none " +
         imgDivClass +
         (invertLogoOnHover
-          ? " group-hover:child:invert group-hover:!drop-shadow-[2px_2px_12px_#0007]"
+          ? " dark:group-hover:child:invert invert dark:invert-0 dark:group-hover:!drop-shadow-[2px_2px_12px_#0007]"
           : "") +
         (invertLogoWhenPrint ? " print:invert" : "")}
     >
@@ -61,14 +61,14 @@ const {
       />
     </div>
     <div
-      class={"flex flex-col items-start justify-center text-left gap-y-[2px] invert-0 duration-200 transition-all drop-shadow-[2px_2px_1px_#000] group-hover:drop-shadow-none print:drop-shadow-none " +
-        (invertTextOnHover ? "group-hover:invert" : "")}
+      class={"flex flex-col items-start justify-center text-left gap-y-[2px] invert-0 duration-200 transition-all dark:drop-shadow-[2px_2px_1px_#000] group-hover:drop-shadow-none print:drop-shadow-none " +
+        (invertTextOnHover ? "dark:group-hover:invert" : "")}
     >
-      <div class="text-sm sm:text-md font-semibold transform-gpu">
+      <div class="text-sm sm:text-md font-semibold transform-gpu dark:text-">
         {name}
       </div>
       <div
-        class="text-xs sm:text-sm font-light relative bottom-[4px] text-white/90 print:text-black/90 transform-gpu"
+        class="text-xs sm:text-sm font-light relative bottom-[4px] text-black/90 dark:text-white/90 print:text-black/90 transform-gpu"
       >
         <p set:html={marked.parse(subline)} />
       </div>

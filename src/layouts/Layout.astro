@@ -27,12 +27,47 @@ const { title, bodyClass } = Astro.props;
       rel="stylesheet"
     />
     <meta name="generator" content={Astro.generator} />
+    <script is:inline>
+      const themeMatcher =
+        window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)");
+      const event = new Event("theme-change");
+
+      function setTheme(theme = "", documentE = document) {
+        if (!!theme) {
+          let newTheme = theme === "dark" ? "dark" : "light";
+          localStorage.setItem("theme", newTheme);
+          if (newTheme === "dark")
+            documentE.documentElement.classList.add("dark");
+          else documentE.documentElement.classList.remove("dark");
+          document.dispatchEvent(event);
+          return;
+        }
+        localStorage.setItem(
+          "theme",
+          localStorage.getItem("theme") ||
+            (themeMatcher && themeMatcher.matches ? "dark" : "light") ||
+            "dark"
+        );
+        documentE.documentElement.classList.remove(
+          localStorage?.theme === "dark" ? "light" : "dark"
+        );
+      }
+
+      themeMatcher.addEventListener("change", (e) => {
+        setTheme(e.matches ? "dark" : "light");
+      });
+
+      setTheme();
+      document.addEventListener("astro:before-swap", (ev) => {
+        setTheme(undefined, ev.newDocument);
+      });
+    </script>
     <title>{title}</title>
     <ViewTransitions fallback="none" />
   </head>
   <body
     class:list={[
-      "bg-neutral-900 print:bg-white overflow-y-scroll antialiased",
+      "dark:bg-neutral-900 transition-colors duration-100 bg-neutral-50 print:bg-white text-black dark:text-white overflow-y-scroll antialiased",
       bodyClass ?? "",
     ]}
   >

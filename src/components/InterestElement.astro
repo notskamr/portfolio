@@ -77,16 +77,12 @@ function isSubContentArray(arr: any[]): arr is SubContent[] {
 ---
 
 <div
-  class="border-l-orange-500 print:border-none border-l-[5px] h-fit flex flex-row interest-container child:transform-gpu"
+  class="border-l-blue-500 dark:border-l-orange-500 print:border-none border-l-[5px] h-fit flex flex-row interest-container child:transform-gpu"
 >
   <div
-    class="h-[38px] w-[38px] md:h-[48px] md:w-[48px] relative right-[21px] md:right-[26px] print:hidden bg-orange-600 rounded-full"
+    class="h-[38px] w-[38px] md:h-[48px] md:w-[48px] relative right-[21px] md:right-[26px] print:hidden bg-blue-500 dark:bg-orange-600 rounded-full"
   >
-    <div
-      class:list={[
-        "drop-shadow-[1px_1px_0px_#000F] md:drop-shadow-[2px_2px_0px_#000F]",
-      ]}
-    >
+    <div class:list={["drop-shadow-[1.5px_1.5px_0px_#0004] text-white"]}>
       <Icon
         class:list={[
           "transform-gpu h-[38px] md:h-[48px] p-2 object-contain",
@@ -129,11 +125,11 @@ function isSubContentArray(arr: any[]): arr is SubContent[] {
   </div>
 </div>
 <div
-  class="w-[20px] h-[20px] rounded-full bg-yellow-500 z-[99] scale-[105%] relative right-[7px]"
+  class="w-[20px] h-[20px] rounded-full bg-rose-600 dark:bg-yellow-500 z-[99] scale-[105%] relative right-[7px]"
 >
 </div>
 <div
-  class={"border-l-yellow-500 print:border-none border-l-[5px] h-[16px] print:pt-2 " +
+  class={"border-l-rose-600 dark:border-l-yellow-500 print:border-none border-l-[5px] h-[16px] print:pt-2 " +
     (last ? "rounded-b-md !h-[12px]" : "")}
 >
 </div>

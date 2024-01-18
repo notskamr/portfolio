@@ -16,7 +16,7 @@ import { SEO } from "astro-seo";
     description="I'm a high school student from India passionate about computer engineering, web development, and open-source software - and anything related to computers! - with a specific interest in Computer Architecture; see my portfolio here!"
   />
   <main
-    class="mx-auto max-w-screen-md scroll-smooth motion-reduce:scroll-auto font-sans text-white print:text-black print:max-w-none py-8 px-4 print:px-0 print:py-0 drop-shadow-xl print:drop-shadow-none child:transform-gpu"
+    class="mx-auto max-w-screen-md scroll-smooth motion-reduce:scroll-auto font-sansprint:text-black print:max-w-none py-8 px-4 print:px-0 print:py-0 drop-shadow-xl print:drop-shadow-none child:transform-gpu"
   >
     <h1 class="text-4xl font-bold">
       <span class="print:hidden"
@@ -24,7 +24,7 @@ import { SEO } from "astro-seo";
         <br />
         <div class="font-medium">
           I'm <span
-            class="text-orange-500 sm:inline-flex sm:flex-row sm:items-end"
+            class="text-red-500 dark:text-orange-500 sm:inline-flex sm:flex-row sm:items-end"
             >Varun Sahni<br /><span
               class="hidden sm:inline sm:pl-2 sm:pb-1 text-xl text-neutral-500 font-mono italic"
               >(aka skamr)</span
@@ -41,7 +41,7 @@ import { SEO } from "astro-seo";
     <hr class="print:hidden" />
     <div
       id="socials"
-      class="print:hidden flex items-center gap-4 mt-3 child:underline child:underline-offset-2 child:text-blue-300 child:duration-200 child-hover:text-amber-500 child-hover:scale-125 child:w-[28px] shadow-amber-400 child-hover:drop-shadow-[0_2px_8px_#fbbf24aa] child:will-change-transform"
+      class="print:hidden flex items-center gap-4 mt-3 child:underline child:underline-offset-2 child:text-blue-600 dark:child:text-blue-300 child:duration-200 child-hover:text-rose-500 dark:child-hover:text-amber-500 child-hover:scale-125 child:w-[28px] shadow-amber-400 child-hover:drop-shadow-[2px_2px_0px_#0001] dark:child-hover:drop-shadow-[0_2px_8px_#fbbf24aa] child:will-change-transform"
     >
       <a href="https://github.com/notskamr" title="GitHub"
         ><Icon name="ri:github-line" /></a
@@ -60,6 +60,29 @@ import { SEO } from "astro-seo";
       >
         <Icon name="mi:print" />
       </button>
+      <button
+        class="theme-toggle !w-[30px]"
+        type="button"
+        title="Toggle theme"
+        id="theme-toggle"
+      >
+        <div class="hidden dark:block">
+          <svg viewBox="0 0 24 24" astro-icon="ic:outline-dark-mode"
+            ><path
+              fill="currentColor"
+              d="M9.37 5.51A7.35 7.35 0 0 0 9.1 7.5c0 4.08 3.32 7.4 7.4 7.4.68 0 1.35-.09 1.99-.27A7.014 7.014 0 0 1 12 19c-3.86 0-7-3.14-7-7 0-2.93 1.81-5.45 4.37-6.49zM12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1z"
+            ></path></svg
+          >
+        </div>
+        <div class="block dark:hidden">
+          <svg viewBox="0 0 24 24" astro-icon="ic:outline-light-mode"
+            ><path
+              fill="currentColor"
+              d="M12 9c1.65 0 3 1.35 3 3s-1.35 3-3 3-3-1.35-3-3 1.35-3 3-3m0-2c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58a.996.996 0 0 0-1.41 0 .996.996 0 0 0 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37a.996.996 0 0 0-1.41 0 .996.996 0 0 0 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0a.996.996 0 0 0 0-1.41l-1.06-1.06zm1.06-10.96a.996.996 0 0 0 0-1.41.996.996 0 0 0-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06zM7.05 18.36a.996.996 0 0 0 0-1.41.996.996 0 0 0-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06z"
+            ></path></svg
+          >
+        </div>
+      </button>
     </div>
     <hr />
     <p class="print:hidden">
@@ -73,8 +96,8 @@ import { SEO } from "astro-seo";
       >
       <br />
       <br />
-       I'm also a huge fan of music, film, VFX and editing. See more about my
-      interests <a href="#interests" class="underline">here</a>
+      I'm also a huge fan of music, film, VFX and editing. See more about my interests
+      <a href="#interests" class="underline">here</a>
     </p>
     <div class="mt-6 print:hidden">
       <span class="font-bold">Currently listening to:</span>
@@ -83,14 +106,14 @@ import { SEO } from "astro-seo";
       >
       <a
         id="nowPlaying"
-        class="duration-500 opacity-0 hover:duration-0 hover:text-orange-500"
+        class="duration-500 opacity-0 hover:duration-0 dark:hover:text-orange-500 hover:text-blue-500"
         rel="noreferrer noopener"
         target="_blank"></a>
     </div>
     <hr class="print:hidden" />
     <section id="education">
       <h2
-        class="text-2xl md:text-3xl text-yellow-500 print:text-black font-semibold underline underline-offset-[8px] mb-2"
+        class="text-2xl md:text-3xl text-rose-600 dark:text-yellow-500 print:text-black font-semibold underline underline-offset-[8px] mb-2"
       >
         Education/Courses
       </h2>
@@ -127,7 +150,7 @@ import { SEO } from "astro-seo";
     <section id="projects">
       <div class="flex gap-2 items-baseline">
         <h2
-          class="text-2xl md:text-3xl text-yellow-500 print:text-black font-semibold underline underline-offset-[8px] mb-[min(2.3vh,2.5rem)]"
+          class="text-2xl md:text-3xl text-rose-600 dark:text-yellow-500 print:text-black font-semibold underline underline-offset-[8px] mb-[min(2.3vh,2.5rem)]"
         >
           Projects
         </h2>
@@ -145,7 +168,7 @@ import { SEO } from "astro-seo";
           invertLogoOnHover={false}
           rootAnchorClass="z-[99]"
           rootDivClass="hover:!bg-amber-300 hover:!shadow-amber-400"
-          imgDivClass="drop-shadow-[2px_2px_2px_#000F]"
+          imgDivClass="dark:drop-shadow-[2px_2px_2px_#000F]"
         />
         <ProjectElement
           name="Parallelized"
@@ -156,7 +179,7 @@ import { SEO } from "astro-seo";
           invertLogoWhenPrint={true}
           rootAnchorClass="z-[98]"
           rootDivClass="hover:!bg-violet-200 hover:!shadow-violet-300"
-          imgDivClass="drop-shadow-[2px_2px_2px_#000F]"
+          imgDivClass="dark:drop-shadow-[2px_2px_2px_#000F]"
         />
         <ProjectElement
           name="CS61CPU"
@@ -166,7 +189,7 @@ import { SEO } from "astro-seo";
           invertLogoOnHover={false}
           rootAnchorClass="z-[97]"
           rootDivClass="hover:!bg-teal-200 hover:!shadow-teal-400"
-          imgDivClass="group-hover:child:saturate-200 drop-shadow-[0px_2px_1px_#000F]"
+          imgDivClass="group-hover:child:saturate-200 dark:drop-shadow-[0px_2px_1px_#000F]"
         />
         <ProjectElement
           name="kNN Movie Classification"
@@ -176,7 +199,7 @@ import { SEO } from "astro-seo";
           invertLogoOnHover={false}
           rootAnchorClass="z-[96]"
           rootDivClass="hover:!bg-blue-300 hover:!shadow-blue-400"
-          imgDivClass="group-hover:child:saturate-200 drop-shadow-[2px_2px_2px_#000F]"
+          imgDivClass="group-hover:child:saturate-200 dark:drop-shadow-[2px_2px_2px_#000F]"
         />
         <ProjectElement
           name="CortX"
@@ -186,7 +209,7 @@ import { SEO } from "astro-seo";
           invertLogoOnHover={false}
           rootDivClass="hover:!bg-rose-300 hover:!shadow-rose-400 !py-[1ex] relative"
           rootAnchorClass="z-[95]"
-          imgDivClass="drop-shadow-[2px_2px_2px_#000F]"
+          imgDivClass="dark:drop-shadow-[2px_2px_2px_#000F]"
         />
         <ProjectElement
           name="MusicAI 2023"
@@ -242,7 +265,7 @@ import { SEO } from "astro-seo";
     <hr />
     <section id="awards">
       <h2
-        class="text-2xl md:text-3xl text-yellow-500 print:text-black font-semibold underline underline-offset-[8px] mb-5"
+        class="text-2xl md:text-3xl text-rose-600 dark:text-yellow-500 print:text-black font-semibold underline underline-offset-[8px] mb-5"
       >
         Awards
       </h2>
@@ -259,13 +282,13 @@ import { SEO } from "astro-seo";
     <hr />
     <section id="interests">
       <h2
-        class="text-2xl md:text-3xl text-yellow-500 print:text-black font-semibold underline underline-offset-[8px] mb-4"
+        class="text-2xl md:text-3xl text-rose-600 dark:text-yellow-500 print:text-black font-semibold underline underline-offset-[8px] mb-4"
       >
         Interests
       </h2>
       <div class="pl-1 print:pl-0 relative bottom-[14px] -mb-[14px]">
         <div
-          class="border-l-yellow-500 print:border-none border-l-[5px] h-[8px] pt-6 print:pt-2"
+          class="border-l-rose-600 dark:border-l-yellow-500 print:border-none border-l-[5px] h-[8px] pt-6 print:pt-2"
         >
         </div>
         <InterestElement
@@ -321,12 +344,28 @@ import { SEO } from "astro-seo";
     </section>
   </main>
 </Layout>
-<script defer>
+<script is:inline>
+  function initThemeToggle() {
+    const event = new Event("theme-change");
+    const toggle = document.querySelector(".theme-toggle");
+    if (localStorage.getItem("theme") === "light") {
+      toggle.setAttribute("aria-checked", "true");
+    } else {
+      toggle.setAttribute("aria-checked", "false");
+    }
+    toggle.onclick = (e) => {
+      setTheme(localStorage.getItem("theme") === "light" ? "dark" : "light");
+    };
+  }
+  initThemeToggle();
+  document.addEventListener("astro:page-load", initThemeToggle);
+</script>
+<script>
   document.getElementById("print-resume").addEventListener("click", () => {
     window.print();
   });
 </script>
-<script defer>
+<script>
   fetch("https://np.vsahni.me").then((data) => {
     let nowPlayingLoading = document.getElementById("nowPlayingLoading");
     let nowPlaying = document.getElementById("nowPlaying");
