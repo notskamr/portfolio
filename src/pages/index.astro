@@ -100,7 +100,7 @@ import { SEO } from "astro-seo";
       <a href="#interests" class="underline">here</a>
     </p>
     <div class="mt-6 print:hidden">
-      <span class="font-bold">Currently listening to:</span>
+      <span class="font-bold">I'm currently listening to:</span>
       <span id="nowPlayingLoading" class="ml-1 absolute duration-500"
         >Loading...</span
       >
@@ -366,28 +366,48 @@ import { SEO } from "astro-seo";
   });
 </script>
 <script>
-  fetch("https://np.vsahni.me").then((data) => {
-    let nowPlayingLoading = document.getElementById("nowPlayingLoading");
-    let nowPlaying = document.getElementById("nowPlaying");
-    data.json().then((json) => {
-      if (
-        json.statusCode !== 200 ||
-        json.track.external_urls.spotify === undefined
-      ) {
-        nowPlaying.innerText = " Silence...";
-      } else if (json.statusCode === 200) {
-        let artists = json.track.artists
-          .map((artist) => artist.name)
-          .join(", ");
-        nowPlaying.innerText = " " + json.track.name + " by " + artists;
-        nowPlaying.setAttribute("href", json.track.external_urls.spotify);
-      }
-      nowPlayingLoading.style.opacity = "0";
-      nowPlaying.style.opacity = "1";
-      setTimeout(() => {
-        nowPlayingLoading.style.display = "none";
-      }, 600);
-    });
+  type Song = any;
+  async function getSong(): Promise<Song> {
+    const response = await fetch("https://np.vsahni.me");
+    const data = await response.json();
+    return data;
+  }
+
+  function getSongDisplayInfo(song: Song): {
+    message: string;
+    url?: string;
+  } {
+    let message: string;
+    const details = song?.details;
+    if (song?.statusCode === 200 && details?.url) {
+      let artists = details.artists.map((artist) => artist.name).join(", ");
+      message = " " + details.name + " by " + artists;
+      return { message, url: details.url };
+    }
+    message = " Silence...";
+    return { message, url: undefined };
+  }
+
+  const nowPlayingLoading = document.getElementById("nowPlayingLoading");
+  const nowPlaying = document.getElementById("nowPlaying");
+
+  document.addEventListener("astro:page-load", async () => {
+    const npSong = await getSong();
+    const displayInfo = getSongDisplayInfo(npSong);
+    nowPlaying.innerText = displayInfo.message;
+    displayInfo.url && nowPlaying.setAttribute("href", displayInfo.url);
+    nowPlayingLoading.style.opacity = "0";
+    nowPlaying.style.opacity = "1";
+    setTimeout(() => {
+      nowPlayingLoading.style.display = "none";
+    }, 600);
+    // start polling
+    setInterval(async () => {
+      const npSong = await getSong();
+      const displayInfo = getSongDisplayInfo(npSong);
+      nowPlaying.innerText = displayInfo.message;
+      displayInfo.url && nowPlaying.setAttribute("href", displayInfo.url);
+    }, 7500);
   });
 </script>
 <style>
