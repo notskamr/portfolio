@@ -48,6 +48,7 @@ const { title, bodyClass } = Astro.props;
             (themeMatcher && themeMatcher.matches ? "dark" : "light") ||
             "dark"
         );
+        documentE.documentElement.classList.add(localStorage.getItem("theme"));
         documentE.documentElement.classList.remove(
           localStorage?.theme === "dark" ? "light" : "dark"
         );
