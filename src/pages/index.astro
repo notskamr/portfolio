@@ -43,14 +43,17 @@ import { SEO } from "astro-seo";
       id="socials"
       class="print:hidden flex items-center gap-4 mt-3 child:underline child:underline-offset-2 child:text-blue-600 dark:child:text-blue-300 child:duration-200 child-hover:text-rose-500 dark:child-hover:text-amber-500 child-hover:scale-125 child:w-[28px] shadow-amber-400 child-hover:drop-shadow-[2px_2px_0px_#0001] dark:child-hover:drop-shadow-[0_2px_8px_#fbbf24aa] child:will-change-transform"
     >
-      <a href="https://github.com/notskamr" title="GitHub"
+      <a href="https://github.com/notskamr" title="GitHub" aria-label="GitHub"
         ><Icon name="ri:github-line" /></a
       >
-      <a href="https://blog.vsahni.me" title="Blog"
+      <a href="https://blog.vsahni.me" title="Blog" aria-label="Blog"
         ><Icon name="icomoon-free:blog" /></a
       >
-      <a href="mailto:contact@vsahni.me" title="E-mail" class="!w-[30px]"
-        ><Icon name="ic:outline-mail" /></a
+      <a
+        href="mailto:contact@vsahni.me"
+        title="E-mail"
+        class="!w-[30px]"
+        aria-label="E-mail"><Icon name="ic:outline-mail" /></a
       >
       <button
         class="!w-[30px]"
@@ -101,13 +104,18 @@ import { SEO } from "astro-seo";
     </p>
     <div class="mt-6 print:hidden">
       <span class="font-bold">I'm currently listening to:</span>
-      <span id="nowPlayingLoading" class="ml-1 absolute duration-500"
-        >Loading...</span
+      <span
+        id="nowPlayingLoading"
+        class="ml-1 absolute duration-500"
+        aria-hidden="true">Loading...</span
       >
       <a
         id="nowPlaying"
         class="duration-500 opacity-0 hover:duration-0 dark:hover:text-orange-500 hover:text-blue-500"
+        aria-label="Now Playing"
+        aria-hidden="true"
         rel="noreferrer noopener"
+        href="#0"
         target="_blank"></a>
     </div>
     <hr class="print:hidden" />
@@ -196,7 +204,7 @@ import { SEO } from "astro-seo";
         <ProjectElement
           name="kNN Movie Classification"
           subline="My favourite DATA8 project; kNN movie classifier based on word usage"
-          href="#"
+          href="#0"
           imgURL="/assets/data8.webp"
           invertLogoOnHover={false}
           rootAnchorClass="z-[96]"
@@ -236,7 +244,7 @@ import { SEO } from "astro-seo";
         <ProjectElement
           name="Editing Community"
           subline="VFX and Editing Community with 100k+ site visits"
-          href="javascript:void(0);"
+          href="#0"
           inNewTab={false}
           imgURL="/assets/editing.webp"
           rootAnchorClass="cursor-default z-[92]"
@@ -309,7 +317,7 @@ import { SEO } from "astro-seo";
             },
             {
               content:
-                "My favourite artists are always changing; right now they're probably [Coldplay](#), [RHCP](#), [Dominic Fike](#), [James Blake](#), and [Carter Ace](#) (that's a lot!)",
+                "My favourite artists are always changing; right now they're probably [Coldplay](https://www.coldplay.com/), [RHCP](https://redhotchilipeppers.com/), [Dominic Fike](https://www.dominicfike.com/), [James Blake](https://www.jamesblakemusic.com/), and [Carter Ace](https://www.carteracemusic.com/) (that's a lot!)",
               listStyleType: "'👨🏼‍🎤'",
             },
           ]}
@@ -397,6 +405,7 @@ import { SEO } from "astro-seo";
     const npSong = await getSong();
     const displayInfo = getSongDisplayInfo(npSong);
     nowPlaying.innerText = displayInfo.message;
+    nowPlaying.ariaHidden = "false";
     displayInfo.url && nowPlaying.setAttribute("href", displayInfo.url);
     nowPlayingLoading.style.opacity = "0";
     nowPlaying.style.opacity = "1";
