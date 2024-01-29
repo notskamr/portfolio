@@ -3,7 +3,6 @@ import tailwind from "@astrojs/tailwind";
 import vercel from "@astrojs/vercel/static";
 import robots from "astro-robots";
 import sitemap from "@astrojs/sitemap";
-import partytown from "@astrojs/partytown";
 import fontPicker from "astro-font-picker";
 
 import compress from "astro-compress";
