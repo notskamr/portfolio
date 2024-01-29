@@ -408,12 +408,19 @@ import {
     url?: string;
   } {
     let message: string;
-    const details = song?.details;
+    const details:
+      | {
+          id: string;
+          name: string;
+          artists: string[];
+          url: string;
+          progress: number;
+          duration: number;
+        }
+      | undefined = song.details;
     if (song?.statusCode === 200 && details?.url) {
-      let artists = details.artists
-        .map((artist: { name: string }) => artist.name)
-        .join(", ");
-      message = " " + details.name + " by " + artists;
+      let artistsFormatted: string = details.artists.join(", ");
+      message = " " + details.name + " by " + artistsFormatted;
       return { message, url: details.url };
     }
     message = " Silence...";
