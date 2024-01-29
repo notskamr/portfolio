@@ -432,7 +432,6 @@ import {
   async function nowPlayingInit() {
     const nowPlayingEventSource = new EventSource("https://np.vsahni.me/sse");
     nowPlayingEventSource.onmessage = (e) => {
-      console.log(e);
       const npSong = JSON.parse(e.data);
       console.log("[NowPlaying] Song changed", npSong);
       const displayInfo = getSongDisplayInfo(npSong);
