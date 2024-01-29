@@ -8,6 +8,14 @@ import InterestElement from "../components/InterestElement.astro";
 import { Awards } from "../config/Awards";
 
 import { SEO } from "astro-seo";
+import {
+  GithubIcon,
+  HeartIcon,
+  MailIcon,
+  MusicIcon,
+  PenToolIcon,
+  PrinterIcon,
+} from "astro-feather";
 ---
 
 <Layout title="Varun Sahni" bodyClass="transform-gpu">
@@ -44,25 +52,21 @@ import { SEO } from "astro-seo";
       class="print:hidden flex items-center gap-4 mt-3 child:underline child:underline-offset-2 child:text-blue-600 dark:child:text-blue-300 child:duration-200 child-hover:text-rose-500 dark:child-hover:text-amber-500 child-hover:scale-125 child:w-[28px] shadow-amber-400 child-hover:drop-shadow-[2px_2px_0px_#0001] dark:child-hover:drop-shadow-[0_2px_8px_#fbbf24aa] child:will-change-transform"
     >
       <a href="https://github.com/notskamr" title="GitHub" aria-label="GitHub"
-        ><Icon name="ri:github-line" /></a
+        ><GithubIcon size={28} /></a
       >
       <a href="https://blog.vsahni.me" title="Blog" aria-label="Blog"
-        ><Icon name="icomoon-free:blog" /></a
+        ><PenToolIcon size={28} /></a
       >
-      <a
-        href="mailto:contact@vsahni.me"
-        title="E-mail"
-        class="!w-[30px]"
-        aria-label="E-mail"><Icon name="ic:outline-mail" /></a
+      <a href="mailto:contact@vsahni.me" title="E-mail" aria-label="E-mail"
+        ><MailIcon size={28} /></a
       >
       <button
-        class="!w-[30px]"
         type="button"
         title="Print Resume"
         id="print-resume"
         aria-label="Print Resume"
       >
-        <Icon name="mi:print" />
+        <PrinterIcon size={28} />
       </button>
       <button
         class="theme-toggle !w-[30px]"
@@ -305,7 +309,6 @@ import { SEO } from "astro-seo";
         </div>
         <InterestElement
           name="Music"
-          iconName="uil:music"
           iconClasses={"relative right-[1px] bottom-[1px]"}
           content={[
             {
@@ -323,20 +326,31 @@ import { SEO } from "astro-seo";
               listStyleType: "'👨🏼‍🎤'",
             },
           ]}
-        />
+        >
+          <MusicIcon slot="icon" customClasses="relative right-[1px]" />
+        </InterestElement>
         <InterestElement
           name="Gaming"
-          iconName="icons8:controller"
           content={[
             {
               content: "My favourite games of all time are Minecraft and RDR2.",
               listStyleType: "'🤠'",
             },
           ]}
-        />
+        >
+          <svg
+            slot="icon"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            ><path
+              fill="currentColor"
+              fill-rule="evenodd"
+              d="M13 15h-2a5 5 0 1 1-4-8h10a5 5 0 1 1-4 8m-5-4v-1a1 1 0 1 0-2 0v1H5a1 1 0 0 0 0 2h1v1a1 1 0 0 0 2 0v-1h1a1 1 0 0 0 0-2zm9 0a1 1 0 1 0 0-2a1 1 0 0 0 0 2m-1 3a1 1 0 1 0 0-2a1 1 0 0 0 0 2m3-1a1 1 0 1 0 0-2a1 1 0 0 0 0 2"
+            ></path></svg
+          >
+        </InterestElement>
         <InterestElement
           name="Social Work"
-          iconName="healthicons:social-work-outline"
           defaultBulletListStyleType="disc"
           last={true}
           content={[
@@ -351,7 +365,9 @@ import { SEO } from "astro-seo";
               ],
             },
           ]}
-        />
+        >
+          <HeartIcon slot="icon" />
+        </InterestElement>
       </div>
     </section>
   </main>
