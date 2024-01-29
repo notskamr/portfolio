@@ -98,12 +98,11 @@ function isSubContentArray(arr: any[]): arr is SubContent[] {
       class="pl-5 text-base md:text-lg child:pl-2 child:mb-2 pt-1 print:child:!list-disc"
     >
       {
-        content.map((content: any) => (
+        content.map((content: BulletPoint | SubContent) => (
           <li
             style={
               "list-style-type: " +
-              (content?.emoji ??
-                content?.listStyleType ??
+              (("title" in content ? content.emoji : content.listStyleType) ??
                 defaultBulletListStyleType ??
                 "disc")
             }

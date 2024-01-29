@@ -371,7 +371,7 @@ import { SEO } from "astro-seo";
   document.addEventListener("astro:page-load", initThemeToggle);
 </script>
 <script>
-  document.getElementById("print-resume").addEventListener("click", () => {
+  document.getElementById("print-resume")?.addEventListener("click", () => {
     window.print();
   });
 </script>
@@ -390,7 +390,9 @@ import { SEO } from "astro-seo";
     let message: string;
     const details = song?.details;
     if (song?.statusCode === 200 && details?.url) {
-      let artists = details.artists.map((artist) => artist.name).join(", ");
+      let artists = details.artists
+        .map((artist: { name: string }) => artist.name)
+        .join(", ");
       message = " " + details.name + " by " + artists;
       return { message, url: details.url };
     }
@@ -404,6 +406,7 @@ import { SEO } from "astro-seo";
   document.addEventListener("astro:page-load", async () => {
     const npSong = await getSong();
     const displayInfo = getSongDisplayInfo(npSong);
+    if (!nowPlaying || !nowPlayingLoading) return;
     nowPlaying.innerText = displayInfo.message;
     nowPlaying.ariaHidden = "false";
     displayInfo.url && nowPlaying.setAttribute("href", displayInfo.url);
@@ -413,13 +416,16 @@ import { SEO } from "astro-seo";
       nowPlayingLoading.style.display = "none";
     }, 600);
     // start polling
-    setInterval(async () => {
+    const interval = setInterval(async () => {
       const npSong = await getSong();
       const displayInfo = getSongDisplayInfo(npSong);
       nowPlaying.innerText = displayInfo.message;
       displayInfo.url && nowPlaying.setAttribute("href", displayInfo.url);
     }, 7500);
   });
+  function get(store: string): string {
+    throw new Error("Function not implemented.");
+  }
 </script>
 <style>
   hr {

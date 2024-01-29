@@ -11,12 +11,13 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/partytown": "^2.0.4",
     "@astrojs/sitemap": "^3.0.5",
     "@astrojs/tailwind": "^5.1.0",
-    "@astrojs/vercel": "^7.0.0",
+    "@astrojs/vercel": "^7.0.2",
     "@vercel/analytics": "^1.0.2",
-    "astro": "^4.2.1",
+    "@vercel/speed-insights": "^1.0.8",
+    "astro": "^4.2.6",
+    "astro-compress": "^2.2.8",
     "astro-font-picker": "^0.2.1",
     "astro-icon": "^0.8.1",
     "astro-robots": "^1.0.2",
