@@ -431,24 +431,32 @@ import {
   const nowPlaying = document.getElementById("nowPlaying");
 
   document.addEventListener("astro:page-load", async () => {
-    const npSong = await getSong();
-    const displayInfo = getSongDisplayInfo(npSong);
-    if (!nowPlaying || !nowPlayingLoading) return;
-    nowPlaying.innerText = displayInfo.message;
-    nowPlaying.ariaHidden = "false";
-    displayInfo.url && nowPlaying.setAttribute("href", displayInfo.url);
-    nowPlayingLoading.style.opacity = "0";
-    nowPlaying.style.opacity = "1";
-    setTimeout(() => {
-      nowPlayingLoading.style.display = "none";
-    }, 600);
-    // start polling
-    const interval = setInterval(async () => {
-      const npSong = await getSong();
+    // const npSong = await getSong();
+    // const displayInfo = getSongDisplayInfo(npSong);
+    // if (!nowPlaying || !nowPlayingLoading) return;
+    // nowPlaying.innerText = displayInfo.message;
+    // nowPlaying.ariaHidden = "false";
+    // displayInfo.url && nowPlaying.setAttribute("href", displayInfo.url);
+    // nowPlayingLoading.style.opacity = "0";
+    // nowPlaying.style.opacity = "1";
+    // setTimeout(() => {
+    //   nowPlayingLoading.style.display = "none";
+    // }, 600);
+    const nowPlayingEventSource = new EventSource("https://np.vsahni.me/sse");
+    nowPlayingEventSource.onmessage = (e) => {
+      const npSong = JSON.parse(e.data);
+      console.log("[NowPlaying] Song changed", npSong);
       const displayInfo = getSongDisplayInfo(npSong);
+      if (!nowPlaying || !nowPlayingLoading) return;
       nowPlaying.innerText = displayInfo.message;
+      nowPlaying.ariaHidden = "false";
       displayInfo.url && nowPlaying.setAttribute("href", displayInfo.url);
-    }, 7500);
+      nowPlayingLoading.style.opacity = "0";
+      nowPlaying.style.opacity = "1";
+      setTimeout(() => {
+        nowPlayingLoading.style.display = "none";
+      }, 600);
+    };
   });
 </script>
 <style>
