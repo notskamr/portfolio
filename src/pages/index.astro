@@ -120,8 +120,7 @@ import {
         aria-label="Now Playing"
         aria-hidden="true"
         rel="noreferrer noopener"
-        href="#0"
-        target="_blank"></a>
+        href="#0"></a>
     </div>
     <hr class="print:hidden" />
     <section id="education">
@@ -438,7 +437,10 @@ import {
       if (!nowPlaying || !nowPlayingLoading) return;
       nowPlaying.innerText = displayInfo.message;
       nowPlaying.ariaHidden = "false";
-      displayInfo.url && nowPlaying.setAttribute("href", displayInfo.url);
+      if (displayInfo.url) {
+        nowPlaying.setAttribute("href", displayInfo.url);
+        nowPlaying.setAttribute("target", "_blank");
+      }
       nowPlayingLoading.style.opacity = "0";
       nowPlaying.style.opacity = "1";
       setTimeout(() => {
