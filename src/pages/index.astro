@@ -437,10 +437,8 @@ import {
       if (!nowPlaying || !nowPlayingLoading) return;
       nowPlaying.innerText = displayInfo.message;
       nowPlaying.ariaHidden = "false";
-      if (displayInfo.url) {
-        nowPlaying.setAttribute("href", displayInfo.url);
-        nowPlaying.setAttribute("target", "_blank");
-      }
+      nowPlaying.setAttribute("href", displayInfo.url ?? "");
+      nowPlaying.setAttribute("target", "_blank");
       nowPlayingLoading.style.opacity = "0";
       nowPlaying.style.opacity = "1";
       setTimeout(() => {
