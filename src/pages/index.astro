@@ -377,13 +377,13 @@ import {
   function initThemeToggle() {
     const event = new Event("theme-change");
     const toggle = document.querySelector(".theme-toggle");
-    if (localStorage.getItem("theme") === "light") {
+    if (sessionStorage.getItem("theme") === "light") {
       toggle.setAttribute("aria-checked", "true");
     } else {
       toggle.setAttribute("aria-checked", "false");
     }
     toggle.onclick = (e) => {
-      setTheme(localStorage.getItem("theme") === "light" ? "dark" : "light");
+      setTheme(sessionStorage.getItem("theme") === "light" ? "dark" : "light");
     };
   }
   initThemeToggle();

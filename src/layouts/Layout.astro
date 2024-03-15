@@ -41,22 +41,24 @@ const { title, bodyClass } = Astro.props;
       function setTheme(theme = "", documentE = document) {
         if (!!theme) {
           let newTheme = theme === "dark" ? "dark" : "light";
-          localStorage.setItem("theme", newTheme);
+          sessionStorage.setItem("theme", newTheme);
           if (newTheme === "dark")
             documentE.documentElement.classList.add("dark");
           else documentE.documentElement.classList.remove("dark");
           document.dispatchEvent(event);
           return;
         }
-        localStorage.setItem(
+        sessionStorage.setItem(
           "theme",
-          localStorage.getItem("theme") ||
+          sessionStorage.getItem("theme") ||
             (themeMatcher && themeMatcher.matches ? "dark" : "light") ||
             "dark"
         );
-        documentE.documentElement.classList.add(localStorage.getItem("theme"));
+        documentE.documentElement.classList.add(
+          sessionStorage.getItem("theme")
+        );
         documentE.documentElement.classList.remove(
-          localStorage?.theme === "dark" ? "light" : "dark"
+          sessionStorage?.theme === "dark" ? "light" : "dark"
         );
       }
 
