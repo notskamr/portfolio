@@ -434,19 +434,21 @@ import {
       const npSong = JSON.parse(e.data);
       console.log("[NowPlaying] Song changed", npSong);
       const displayInfo = getSongDisplayInfo(npSong);
-      if (!nowPlaying || !nowPlayingLoading) return;
+      if (!nowPlaying) return;
       nowPlaying.innerText = displayInfo.message;
       nowPlaying.ariaHidden = "false";
-      nowPlaying.setAttribute("href", displayInfo.url ?? "");
+      nowPlaying.setAttribute("href", displayInfo.url ?? "#0");
       if (displayInfo.url) {
         nowPlaying.setAttribute("target", "_blank");
       } else {
         nowPlaying.removeAttribute("target");
       }
-      nowPlayingLoading.style.opacity = "0";
       nowPlaying.style.opacity = "1";
+      if (!nowPlayingLoading) return;
+      nowPlayingLoading.style.opacity = "0";
       setTimeout(() => {
         nowPlayingLoading.style.display = "none";
+        nowPlayingLoading?.remove();
       }, 600);
     };
   }
