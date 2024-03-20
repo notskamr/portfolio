@@ -132,7 +132,7 @@ import {
       <div id="education-content" class="child:transform-gpu">
         <EducationElement
           name="The Shri Ram School, Moulsari"
-          subline={`\- IBDP Year 1 Student\n \- Completed IGCSE with A*s in all 9 subjects \n \- Secretary of Information, Communication and Technology (ICT)`}
+          subline={`\- IBDP Year 1 Student\n \- Completed IGCSE with A*s in all 9 subjects \n \- Secretary of Information, Communication and Technology (2023-2024)\n \- Head of Information, Communication and Technology (2024-2025)`}
           dates="2018-Present"
           location="Gurugram, HR, IN"
         />
@@ -254,26 +254,29 @@ import {
           rootAnchorClass="cursor-default z-[92]"
           rootDivClass="hover:!bg-white !shadow-3xl hover:!shadow-white"
         />
-        <!-- <ProjectElement
+        <ProjectElement
           name="Hack Club"
           subline="Leader of school Hack Club"
-          href="/assets/hackclub.svg"
+          href="https://hackclub.com"
           inNewTab={true}
           imgURL="https://assets.hackclub.com/icon-rounded.svg"
           invertTextOnHover={false}
           invertLogoOnHover={false}
           rootAnchorClass="z-[91]"
-          rootDivClass="hover:!bg-[#ec3750] hover:!shadow-[#ec3750]"
+          rootDivClass="hover:!bg-[#fa8292] hover:!shadow-[#d66d7b]"
           customImgDims={{ width: 1, height: 1 }}
-        /> -->
-        <!-- <ProjectElement
-          name="Intelliger"
-          subline="Productivity app for students with a pomodoro timer, to-do list, notes and more"
-          href="#"
-          rootAnchorClass="active:pointer-events-none"
-          imgURL="/assets/intelliger.webp"
-          rootDivClass="relative z-[91]"
-        /> -->
+        />
+        <ProjectElement
+          name="clear2onion"
+          subline="Intermediary site between the clear and dark web"
+          inNewTab={true}
+          href="https://c2o.vsahni.me"
+          imgURL="/assets/c2o.svg"
+          invertLogoOnHover={false}
+          customImgDims={{ width: 1, height: 1 }}
+          rootDivClass="hover:!bg-[#ccf7cb] hover:!shadow-[#a2cfa1]"
+          rootAnchorClass="relative z-[90]"
+        />
       </div>
     </section>
     <hr />
@@ -383,6 +386,7 @@ import {
       toggle.setAttribute("aria-checked", "false");
     }
     toggle.onclick = (e) => {
+      document.dispatchEvent(event);
       setTheme(sessionStorage.getItem("theme") === "light" ? "dark" : "light");
     };
   }
