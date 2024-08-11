@@ -94,17 +94,19 @@ import {
     </div>
     <hr />
     <p class="print:hidden">
-      I'm a high school student from India. I love everything computers from
-      web-dev to computer engineering to networking and so on... I'm also a huge
-      fan of open-source software and I try to contribute to it as much as I
-      can. My main interest nowadays is Computer Engineering, specifically
-      Computer Architecture - I just find learning how computers work extremely
-      fascinating and I'm trying to learn as much as I can about it <i
+      I'm a high school student from India with a passion for everything related
+      to computers—from the letter C to RAID0 and discussing the 42 million
+      JavaScript frameworks that were released last week. I'm also a huge fan of
+      open-source software and do my best to contribute whenever I can. My main
+      interest these days is Computer Engineering, specifically Computer
+      Architecture. I find it incredibly fascinating to learn how computers
+      work, and I'm eager to deepen my understanding of the subject <i
         >(there's so much abstraction!)</i
       >
       <br />
       <br />
-      I'm also a huge fan of music, film, VFX and editing. See more about my interests
+      Also, a pretty massive lover of music, film, VFX and editing. See more about
+      my interests
       <a href="#interests" class="underline">here</a>
     </p>
     <div class="mt-6 print:hidden">
@@ -132,7 +134,7 @@ import {
       <div id="education-content" class="child:transform-gpu">
         <EducationElement
           name="The Shri Ram School, Moulsari"
-          subline={`\- IBDP Year 1 Student\n \- Completed IGCSE with A*s in all 9 subjects \n \- Secretary of Information, Communication and Technology (2023-2024)\n \- Head of Information, Communication and Technology (2024-2025)`}
+          subline={`\- IBDP Year 2 Student\n \- Completed IGCSE with A*s in all 9 subjects \n \- Secretary of Information, Communication and Technology (2023-2024)\n \- Head of Information, Communication and Technology (2024-2025)`}
           dates="2018-Present"
           location="Gurugram, HR, IN"
         />
@@ -276,6 +278,17 @@ import {
           rootDivClass="hover:!bg-[#ccf7cb] hover:!shadow-[#a2cfa1]"
           rootAnchorClass="relative z-[90]"
         />
+        <!-- <ProjectElement
+          name="Parallelized"
+          subline="Interschool code optimization/development competition _(see the site)_"
+          href="https://crypthunt.tsrs.tech/about"
+          imgURL="https://crypthunt.tsrs.tech/favicon.svg"
+          invertLogoOnHover={true}
+          invertLogoWhenPrint={true}
+          rootAnchorClass="z-[89]"
+          rootDivClass="hover:!bg-violet-200 hover:!shadow-violet-300"
+          imgDivClass="dark:drop-shadow-[2px_2px_2px_#000F]"
+        /> -->
       </div>
     </section>
     <hr />
@@ -380,9 +393,9 @@ import {
     const event = new Event("theme-change");
     const toggle = document.querySelector(".theme-toggle");
     if (sessionStorage.getItem("theme") === "light") {
-      toggle.setAttribute("aria-checked", "true");
+      toggle.setAttribute("data-checked", "true");
     } else {
-      toggle.setAttribute("aria-checked", "false");
+      toggle.setAttribute("data-checked", "false");
     }
     toggle.onclick = (e) => {
       document.dispatchEvent(event);
