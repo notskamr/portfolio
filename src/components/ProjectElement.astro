@@ -1,20 +1,20 @@
 ---
 import { marked } from "marked";
-interface IMGDims {
-  width: number;
-  height: number;
+interface Image {
+  url: string;
+  width?: number;
+  height?: number;
 }
 interface Props {
   name: string;
   subline: string;
   href: string;
-  imgURL: string;
+  image: Image;
   invertLogoOnHover?: boolean;
   invertTextOnHover?: boolean;
   invertLogoWhenPrint?: boolean;
   rootDivClass?: string;
   imgDivClass?: string;
-  customImgDims?: IMGDims;
   rootAnchorClass?: string;
   inNewTab?: boolean;
 }
@@ -22,16 +22,18 @@ const {
   name,
   subline,
   href,
-  imgURL,
+  image,
   invertLogoOnHover = true,
   invertLogoWhenPrint = false,
   rootDivClass = "",
   imgDivClass = "",
   rootAnchorClass = "",
   inNewTab = true,
-  customImgDims = { width: 1, height: 1 },
   invertTextOnHover = true,
 } = Astro.props;
+
+image.height = image.height || 1;
+image.width = image.width || 1;
 ---
 
 <a
@@ -52,11 +54,11 @@ const {
         (invertLogoWhenPrint ? " print:invert" : "")}
     >
       <img
-        src={imgURL}
+        src={image.url}
         alt={name + " logo"}
         loading="lazy"
-        width={customImgDims?.width}
-        height={customImgDims?.height}
+        width={image.width}
+        height={image.height}
         class="h-full w-full object-contain object-center duration-200 transition-all transform-gpu"
       />
     </div>

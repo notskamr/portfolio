@@ -180,7 +180,7 @@ import {
           name="Firewood"
           subline="A super-simple video calling website"
           href="https://firewood.vsahni.me/"
-          imgURL="/assets/fw-logo.png"
+          image={{ url: "/assets/fw-logo.png" }}
           invertLogoOnHover={false}
           rootAnchorClass="z-[99]"
           rootDivClass="hover:!bg-amber-300 hover:!shadow-amber-400"
@@ -190,7 +190,7 @@ import {
           name="Parallelized"
           subline="Interschool code optimization/development competition _(see the site)_"
           href="https://parallelized.in"
-          imgURL="/assets/parallelized-small.svg"
+          image={{ url: "/assets/parallelized-small.svg" }}
           invertLogoOnHover={true}
           invertLogoWhenPrint={true}
           rootAnchorClass="z-[98]"
@@ -201,7 +201,7 @@ import {
           name="CS61CPU"
           subline="My favorite project from CS61C at UC Berkeley; RISC-V CPU in Logisim"
           href="https://inst.eecs.berkeley.edu/~cs61c/su23/projects/proj3/"
-          imgURL="/assets/cs61c.webp"
+          image={{ url: "/assets/cs61c.webp" }}
           invertLogoOnHover={false}
           rootAnchorClass="z-[97]"
           rootDivClass="hover:!bg-teal-200 hover:!shadow-teal-400"
@@ -211,7 +211,7 @@ import {
           name="kNN Movie Classification"
           subline="My favourite DATA8 project; kNN movie classifier based on word usage"
           href="#0"
-          imgURL="/assets/data8.webp"
+          image={{ url: "/assets/data8.webp" }}
           invertLogoOnHover={false}
           rootAnchorClass="z-[96]"
           rootDivClass="hover:!bg-blue-300 hover:!shadow-blue-400"
@@ -221,7 +221,7 @@ import {
           name="CortX"
           subline={"Medical management web-app, won ShriTeq Hackathon 2022."}
           href="https://urls.vsahni.me/cortx"
-          imgURL="/assets/cortx.webp"
+          image={{ url: "/assets/cortx.webp" }}
           invertLogoOnHover={false}
           rootDivClass="hover:!bg-rose-300 hover:!shadow-rose-400 !py-[1ex] relative"
           rootAnchorClass="z-[95]"
@@ -231,8 +231,7 @@ import {
           name="MusicAI 2023"
           subline="Quiz-based game for awareness about AI-generated music, played by 150+ students"
           href="https://urls.vsahni.me/musicai2023"
-          imgURL="/assets/musicai-white.svg"
-          customImgDims={{ width: 782, height: 173 }}
+          image={{ url: "/assets/musicai-white.svg", width: 782, height: 173 }}
           rootAnchorClass="z-[94]"
           rootDivClass="hover:!bg-red-200 hover:!shadow-red-300"
           imgDivClass=""
@@ -241,7 +240,7 @@ import {
           name="KageMod: Minecraft Mod"
           subline="Minecraft mod with ~20K downloads"
           href="https://www.curseforge.com/minecraft/mc-mods/kagemod"
-          imgURL="/assets/kagemod.webp"
+          image={{ url: "/assets/kagemod.webp" }}
           invertLogoOnHover={false}
           rootAnchorClass="z-[93]"
           rootDivClass="hover:!bg-blue-200 hover:!shadow-slate-500"
@@ -252,7 +251,7 @@ import {
           subline="VFX and Editing Community with 100k+ site visits"
           href="#0"
           inNewTab={false}
-          imgURL="/assets/editing.webp"
+          image={{ url: "/assets/editing.webp" }}
           rootAnchorClass="cursor-default z-[92]"
           rootDivClass="hover:!bg-white !shadow-3xl hover:!shadow-white"
         />
@@ -261,34 +260,49 @@ import {
           subline="Leader of school Hack Club"
           href="https://hackclub.com"
           inNewTab={true}
-          imgURL="https://assets.hackclub.com/icon-rounded.svg"
+          image={{
+            url: "https://assets.hackclub.com/icon-rounded.svg",
+            width: 1,
+            height: 1,
+          }}
           invertLogoOnHover={false}
           rootAnchorClass="z-[91]"
           rootDivClass="hover:!bg-[#fa8292] hover:!shadow-[#d66d7b]"
-          customImgDims={{ width: 1, height: 1 }}
         />
         <ProjectElement
           name="clear2onion"
           subline="Intermediary site between the clear and dark web"
           inNewTab={true}
           href="https://c2o.vsahni.me"
-          imgURL="/assets/c2o.svg"
+          image={{ url: "/assets/c2o.svg" }}
           invertLogoOnHover={false}
-          customImgDims={{ width: 1, height: 1 }}
           rootDivClass="hover:!bg-[#ccf7cb] hover:!shadow-[#a2cfa1]"
           rootAnchorClass="relative z-[90]"
         />
-        <!-- <ProjectElement
-          name="Parallelized"
-          subline="Interschool code optimization/development competition _(see the site)_"
-          href="https://crypthunt.tsrs.tech/about"
-          imgURL="https://crypthunt.tsrs.tech/favicon.svg"
-          invertLogoOnHover={true}
-          invertLogoWhenPrint={true}
-          rootAnchorClass="z-[89]"
-          rootDivClass="hover:!bg-violet-200 hover:!shadow-violet-300"
-          imgDivClass="dark:drop-shadow-[2px_2px_2px_#000F]"
-        /> -->
+        <ProjectElement
+          name="Flux"
+          subline="Live data-streaming API"
+          inNewTab={true}
+          href="https://flux.vsahni.me"
+          image={{
+            url: "https://rawcdn.githack.com/notskamr/flux/refs/heads/main/src/assets/flux-rounded.svg?min=1",
+          }}
+          invertLogoOnHover={false}
+          rootDivClass="hover:!bg-neutral-100"
+          rootAnchorClass="relative z-[89]"
+        />
+        <ProjectElement
+          name="ShriTeq"
+          subline="Interschool tech competition"
+          inNewTab={true}
+          href="https://shriteq.org"
+          image={{
+            url: "/assets/shriteq.svg",
+          }}
+          invertLogoOnHover={false}
+          rootDivClass="hover:!bg-[#abe0ff] hover:!shadow-[#abe0ff]"
+          rootAnchorClass="relative z-[88]"
+        />
       </div>
     </section>
     <hr />
