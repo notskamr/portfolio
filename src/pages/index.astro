@@ -315,19 +315,24 @@ import {
       </h2>
       <ol class="list-['🔬'] pl-5 text-base md:text-lg child:pl-2 child:mb-2">
         {
-          Research.map((research) => (
-            <li
-              style={research?.icon ? "list-style-type: " + research.icon : ""}
-            >
-              <a href={research.href} class="font-semibold">
-                {[
-                  research.text,
-                  research.year ? `(${research.year})` : undefined,
-                ].join(" ")}
-              </a>
-              <p class="text-base">{research.description}</p>
-            </li>
-          ))
+          Research.map((research) => {
+            const TitleElement = research.href ? "a" : "span";
+            return (
+              <li
+                style={
+                  research?.icon ? "list-style-type: " + research.icon : ""
+                }
+              >
+                <TitleElement href={research.href} class="font-semibold">
+                  {[
+                    research.text,
+                    research.year ? `(${research.year})` : undefined,
+                  ].join(" ")}
+                </TitleElement>
+                <p class="text-base">{research.description}</p>
+              </li>
+            );
+          })
         }
       </ol>
     </section>
