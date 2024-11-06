@@ -313,7 +313,7 @@ import {
       >
         Publications/Research
       </h2>
-      <ol class="list-['🔬'] pl-5 text-base md:text-lg child:pl-2 child:mb-2">
+      <ul class="list-['🔬'] pl-5 text-base md:text-lg child:pl-2 child:mb-2">
         {
           Research.map((research) => {
             const TitleElement = research.href ? "a" : "span";
@@ -334,7 +334,7 @@ import {
             );
           })
         }
-      </ol>
+      </ul>
     </section>
     <section id="awards">
       <h2
@@ -342,7 +342,7 @@ import {
       >
         Awards
       </h2>
-      <ol class="list-['🏅'] pl-5 text-base md:text-lg child:pl-2 child:mb-2">
+      <ul class="list-['🏅'] pl-5 text-base md:text-lg child:pl-2 child:mb-2">
         {
           Awards.map((award) => (
             <li style={award?.icon ? "list-style-type: " + award.icon : ""}>
@@ -350,7 +350,7 @@ import {
             </li>
           ))
         }
-      </ol>
+      </ul>
     </section>
     <hr />
     <section id="interests">
