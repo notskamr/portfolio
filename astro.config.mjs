@@ -13,7 +13,10 @@ export default defineConfig({
   integrations: [fontPicker(), tailwind(), robots(), sitemap(), compress()],
   adapter: vercel({
     webAnalytics: {
-      enabled: true
+      enabled: true,
+    },
+    edgeMiddleware: {
+      enabled: true,
     }
   })
 });
