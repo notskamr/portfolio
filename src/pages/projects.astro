@@ -1,0 +1,80 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { SEO } from "astro-seo";
+import { PROJECTS } from "../config/Projects";
+import { ArrowLeft, Search } from "@lucide/astro";
+import ProjectCard from "../components/v2/Project.astro";
+
+const page = {
+  title: "Projects — Varun Sahni",
+  desc: "All projects by Varun Sahni — systems, web, open-source.",
+  canonical: "https://vsahni.me/projects",
+};
+const projects = PROJECTS;
+---
+
+<Layout title={page.title}>
+  <SEO
+    slot="headTop"
+    title={page.title}
+    description={page.desc}
+    canonical={page.canonical}
+  />
+
+  <main
+    class="mx-auto max-w-5xl px-4 py-8 lg:py-12 selection:bg-yellow-300/40 dark:selection:bg-amber-400/20"
+  >
+    <header class="flex items-end justify-between gap-3">
+      <div>
+        <a href="/" class="flex text-sm hover:underline underline-offset-4"
+          ><ArrowLeft size="20" class="mr-1" /> Back</a
+        >
+
+        <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight mt-3">
+          Projects
+        </h1>
+        <p class="text-neutral-600 dark:text-neutral-300">
+          Systems, web, open-source, and fun stuff.
+        </p>
+      </div>
+    </header>
+
+    <div class="mt-6">
+      <label for="q" class="sr-only">Search projects</label>
+      <div
+        class="flex items-center gap-2 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 px-3 py-2"
+      >
+        <Search class="w-4 h-4 text-neutral-500" />
+        <input
+          id="q"
+          name="q"
+          type="text"
+          placeholder="Search by name, stack, or description…"
+          class="w-full bg-transparent outline-none text-sm placeholder:text-neutral-400"
+        />
+      </div>
+    </div>
+
+    <section class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4" id="list">
+      {projects.map((p) => <ProjectCard {...p} dense />)}
+    </section>
+  </main>
+
+  <script is:inline>
+    const input = document.getElementById("q");
+    const list = document.getElementById("list");
+    const cards = Array.from(list?.children || []);
+    const text = (el) => (el?.textContent || "").toLowerCase();
+
+    input?.addEventListener("input", (e) => {
+      const q = (e.target.value || "").toLowerCase().trim();
+      if (!q) {
+        cards.forEach((c) => (c.style.display = ""));
+        return;
+      }
+      cards.forEach(
+        (c) => (c.style.display = text(c).includes(q) ? "" : "none"),
+      );
+    });
+  </script>
+</Layout>

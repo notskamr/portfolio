@@ -4,11 +4,11 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Montserrat", "Verdana", "Arial", "Helvetica", "system-ui", "sans-serif"],
+        sans: ["-apple-system", "BlinkMacSystemFont", "'Inter'", "system-ui", "sans-serif"],
       },
     },
   },
-  darkMode: 'class',
+  darkMode: "media",
   plugins: [
     function ({ addVariant }) {
       addVariant("child", "& > *");

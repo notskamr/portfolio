@@ -1,521 +1,352 @@
 ---
+import { ArrowRight } from "@lucide/astro";
+import Project from "../components/v2/Project.astro";
+import { PROJECTS } from "../config/Projects";
 import Layout from "../layouts/Layout.astro";
-import EducationElement from "../components/EducationElement.astro";
-import ProjectElement from "../components/ProjectElement.astro";
-import InterestElement from "../components/InterestElement.astro";
-
-import { Awards } from "../config/Awards";
-import { Research } from "../config/Research";
-
 import { SEO } from "astro-seo";
-import {
-  EditIcon,
-  GithubIcon,
-  HeartIcon,
-  MailIcon,
-  MusicIcon,
-  PrinterIcon,
-} from "astro-feather";
+
+const me = {
+  name: "Varun Sahni",
+  tagline:
+    "Purdue CS/CE '28 · systems & computer architecture · spanning CS + ECE",
+  email: "contact@vsahni.me",
+  phone: "510-944-7378",
+  github: "https://github.com/notskamr",
+  site: "https://vsahni.me",
+  blog: "https://blog.vsahni.me",
+  resume: "/resume.pdf",
+};
+
+const socials = [
+  { t: "GitHub", u: me.github },
+  { t: "Blog", u: me.blog },
+  { t: "Email", u: `mailto:${me.email}` },
+  { t: "Resume (PDF)", u: me.resume },
+];
+
+const experience = [
+  {
+    org: "Paasa (YC S24)",
+    role: "Full-Stack Developer Intern",
+    when: "Nov 2024 — Jan 2025",
+    pts: [
+      "Built admin panel (React/Python/SQL) → 3x advisor productivity.",
+      "Deployed AWS infra; ~80% cost reduction.",
+      "Contributed mobile light-mode UI + WhatsApp AI MCP server.",
+    ],
+  },
+  {
+    org: "CortX (Healthcare startup)",
+    role: "Co-Founder & Founding Engineer",
+    when: "2021 — 2022",
+    pts: [
+      "One of 5 core founders; led full-stack (React + Express).",
+      "Designed 'health-audit' algorithm to consolidate patient histories.",
+      "Work recognized by Young Changemaker Award (Govt. of India).",
+    ],
+  },
+];
+
+const projects = PROJECTS.slice(0, 6);
+
+const research = [
+  "Self-directed CV/ML: lightweight CNN for GI disorder detection (97.82% on HyperKvasir).",
+  "Presented at UMich AI Symposium, IEEE CICT, SLAS Data 2024, SCCUR, IFIC Zhejiang Lab.",
+  "First-author IEEE paper pending.",
+];
+
+const leadership = [
+  "Head of ICT — The Shri Ram School: ran ShriTeq (90+ schools), AI & Cybersecurity Weeks (800+ students).",
+  "Launched Parallelized — India's first performance-aware programming contest.",
+  "Hack Club — member & mentor; Pure Hearts co-founder (3K+ beneficiaries; 500+ volunteers; $30K+ raised).",
+];
+
+const education = [
+  {
+    school: "Purdue University",
+    sub: "B.S. Computer Science ('28) · spanning CS & ECE",
+    loc: "West Lafayette, IN",
+    items: [
+      "3.92 GPA, Dean's List",
+      "ECE 264 (Advanced C Programming)",
+      "CS 180 (Object-Oriented Programming)",
+      "Interests: Arch, Systems, AI/ML",
+    ],
+  },
+  {
+    school: "UC Berkeley — Summer Sessions",
+    sub: "CS61C (A-), Data 8 (B+)",
+    loc: "Berkeley, CA",
+    items: [
+      "CS 61C, computer architecture: boolean logic, C, assembly, memory hierarchy, pipelining, parallelism; built a 5-stage pipelined RISC-V CPU in Logisim.",
+      "DATA 8: inference on real-world datasets using Python/NumPy/Pandas.",
+    ],
+  },
+];
+
+const skills = [
+  {
+    k: "Languages",
+    v: "Python, C, Java, JavaScript/TypeScript, SQL (PostgreSQL, libSQL), RISC-V",
+  },
+  {
+    k: "Frameworks",
+    v: "React, Next.js, Svelte, Astro, Bun, Node.js, Flask, FastAPI, Django, NestJS, Express, TailwindCSS",
+  },
+  { k: "ML", v: "NumPy, Pandas, scikit-learn, TensorFlow, PyTorch, Keras" },
+  { k: "Tools", v: "Git, Docker, VS Code" },
+];
 ---
 
-<Layout title="Varun Sahni" bodyClass="transform-gpu">
+<Layout title="Varun Sahni — Portfolio" bodyClass="min-h-screen">
   <SEO
     slot="headTop"
-    description="I'm a high school student from India passionate about computer engineering, web development, and open-source software - and anything related to computers! - with a specific interest in Computer Architecture; see my portfolio here!"
+    title="Varun Sahni — Portfolio"
+    description="Varun Sahni — Purdue CS '28. Systems & computer architecture. Open-source, research, and products."
+    canonical={me.site}
   />
+
   <main
-    class="mx-auto max-w-screen-md scroll-smooth motion-reduce:scroll-auto font-sansprint:text-black print:max-w-none py-8 px-4 print:px-0 print:py-0 dark:drop-shadow-xl print:drop-shadow-none child:transform-gpu"
+    class="mx-auto max-w-5xl px-4 py-8 lg:py-12 selection:bg-yellow-300/40 dark:selection:bg-amber-400/20"
   >
-    <h1 class="text-4xl font-bold">
-      <span class="print:hidden"
-        ><span transition:name="hi-text">Hi 👋</span>
-        <br />
-        <div class="font-medium">
-          I'm <span
-            class="text-red-500 dark:text-orange-500 sm:inline-flex sm:flex-row sm:items-end"
-            >Varun Sahni<br /><span
-              class="hidden sm:inline sm:pl-2 sm:pb-1 text-xl text-neutral-500 font-mono italic"
-              >(aka skamr)</span
-            ></span
-          >
-        </div></span
-      >
-      <span class="hidden print:block print:text-center">Varun Sahni</span>
-      <span
-        class="hidden print:block print:text-center text-base font-light relative left-1"
-        >Gurugram, India</span
-      >
-    </h1>
-    <hr class="print:hidden" />
-    <div
-      id="socials"
-      class="print:hidden flex items-center gap-4 mt-3 child:underline child:underline-offset-2 child:text-blue-600 dark:child:text-blue-300 child:duration-200 child-hover:text-rose-500 dark:child-hover:text-amber-500 child-hover:scale-125 child:w-[28px] shadow-amber-400 child-hover:drop-shadow-[2px_2px_0px_#0001] dark:child-hover:drop-shadow-[0_2px_8px_#fbbf24aa] child:will-change-transform"
-    >
-      <a href="https://github.com/notskamr" title="GitHub" aria-label="GitHub"
-        ><GithubIcon size={28} /></a
-      >
-      <a href="https://blog.vsahni.me" title="Blog" aria-label="Blog"
-        ><EditIcon size={28} /></a
-      >
-      <a href="mailto:contact@vsahni.me" title="E-mail" aria-label="E-mail"
-        ><MailIcon size={28} /></a
-      >
-      <button
-        type="button"
-        title="Print Resume"
-        id="print-resume"
-        aria-label="Print Resume"
-      >
-        <PrinterIcon size={28} />
-      </button>
-      <button
-        class="theme-toggle"
-        type="button"
-        title="Toggle theme"
-        aria-label="Toggle theme"
-        id="theme-toggle"
-      >
-        <div class="hidden dark:block">
-          <svg viewBox="0 0 24 24" width="32" height="32"
-            ><path
-              fill="currentColor"
-              d="M9.37 5.51A7.35 7.35 0 0 0 9.1 7.5c0 4.08 3.32 7.4 7.4 7.4.68 0 1.35-.09 1.99-.27A7.014 7.014 0 0 1 12 19c-3.86 0-7-3.14-7-7 0-2.93 1.81-5.45 4.37-6.49zM12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1z"
-            ></path></svg
-          >
-        </div>
-        <div class="block dark:hidden">
-          <svg viewBox="0 0 24 24" width="32" height="32"
-            ><path
-              fill="currentColor"
-              d="M12 9c1.65 0 3 1.35 3 3s-1.35 3-3 3-3-1.35-3-3 1.35-3 3-3m0-2c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58a.996.996 0 0 0-1.41 0 .996.996 0 0 0 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37a.996.996 0 0 0-1.41 0 .996.996 0 0 0 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0a.996.996 0 0 0 0-1.41l-1.06-1.06zm1.06-10.96a.996.996 0 0 0 0-1.41.996.996 0 0 0-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06zM7.05 18.36a.996.996 0 0 0 0-1.41.996.996 0 0 0-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06z"
-            ></path></svg
-          >
-        </div>
-      </button>
-    </div>
-    <hr />
-    <p class="print:hidden">
-      I'm a high school student from India with a passion for everything related
-      to computers—from the letter C to RAID0 and discussing the 42 million
-      JavaScript frameworks that were released last week. I'm also a huge fan of
-      open-source software and do my best to contribute whenever I can. My main
-      interest these days is Computer Engineering, specifically Computer
-      Architecture. I find it incredibly fascinating to learn how computers
-      work, and I'm eager to deepen my understanding of the subject <i
-        >(there's so much abstraction!)</i
-      >
-      <br />
-      <br />
-      Also, a pretty massive lover of music, film, VFX and editing. See more about
-      my interests
-      <a href="#interests" class="underline">here</a>
-    </p>
-    <div class="mt-6 print:hidden">
-      <span class="font-bold">I'm currently listening to:</span>
-      <span
-        id="nowPlayingLoading"
-        class="ml-1 absolute duration-500"
-        aria-hidden="true">Loading...</span
-      >
-      <a
-        id="nowPlaying"
-        class="duration-500 opacity-0 hover:duration-0 dark:hover:text-orange-500 hover:text-blue-500"
-        aria-label="Now Playing"
-        aria-hidden="true"
-        rel="noreferrer noopener"
-        href="#0"></a>
-    </div>
-    <hr class="print:hidden" />
-    <section id="education">
-      <h2
-        class="text-2xl md:text-3xl text-rose-600 dark:text-yellow-500 print:text-black font-semibold underline underline-offset-[8px] mb-2"
-      >
-        Education/Courses
-      </h2>
-      <div id="education-content" class="child:transform-gpu">
-        <EducationElement
-          name="The Shri Ram School, Moulsari"
-          subline={`\- IBDP Year 2 Student, 44/45 Predicted \n \- Completed IGCSE with A*s in all 9 subjects \n \- Secretary of Information, Communication and Technology (2023-2024)\n \- Head of Information, Communication and Technology (2024-2025)`}
-          dates="2018-Present"
-          location="Gurugram, HR, IN"
-        />
-        <EducationElement
-          name="University of California, Berkeley"
-          dates="June 2023-August 2023"
-          location="Berkeley, CA, USA"
-          subline="Completed CS61C and DATA 8 at UC Berkeley's pre-college summer program with a 3.5 GPA (A- and B+ respectively)"
-          sublineMobile="Summer program: CS61C (A-), DATA8 (B+); 3.5GPA"
-        />
-        <EducationElement
-          name={`<a class="underline underline-offset-2 print:no-underline" href="https://courses.edx.org/certificates/42202c295c1e4969b6543af1026b86d3" target="_blank" rel="noopener noreferrer">Harvard's CS50x</a>`}
-          dates="2022"
-          location="Online"
-          subline={`Finished with verified certificate. Created <a class="underline underline-offset-2 print:no-underline" href="https://firewood.vsahni.me/" target="_blank" rel="noopener noreferrer">Firewood</a> as a final project.`}
-        />
-        <EducationElement
-          name="Plaksha University, Young Tech Scholars"
-          dates="June 2022"
-          location=""
-          subline="Attended Plaksha's two-week YTS Program. Built a self-navigating robot using LIDAR, ultrasound and infrared sensors with Arduino and C++ from scratch."
-          sublineMobile="Summer program: Built a self-navigating robot using LIDAR, ultrasound and infrared sensors with Arduino and C++ from scratch."
-        />
+    <!-- top -->
+    <header class="flex flex-col gap-3">
+      <div class="flex flex-wrap items-end justify-between gap-3">
+        <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight">
+          {me.name}
+        </h1>
       </div>
-    </section>
-    <hr />
-    <section id="projects">
-      <div class="flex gap-2 items-baseline">
-        <h2
-          class="text-2xl md:text-3xl text-rose-600 dark:text-yellow-500 print:text-black font-semibold underline underline-offset-[8px] mb-[min(2.3vh,2.5rem)]"
-        >
-          Projects
-        </h2>
-        <span class="text-base italic text-black/60 dark:text-white/80"
-          >(click to see more!)</span
-        >
-      </div>
-      <div
-        id="projects-content"
-        class="grid md:grid-cols-2 print:grid-cols-2 gap-4"
-      >
-        <ProjectElement
-          name="Firewood"
-          subline="A super-simple video calling website"
-          href="https://firewood.vsahni.me/"
-          image={{ url: "/assets/fw-logo.png" }}
-          invertLogoOnHover={false}
-          rootAnchorClass="z-[99]"
-          rootDivClass="hover:!bg-amber-300 hover:!shadow-amber-400"
-          imgDivClass="dark:drop-shadow-[2px_2px_2px_#000F]"
-        />
-        <ProjectElement
-          name="Parallelized"
-          subline="Interschool code optimization/development competition _(see the site)_"
-          href="https://parallelized.in"
-          image={{ url: "/assets/parallelized-small.svg" }}
-          invertLogoOnHover={true}
-          invertLogoWhenPrint={true}
-          rootAnchorClass="z-[98]"
-          rootDivClass="hover:!bg-violet-200 hover:!shadow-violet-300"
-          imgDivClass="dark:drop-shadow-[2px_2px_2px_#000F]"
-        />
-        <ProjectElement
-          name="CS61CPU"
-          subline="My favorite project from CS61C at UC Berkeley; RISC-V CPU in Logisim"
-          href="https://inst.eecs.berkeley.edu/~cs61c/su23/projects/proj3/"
-          image={{ url: "/assets/cs61c.webp" }}
-          invertLogoOnHover={false}
-          rootAnchorClass="z-[97]"
-          rootDivClass="hover:!bg-teal-200 hover:!shadow-teal-400"
-          imgDivClass="group-hover:child:saturate-200 dark:drop-shadow-[0px_2px_1px_#000F]"
-        />
-        <ProjectElement
-          name="kNN Movie Classification"
-          subline="My favourite DATA8 project; kNN movie classifier based on word usage"
-          href="#0"
-          image={{ url: "/assets/data8.webp" }}
-          invertLogoOnHover={false}
-          rootAnchorClass="z-[96]"
-          rootDivClass="hover:!bg-blue-300 hover:!shadow-blue-400"
-          imgDivClass="group-hover:child:saturate-200 dark:drop-shadow-[2px_2px_2px_#000F]"
-        />
-        <ProjectElement
-          name="CortX"
-          subline={"Medical management web-app, won ShriTeq Hackathon 2022."}
-          href="https://urls.vsahni.me/cortx"
-          image={{ url: "/assets/cortx.webp" }}
-          invertLogoOnHover={false}
-          rootDivClass="hover:!bg-rose-300 hover:!shadow-rose-400 !py-[1ex] relative"
-          rootAnchorClass="z-[95]"
-          imgDivClass="dark:drop-shadow-[2px_2px_2px_#000F]"
-        />
-        <ProjectElement
-          name="MusicAI 2023"
-          subline="Quiz-based game for awareness about AI-generated music, played by 150+ students"
-          href="https://urls.vsahni.me/musicai2023"
-          image={{ url: "/assets/musicai-white.svg", width: 782, height: 173 }}
-          rootAnchorClass="z-[94]"
-          rootDivClass="hover:!bg-red-200 hover:!shadow-red-300"
-          imgDivClass=""
-        />
-        <ProjectElement
-          name="KageMod: Minecraft Mod"
-          subline="Minecraft mod with ~20K downloads"
-          href="https://www.curseforge.com/minecraft/mc-mods/kagemod"
-          image={{ url: "/assets/kagemod.webp" }}
-          invertLogoOnHover={false}
-          rootAnchorClass="z-[93]"
-          rootDivClass="hover:!bg-blue-200 hover:!shadow-slate-500"
-          imgDivClass="p-1"
-        />
-        <ProjectElement
-          name="Editing Community"
-          subline="VFX and Editing Community with 100k+ site visits"
-          href="#0"
-          inNewTab={false}
-          image={{ url: "/assets/editing.webp" }}
-          rootAnchorClass="cursor-default z-[92]"
-          rootDivClass="hover:!bg-white !shadow-3xl hover:!shadow-white"
-        />
-        <ProjectElement
-          name="Hack Club"
-          subline="Leader of school Hack Club"
-          href="https://hackclub.com"
-          inNewTab={true}
-          image={{
-            url: "https://assets.hackclub.com/icon-rounded.svg",
-            width: 1,
-            height: 1,
-          }}
-          invertLogoOnHover={false}
-          rootAnchorClass="z-[91]"
-          rootDivClass="hover:!bg-[#fa8292] hover:!shadow-[#d66d7b]"
-        />
-        <ProjectElement
-          name="clear2onion"
-          subline="Intermediary site between the clear and dark web"
-          inNewTab={true}
-          href="https://c2o.vsahni.me"
-          image={{ url: "/assets/c2o.svg" }}
-          invertLogoOnHover={false}
-          rootDivClass="hover:!bg-[#ccf7cb] hover:!shadow-[#a2cfa1]"
-          rootAnchorClass="relative z-[90]"
-        />
-        <ProjectElement
-          name="Flux"
-          subline="Live data-streaming API"
-          inNewTab={true}
-          href="https://flux.vsahni.me"
-          image={{
-            url: "https://rawcdn.githack.com/notskamr/flux/refs/heads/main/src/assets/flux-rounded.svg?min=1",
-          }}
-          invertLogoOnHover={false}
-          rootDivClass="hover:!bg-neutral-100"
-          rootAnchorClass="relative z-[89]"
-        />
-        <ProjectElement
-          name="ShriTeq"
-          subline="Interschool tech competition"
-          inNewTab={true}
-          href="https://shriteq.org"
-          image={{
-            url: "/assets/shriteq.svg",
-          }}
-          invertLogoOnHover={false}
-          rootDivClass="hover:!bg-[#abe0ff] hover:!shadow-[#abe0ff]"
-          rootAnchorClass="relative z-[88]"
-        />
-      </div>
-    </section>
-    <hr />
-    <section id="research">
-      <h2
-        class="text-2xl md:text-3xl text-rose-600 dark:text-yellow-500 print:text-black font-semibold underline underline-offset-[8px] mb-5"
-      >
-        Publications/Research
-      </h2>
-      <ul class="list-['🔬'] pl-5 text-base md:text-lg child:pl-2 child:mb-2">
+      <p class="text-neutral-600 dark:text-neutral-200">{me.tagline}</p>
+      <nav class="flex flex-wrap gap-2" aria-label="Primary">
         {
-          Research.map((research) => {
-            const TitleElement = research.href ? "a" : "span";
-            return (
-              <li
-                style={
-                  research?.icon ? "list-style-type: " + research.icon : ""
-                }
-              >
-                <TitleElement href={research.href} class="font-semibold">
-                  {[
-                    research.text,
-                    research.year ? `(${research.year})` : undefined,
-                  ].join(" ")}
-                </TitleElement>
-                <p class="text-base">{research.description}</p>
-              </li>
-            );
-          })
-        }
-      </ul>
-    </section>
-    <section id="awards">
-      <h2
-        class="text-2xl md:text-3xl text-rose-600 dark:text-yellow-500 print:text-black font-semibold underline underline-offset-[8px] mb-5"
-      >
-        Awards
-      </h2>
-      <ul class="list-['🏅'] pl-5 text-base md:text-lg child:pl-2 child:mb-2">
-        {
-          Awards.map((award) => (
-            <li style={award?.icon ? "list-style-type: " + award.icon : ""}>
-              {award.text}
-            </li>
+          socials.map((s) => (
+            <a
+              href={s.u}
+              class="inline-flex items-center gap-2 rounded-full bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 px-3 py-1 text-sm shadow-sm hover:shadow transition"
+              rel="noopener noreferrer"
+            >
+              {s.t}
+            </a>
           ))
         }
-      </ul>
-    </section>
-    <hr />
-    <section id="interests">
+      </nav>
+
+      <!-- song now playing (np.vsahni.me) -->
+      <div class="mt-3 flex flex-wrap items-center gap-2 text-sm">
+        <span class="font-semibold">Now Playing:</span>
+        <span id="np-loading" class="dark:text-neutral-300 text-neutral-500"
+          >Loading…</span
+        >
+        <a
+          id="np-link"
+          href="#"
+          class="opacity-0 transition-opacity underline underline-offset-2"></a>
+      </div>
+    </header>
+
+    <!-- about me -->
+    <section class="mt-8">
       <h2
-        class="text-2xl md:text-3xl text-rose-600 dark:text-yellow-500 print:text-black font-semibold underline underline-offset-[8px] mb-4"
+        class="text-xs font-semibold uppercase tracking-[0.18em] dark:text-neutral-300 text-neutral-500"
       >
-        Interests
+        About
       </h2>
-      <div class="pl-1 print:pl-0 relative bottom-[14px] -mb-[14px]">
-        <div
-          class="border-l-rose-600 dark:border-l-yellow-500 print:border-none border-l-[5px] h-[8px] pt-6 print:pt-2"
-        >
-        </div>
-        <InterestElement
-          name="Music"
-          iconClasses={"relative right-[1px] bottom-[1px]"}
-          content={[
-            {
-              content: "I love most genres of music.",
-              listStyleType: "'🎸'",
-            },
-            {
-              content:
-                "I like to sing! Currently in Grade 3 of Rockschool Vocals.",
-              listStyleType: "'🎤'",
-            },
-            {
-              content:
-                "My favourite artists are always changing; right now they're probably [Coldplay](https://www.coldplay.com/), [RHCP](https://redhotchilipeppers.com/), [Dominic Fike](https://www.dominicfike.com/), [James Blake](https://www.jamesblakemusic.com/), and [Carter Ace](https://www.carteracemusic.com/) (that's a lot!)",
-              listStyleType: "'👨🏼‍🎤'",
-            },
-          ]}
-        >
-          <MusicIcon slot="icon" customClasses="relative right-[1px]" />
-        </InterestElement>
-        <InterestElement
-          name="Gaming"
-          content={[
-            {
-              content: "My favourite games of all time are Minecraft and RDR2.",
-              listStyleType: "'🤠'",
-            },
-          ]}
-        >
-          <svg
-            class="scale-[125%]"
-            slot="icon"
-            xmlns="http://www.w3.org/2000/svg"
-            width="32"
-            height="32"
-            viewBox="0 0 24 24"
-            ><path
-              fill="currentColor"
-              fill-rule="evenodd"
-              d="M13 15h-2a5 5 0 1 1-4-8h10a5 5 0 1 1-4 8m-5-4v-1a1 1 0 1 0-2 0v1H5a1 1 0 0 0 0 2h1v1a1 1 0 0 0 2 0v-1h1a1 1 0 0 0 0-2zm9 0a1 1 0 1 0 0-2a1 1 0 0 0 0 2m-1 3a1 1 0 1 0 0-2a1 1 0 0 0 0 2m3-1a1 1 0 1 0 0-2a1 1 0 0 0 0 2"
-            ></path></svg
-          >
-        </InterestElement>
-        <InterestElement
-          name="Social Work"
-          defaultBulletListStyleType="disc"
-          last={true}
-          content={[
-            {
-              title: "Pure Hearts",
-              emoji: "'❤️'",
-              bullets: [
-                {
-                  content:
-                    "Co-founder of Pure Hearts: a non-profit children's initiative that aims to do good and improve the community.",
-                },
-              ],
-            },
-          ]}
-        >
-          <HeartIcon slot="icon" />
-        </InterestElement>
+      <p class="mt-2 leading-relaxed">
+        I build where hardware meets software—<span class="font-medium"
+          >RISC-V & memory hierarchies</span
+        > up to
+        <span class="font-medium">reliable web systems</span>. I like to find
+        community and share knowledge. I ship fast, document well, and keep
+        things <a href="https://grugbrain.dev/" target="_blank">simple</a>.
+      </p>
+    </section>
+
+    <!-- experience -->
+    <section class="mt-10">
+      <h2
+        class="text-xs font-semibold uppercase tracking-[0.18em] dark:text-neutral-300 text-neutral-500"
+      >
+        Experience
+      </h2>
+      <div class="mt-3 grid gap-3">
+        {
+          experience.map((e) => (
+            <article class="rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-4">
+              <div class="flex flex-wrap items-baseline justify-between gap-2">
+                <h3 class="font-semibold">
+                  {e.org} — {e.role}
+                </h3>
+                <span class="text-xs dark:text-neutral-300 text-neutral-500">
+                  {e.when}
+                </span>
+              </div>
+              <ul class="mt-2 list-disc pl-5 space-y-1">
+                {e.pts.map((p) => (
+                  <li>{p}</li>
+                ))}
+              </ul>
+            </article>
+          ))
+        }
       </div>
     </section>
-  </main>
-</Layout>
-<script is:inline>
-  function initThemeToggle() {
-    const event = new Event("theme-change");
-    const toggle = document.querySelector(".theme-toggle");
-    if (sessionStorage.getItem("theme") === "light") {
-      toggle.setAttribute("data-checked", "true");
-    } else {
-      toggle.setAttribute("data-checked", "false");
-    }
-    toggle.onclick = (e) => {
-      document.dispatchEvent(event);
-      setTheme(sessionStorage.getItem("theme") === "light" ? "dark" : "light");
-    };
-  }
-  initThemeToggle();
-  document.addEventListener("astro:page-load", initThemeToggle);
-</script>
-<script>
-  document.getElementById("print-resume")?.addEventListener("click", () => {
-    window.print();
-  });
-</script>
-<script>
-  type Song = any;
-  async function getSong(): Promise<Song> {
-    const response = await fetch("https://np.vsahni.me");
-    const data = await response.json();
-    return data;
-  }
 
-  function getSongDisplayInfo(song: Song): {
-    message: string;
-    url?: string;
-  } {
-    let message: string;
-    const details:
-      | {
-          id: string;
-          name: string;
-          artists: string[];
-          url: string;
-          progress: number;
-          duration: number;
+    <!-- projects -->
+    <section class="mt-12">
+      <div class="mb-2 flex items-baseline justify-between">
+        <h2
+          class="text-xs font-semibold uppercase tracking-[0.18em] dark:text-neutral-300 text-neutral-500"
+        >
+          Selected Projects
+        </h2>
+        <a href="/projects" class="flex text-sm underline underline-offset-4"
+          ><ArrowRight size="20" class="mr-1" />See All</a
+        >
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {projects.map((p) => <Project {...p} />)}
+      </div>
+    </section>
+
+    <!-- research exp. -->
+    <section class="mt-10">
+      <h2
+        class="text-xs font-semibold uppercase tracking-[0.18em] dark:text-neutral-300 text-neutral-500"
+      >
+        Research
+      </h2>
+      <ul class="mt-3 list-disc pl-5 space-y-1">
+        {research.map((r) => <li>{r}</li>)}
+      </ul>
+    </section>
+
+    <!-- leadership -->
+    <section class="mt-10">
+      <h2
+        class="text-xs font-semibold uppercase tracking-[0.18em] dark:text-neutral-300 text-neutral-500"
+      >
+        Leadership & Community
+      </h2>
+      <ul class="mt-3 list-disc pl-5 space-y-1">
+        {leadership.map((l) => <li>{l}</li>)}
+      </ul>
+    </section>
+
+    <!-- education -->
+    <section class="mt-10">
+      <h2
+        class="text-xs font-semibold uppercase tracking-[0.18em] dark:text-neutral-300 text-neutral-500"
+      >
+        Education & Courses
+      </h2>
+      <div class="mt-3 grid gap-3">
+        {
+          education.map((ed) => (
+            <div class="rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-4">
+              <div class="flex flex-wrap items-baseline justify-between gap-2">
+                <h3 class="font-semibold">{ed.school}</h3>
+                <span class="text-xs text-neutral-500">{ed.loc}</span>
+              </div>
+              <p class="text-sm text-neutral-600 dark:text-neutral-300">
+                {ed.sub}
+              </p>
+              <ul class="mt-2 list-disc pl-5 space-y-1">
+                {ed.items.map((it) => (
+                  <li>{it}</li>
+                ))}
+              </ul>
+            </div>
+          ))
         }
-      | undefined = song.details;
-    if (song?.statusCode === 200 && details?.url) {
-      let artistsFormatted: string = details.artists.join(", ");
-      message = " " + details.name + " by " + artistsFormatted;
-      return { message, url: details.url };
-    }
-    message = " Silence...";
-    return { message, url: undefined };
-  }
+      </div>
+    </section>
 
-  const nowPlayingLoading = document.getElementById("nowPlayingLoading");
-  const nowPlaying = document.getElementById("nowPlaying");
-  async function nowPlayingInit() {
-    const nowPlayingEventSource = new EventSource("https://np.vsahni.me/sse");
-    nowPlayingEventSource.onmessage = (e) => {
-      const npSong = JSON.parse(e.data);
-      console.log("[NowPlaying] Song changed", npSong);
-      const displayInfo = getSongDisplayInfo(npSong);
-      if (!nowPlaying) return;
-      nowPlaying.innerText = displayInfo.message;
-      nowPlaying.ariaHidden = "false";
-      nowPlaying.setAttribute("href", displayInfo.url ?? "#0");
-      if (displayInfo.url) {
-        nowPlaying.setAttribute("target", "_blank");
-      } else {
-        nowPlaying.removeAttribute("target");
+    <!-- skills -->
+    <section class="mt-10">
+      <h2
+        class="text-xs font-semibold uppercase tracking-[0.18em] dark:text-neutral-300 text-neutral-500"
+      >
+        Skills
+      </h2>
+      <div class="mt-3 grid sm:grid-cols-2 gap-3">
+        {
+          skills.map((s) => (
+            <div class="rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-4">
+              <span class="font-semibold">{s.k}:</span>
+              <span class="text-neutral-700 dark:text-neutral-300"> {s.v}</span>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="mt-12 text-xs dark:text-neutral-300 text-neutral-500">
+      Last updated {new Date().toISOString().slice(0, 10)} •
+      <a
+        class="underline underline-offset-2"
+        href={me.github}
+        rel="me noopener"
+      >
+        GitHub</a
+      > •
+      <a class="underline underline-offset-2" href={me.blog} rel="noopener">
+        Blog</a
+      >
+    </footer>
+  </main>
+
+  <script is:inline>
+    const npLoading = document.getElementById("np-loading");
+    const npLink = document.getElementById("np-link");
+
+    function setNowPlaying(text, href) {
+      if (npLoading) npLoading.style.display = "none";
+      if (!npLink) return;
+      npLink.textContent = text;
+      npLink.href = href || "#";
+      npLink.style.opacity = "1";
+      if (href) npLink.setAttribute("target", "_blank");
+    }
+
+    function getDisplay(song) {
+      try {
+        const details = song?.details;
+        if (song?.statusCode === 200 && details?.url) {
+          return {
+            text: ` ${details.name} by ${details.artists.join(", ")}`,
+            url: details.url,
+          };
+        }
+      } catch {}
+      return { text: " Silence…", url: undefined };
+    }
+
+    try {
+      const es = new EventSource("https://np.vsahni.me/sse");
+      es.onmessage = (e) => {
+        const payload = JSON.parse(e.data);
+        const { text, url } = getDisplay(payload);
+        setNowPlaying(text, url);
+      };
+      es.onerror = () => {
+        es.close();
+        fallbackPoll();
+      };
+    } catch {
+      fallbackPoll();
+    }
+
+    async function fallbackPoll() {
+      try {
+        const res = await fetch("https://np.vsahni.me", { cache: "no-store" });
+        const data = await res.json();
+        const { text, url } = getDisplay(data);
+        setNowPlaying(text, url);
+      } catch {
+        setNowPlaying(" Silence…");
       }
-      nowPlaying.style.opacity = "1";
-      if (!nowPlayingLoading) return;
-      nowPlayingLoading.style.opacity = "0";
-      setTimeout(() => {
-        nowPlayingLoading.style.display = "none";
-        nowPlayingLoading?.remove();
-      }, 600);
-    };
-  }
-  document.addEventListener("astro:page-load", nowPlayingInit);
-</script>
-<style>
-  hr {
-    @apply w-full border-[1px] border-neutral-700 print:border-neutral-500 mt-4 mb-4 rounded-full;
-  }
-</style>
+    }
+  </script>
+</Layout>

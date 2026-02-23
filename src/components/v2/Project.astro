@@ -1,0 +1,89 @@
+---
+import type { Project } from "../../config/Projects";
+
+interface Props extends Project {
+  class?: string;
+  dense?: boolean;
+  linksLabel?: string;
+}
+
+const {
+  name,
+  blurb,
+  link,
+  stack = [],
+  extra = [],
+  class: className = "",
+  dense = false,
+  linksLabel = `${Astro.props?.name ?? "Project"} links`,
+} = Astro.props as Props;
+---
+
+<article
+  class={`group relative overflow-hidden rounded-2xl border border-neutral-200/70 dark:border-neutral-800/70 bg-white dark:bg-neutral-900 ${dense ? "p-4" : "p-5"} shadow-sm hover:shadow-md transition hover:-translate-y-[1px] ${className}`}
+>
+  <div class="flex items-start justify-between gap-3">
+    <h3
+      class={`font-semibold leading-tight ${dense ? "text-base" : "text-lg"}`}
+    >
+      <a
+        href={link}
+        target={link?.startsWith("/") || link?.startsWith("https://vsahni.me")
+          ? "_self"
+          : "_blank"}
+        class="underline decoration-transparent group-hover:decoration-current underline-offset-4"
+        rel="noopener noreferrer"
+      >
+        {name}
+      </a>
+    </h3>
+
+    {
+      extra.length > 0 && (
+        <nav
+          class="shrink-0 text-sm text-neutral-700 dark:text-neutral-300"
+          aria-label={linksLabel}
+        >
+          <ul class="flex items-center gap-2">
+            {extra.map((x, i) => (
+              <li class="flex items-center">
+                <a
+                  class="underline underline-offset-2 hover:opacity-90"
+                  href={x.u}
+                  rel="noopener noreferrer"
+                >
+                  {x.t}
+                </a>
+                {i < extra.length - 1 && (
+                  <span class="mx-2 text-neutral-400">•</span>
+                )}
+              </li>
+            ))}
+          </ul>
+        </nav>
+      )
+    }
+  </div>
+
+  <p
+    class={`mt-2 text-neutral-600 dark:text-neutral-300 ${dense ? "text-sm leading-5" : "text-[15px] leading-6"}`}
+  >
+    {blurb}
+  </p>
+
+  {
+    stack.length > 0 && (
+      <div class="mt-3 flex flex-wrap gap-1.5">
+        {stack.map((s) => (
+          <span class="inline-flex items-center rounded-full border border-neutral-200/80 dark:border-neutral-700/80 bg-neutral-50 dark:bg-neutral-800/70 px-2.5 py-1 text-[11px] font-medium tracking-wide">
+            {s}
+          </span>
+        ))}
+      </div>
+    )
+  }
+  <div
+    class="pointer-events-none absolute inset-x-0 -bottom-px h-px bg-gradient-to-r from-transparent via-neutral-200/80 to-transparent dark:via-neutral-800/80"
+  >
+  </div>
+</article>
