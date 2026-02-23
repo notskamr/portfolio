@@ -1,6 +1,6 @@
 import { defineConfig } from "astro/config";
 import tailwind from "@astrojs/tailwind";
-import vercel from "@astrojs/vercel/static";
+import vercel from "@astrojs/vercel";
 import robots from "astro-robots";
 import sitemap from "@astrojs/sitemap";
 
@@ -9,6 +9,7 @@ import compress from "astro-compress";
 // https://astro.build/config
 export default defineConfig({
   site: "https://vsahni.me",
+  output: "static",
   integrations: [tailwind(), robots(), sitemap(), compress()],
   adapter: vercel({
     webAnalytics: {
@@ -17,5 +18,8 @@ export default defineConfig({
     edgeMiddleware: {
       enabled: true,
     }
-  })
+  }),
+  redirects: {
+    "/resume.pdf": { destination: "/resume_sep2025.pdf", status: 301 }
+  }
 });
