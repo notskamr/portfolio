@@ -66,6 +66,12 @@ export const PROJECTS: Project[] = [
     stack: ["SvelteKit", "MongoDB", "Vercel"],
   },
   {
+    name: "mdbin",
+    blurb: "Markdown pastebin with syntax highlighting and custom links.",
+    link: "https://mdbin.pages.dev",
+    stack: ["Astro", "Tailwind CSS", "Turso (SQLite)", "Cloudflare Workers"],
+  },
+  {
     name: "clear2onion (c2o)",
     blurb: "Link shortener for the dark web. Educational bridge: clearweb → onion web.",
     link: "https://c2o.vsahni.me",
