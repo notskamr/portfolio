@@ -5,6 +5,7 @@ export type Project = {
   link: string;
   stack?: string[];
   extra?: ProjectLink[];
+  source?: string;
 };
 
 export const PROJECTS: Project[] = [
@@ -14,21 +15,23 @@ export const PROJECTS: Project[] = [
     link: "https://flux.vsahni.me",
     stack: ["Bun", "SSE", "WebSocket", "Serverless"],
     extra: [
-      { t: "GitHub", u: "https://github.com/notskamr/flux" },
       { t: "Blog", u: "https://blog.vsahni.me/posts/putting-the-serverless-in-server-sent-events" },
     ],
+    source: "https://github.com/notskamr/flux"
   },
   {
     name: "bun-sqlite-cache",
     blurb: "Caching layer for Bun + SQLite (1K+ downloads).",
-    link: "https://github.com/notskamr/bun-sqlite-cache",
+    link: "https://www.npmjs.com/package/bun-sqlite-cache",
     stack: ["Bun", "SQLite", "LRU Caching"],
+    source: "https://github.com/notskamr/bun-sqlite-cache"
   },
   {
     name: "Firewood",
     blurb: "WebRTC video-calling app (CS50x final) - 100+ registrations.",
     link: "https://firewood.vsahni.me",
     stack: ["WebRTC", "TypeScript", "PWA"],
+    source: "https://github.com/notskamr/firewood-old"
   },
   {
     name: "KageMod",
@@ -57,7 +60,7 @@ export const PROJECTS: Project[] = [
     name: "ICT @ TSRS (tsrs.tech)",
     blurb: "School-wide infra: custom domains, email bots, magic-link verification for Discord, and a role-based auth Discord bot.",
     link: "https://tsrs.tech",
-    stack: ["Astro", "Tailwind CSS", "Discord Bot (Node/discord.js)", "Magic Links/Auth"],
+    stack: ["Astro", "Tailwind CSS", "Node.js", "Magic Links/Auth"],
   },
   {
     name: "MusicAI 2023",
@@ -70,25 +73,29 @@ export const PROJECTS: Project[] = [
     blurb: "Markdown pastebin with syntax highlighting and custom links.",
     link: "https://mdbin.pages.dev",
     stack: ["Astro", "Tailwind CSS", "Turso (SQLite)", "Cloudflare Workers"],
+    source: "https://github.com/notskamr/mdbin"
   },
   {
     name: "clear2onion (c2o)",
     blurb: "Link shortener for the dark web. Educational bridge: clearweb → onion web.",
     link: "https://c2o.vsahni.me",
-    stack: ["Astro", "Tailwind CSS", "Turso (SQLite)"],
+    stack: ["Astro", "Tailwind CSS", "Turso (SQLite)", "Cloudflare Workers"],
+    source: "https://github.com/notskamr/clear2onion"
   },
 
   {
     name: "Crypt Hunt",
     blurb: "CTF-style web platform for ShriTeq handling and scaling 1.5M+ requests during the event without race conditions.",
     link: "https://crypthunt.tsrs.tech",
-    stack: ["Astro", "Tailwind CSS", "Turso (SQLite)", "Cloudflare Pages", "Zod", "Serverless"],
+    stack: ["Astro", "Tailwind CSS", "Turso (SQLite)", "Cloudflare Workers", "Svelte"],
+    source: "https://github.com/notskamr/tsrs-crypthunt-2024"
   },
   {
     name: "CortX",
     blurb: "Medical management web-app; one of 5 core founding members.",
     link: "https://urls.vsahni.me/cortx",
     stack: ["React", "Express", "MongoDB", "Heroku"],
+    source: "https://github.com/tsrsmict/CortX"
   },
   {
     name: "CS61CPU",

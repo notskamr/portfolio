@@ -13,6 +13,7 @@ const {
   link,
   stack = [],
   extra = [],
+  source,
   class: className = "",
   dense = false,
   linksLabel = `${Astro.props?.name ?? "Project"} links`,
@@ -39,7 +40,7 @@ const {
     </h3>
 
     {
-      extra.length > 0 && (
+      (extra.length > 0 || source) && (
         <nav
           class="shrink-0 text-sm text-neutral-700 dark:text-neutral-300"
           aria-label={linksLabel}
@@ -59,6 +60,22 @@ const {
                 )}
               </li>
             ))}
+            {source && (
+              <>
+                {extra.length > 0 && (
+                  <span class="mx-2 text-neutral-400">•</span>
+                )}
+                <li class="flex items-center">
+                  <a
+                    class="underline underline-offset-2 hover:opacity-90"
+                    href={source}
+                    rel="noopener noreferrer"
+                  >
+                    Source
+                  </a>
+                </li>
+              </>
+            )}
           </ul>
         </nav>
       )
