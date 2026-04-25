@@ -26,13 +26,13 @@ export const PROJECTS: Project[] = [
   },
   {
     name: "Firewood",
-    blurb: "WebRTC video-calling app (CS50x final) — 100+ registrations.",
+    blurb: "WebRTC video-calling app (CS50x final) - 100+ registrations.",
     link: "https://firewood.vsahni.me",
     stack: ["WebRTC", "TypeScript", "PWA"],
   },
   {
     name: "KageMod",
-    blurb: "Minecraft gameplay mod — 23K+ downloads.",
+    blurb: "Minecraft gameplay mod - 23K+ downloads.",
     link: "https://www.curseforge.com/minecraft/mc-mods/kagemod",
     stack: ["Java", "Forge", "Gradle", "Game Modding"],
   },
