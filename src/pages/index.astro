@@ -12,8 +12,8 @@ const me = {
 };
 
 const work = [
-  { name: "CompSi, Purdue", note: "undergraduate researcher", meta: "2026" },
-  { name: "Paasa", note: "software engineer intern", meta: "2026" },
+  { name: "CompSi, Purdue", note: "undergraduate researcher", meta: "2026", href: "https://engineering.purdue.edu/compsi" },
+  { name: "Paasa", note: "software engineer intern", meta: "2026", href: "https://paasa.com" },
   { name: "CortX", note: "co-founder", meta: "2022", href: "https://urls.vsahni.me/cortx" },
   { name: "The Shri Ram School", note: "head of ICT", meta: "2023", href: "https://tsrs.tech" },
 ];
@@ -107,13 +107,15 @@ const link = "underline decoration-rule decoration-1 underline-offset-[3px] hove
       </header>
       <p>
         I build backend systems, and lately the hardware underneath them. I’m an
-        undergraduate researcher in Purdue’s CompSi group, working on RISC-V
+        undergraduate researcher in Purdue’s
+        <a class={link} href="https://engineering.purdue.edu/compsi" target="_blank" rel="noopener noreferrer">CompSi</a> group, working on RISC-V
         vector cores and ML accelerators. I keep things
         <a class={link} href="https://grugbrain.dev/" target="_blank" rel="noopener noreferrer">simple</a>
         on purpose.
       </p>
       <p>
-        This summer I was an engineer at Paasa (YC S24), where I built services
+        This summer I was an engineer at
+        <a class={link} href="https://paasa.com" target="_blank" rel="noopener noreferrer">Paasa</a> (YC S24), where I built services
         for the trading platform, an execution layer that saved the ops team
         200+ hours a week, and their first FIX engine. Before that, I spent high
         school starting things: a health startup, a symposium for 90+ schools,
