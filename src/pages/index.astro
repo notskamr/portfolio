@@ -36,12 +36,10 @@ const writing = [
   { name: "A lightweight CNN for GI disorder detection", note: "IEEE", meta: "2026", href: "https://ieeexplore.ieee.org/document/11613903" },
 ];
 
-// drop images into public/photos; a photo only shows once its file exists
-const photos = [
-  { src: "/photos/shriteq.jpg", caption: "ShriTeq, running the show" },
-  { src: "/photos/berkeley.jpg", caption: "Berkeley, the CS61C summer" },
-  { src: "/photos/paasa.jpg", caption: "Paasa, summer ’26" },
-].filter((p) => fs.existsSync(`public${p.src}`));
+// up to three images from public/photos, e.g. { src: "/photos/one.jpg", caption: "..." }
+const photos: { src: string; caption: string }[] = [].filter(
+  (p: { src: string }) => fs.existsSync(`public${p.src}`),
+);
 
 const label = "mb-2 text-base font-medium tracking-[0.14em] lowercase [font-variant:small-caps] text-muted";
 const link = "underline decoration-rule decoration-1 underline-offset-[3px] hover:decoration-ink";
