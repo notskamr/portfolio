@@ -63,7 +63,8 @@ const link = "underline decoration-rule decoration-1 underline-offset-[3px] hove
     input?.addEventListener("input", (e) => {
       const q = (e.target.value || "").toLowerCase().trim();
       items.forEach((li) => {
-        li.hidden = q !== "" && !li.textContent.toLowerCase().includes(q);
+        // `hidden` loses to the `flex` class, so toggle display directly
+        li.style.display = q === "" || li.textContent.toLowerCase().includes(q) ? "" : "none";
       });
     });
   </script>
