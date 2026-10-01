@@ -2,7 +2,6 @@
 import fs from "node:fs";
 import Entry from "../components/Entry.astro";
 import Layout from "../layouts/Layout.astro";
-import { SEO } from "astro-seo";
 
 const me = {
   email: "contact@vsahni.me",
@@ -36,30 +35,69 @@ const writing = [
   { name: "A lightweight CNN for GI disorder detection", note: "IEEE", meta: "2026", href: "https://ieeexplore.ieee.org/document/11613903" },
 ];
 
+const description =
+  "Varun Sahni studies Computer Engineering at Purdue. He builds backend systems, and lately the hardware underneath them.";
+
+const person = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Varun Sahni",
+  url: me.site,
+  email: `mailto:${me.email}`,
+  description,
+  affiliation: { "@type": "CollegeOrUniversity", name: "Purdue University" },
+  sameAs: [me.github, me.blog],
+};
+
 // images live in public/photos; a row of three moments, then a row of two views
-type Photo = { src: string; caption: string };
+type Photo = { src: string; caption: string; alt: string; w: number; h: number };
 const exists = (p: Photo) => fs.existsSync(`public${p.src}`);
 const moments: Photo[] = [
-  { src: "/photos/buldak.jpg", caption: "The 100x buldak challenge at Berkeley" },
-  { src: "/photos/dispenser.jpg", caption: "A cardboard medicine dispenser" },
-  { src: "/photos/minecraft.jpg", caption: "Beating Minecraft, ten years in" },
+  {
+    src: "/photos/buldak.jpg",
+    caption: "The spiciest buldak, at Berkeley",
+    alt: "A paper bowl of the spiciest buldak noodles, covered in dark chili sauce, with chopsticks",
+    w: 903,
+    h: 1200,
+  },
+  {
+    src: "/photos/dispenser.jpg",
+    caption: "A cardboard medicine dispenser",
+    alt: "A cardboard box with two buttons and a blue LCD reading Fri 17:44, A=cycle, B=done",
+    w: 901,
+    h: 1200,
+  },
+  {
+    src: "/photos/minecraft.jpg",
+    caption: "Beating Minecraft, ten years in",
+    alt: "A laptop showing the Minecraft end poem on a starry screen",
+    w: 1200,
+    h: 903,
+  },
 ].filter(exists);
 const views: Photo[] = [
-  { src: "/photos/sunset.jpg", caption: "Sunset at Purdue" },
-  { src: "/photos/sand.jpg", caption: "Life is good" },
+  {
+    src: "/photos/sunset.jpg",
+    caption: "Sunset at Purdue",
+    alt: "The sun setting over a campus street, framed by trees and a brick residence hall",
+    w: 1051,
+    h: 1400,
+  },
+  {
+    src: "/photos/sand.jpg",
+    caption: "Life is good",
+    alt: "The words life is good and a smiley face written in dark sand",
+    w: 1051,
+    h: 1400,
+  },
 ].filter(exists);
 
 const label = "mb-2 text-base font-medium tracking-[0.14em] lowercase [font-variant:small-caps] text-muted";
 const link = "underline decoration-rule decoration-1 underline-offset-[3px] hover:decoration-ink";
 ---
 
-<Layout title="Varun Sahni">
-  <SEO
-    slot="headTop"
-    title="Varun Sahni"
-    description="Varun Sahni. Computer Engineering at Purdue. Backend systems, and lately the hardware underneath them."
-    canonical={me.site}
-  />
+<Layout title="Varun Sahni" description={description}>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(person)} />
 
   <main class="mx-auto flex max-w-[600px] flex-col gap-14 px-5 pb-20 pt-20 sm:pt-28 [font-variant-numeric:oldstyle-nums]">
     <section class="flex flex-col gap-6">
@@ -108,8 +146,11 @@ const link = "underline decoration-rule decoration-1 underline-offset-[3px] hove
                 <figure class="flex flex-col gap-1.5">
                   <img
                     src={p.src}
-                    alt={p.caption}
+                    alt={p.alt}
+                    width={p.w}
+                    height={p.h}
                     loading="lazy"
+                    decoding="async"
                     class:list={["w-full object-cover", row.length === 3 ? "aspect-square" : "aspect-[4/5]"]}
                   />
                   <figcaption class="text-[15px] italic leading-snug text-muted">{p.caption}</figcaption>
@@ -124,8 +165,8 @@ const link = "underline decoration-rule decoration-1 underline-offset-[3px] hove
     <section class="flex flex-col gap-2">
       <h2 class={label}>favorites</h2>
       <dl class="grid grid-cols-[minmax(0,9rem)_minmax(0,1fr)] gap-x-5 gap-y-1.5">
-        <dt class="italic text-muted">On right now</dt>
-        <dd><a id="np" class={link} href="https://np.vsahni.me" target="_blank" rel="noopener noreferrer">Loading…</a></dd>
+        <dt class="italic text-muted">Listening to</dt>
+        <dd id="np" class="italic text-muted" aria-live="polite">checking…</dd>
         <dt class="italic text-muted">Essay</dt>
         <dd><a class={link} href="https://grugbrain.dev/" target="_blank" rel="noopener noreferrer">The Grug Brained Developer</a></dd>
         <dt class="italic text-muted">Album</dt>
@@ -150,14 +191,24 @@ const link = "underline decoration-rule decoration-1 underline-offset-[3px] hove
   <script is:inline>
     const np = document.getElementById("np");
 
+    // np.vsahni.me only reports a track while one is actually playing
     function show(song) {
       const d = song?.details;
       if (song?.statusCode === 200 && d?.url) {
-        np.textContent = `${d.name} by ${d.artists.join(", ")}`;
-        np.href = d.url;
+        const dot = document.createElement("span");
+        dot.className = "mr-2 inline-block h-2 w-2 -translate-y-[2px] rounded-full bg-ink motion-safe:animate-pulse";
+        dot.title = "Playing now";
+        const a = document.createElement("a");
+        a.className = "underline decoration-rule decoration-1 underline-offset-[3px] hover:decoration-ink";
+        a.href = d.url;
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+        a.textContent = `${d.name} by ${d.artists.join(", ")}`;
+        np.className = "";
+        np.replaceChildren(dot, a);
       } else {
-        np.textContent = "Silence…";
-        np.removeAttribute("href");
+        np.className = "italic text-muted";
+        np.textContent = "nothing right now";
       }
     }
 
