@@ -37,9 +37,11 @@ const writing = [
 ];
 
 // up to three images from public/photos, e.g. { src: "/photos/one.jpg", caption: "..." }
-const photos: { src: string; caption: string }[] = [].filter(
-  (p: { src: string }) => fs.existsSync(`public${p.src}`),
-);
+const photos: { src: string; caption: string; pos?: string }[] = [
+  { src: "/photos/surfing.jpg", caption: "Almost catching a wave", pos: "60% center" },
+  { src: "/photos/dispenser.jpg", caption: "A cardboard medicine dispenser" },
+  { src: "/photos/minecraft.jpg", caption: "Beating Minecraft, ten years in" },
+].filter((p) => fs.existsSync(`public${p.src}`));
 
 const label = "mb-2 text-base font-medium tracking-[0.14em] lowercase [font-variant:small-caps] text-muted";
 const link = "underline decoration-rule decoration-1 underline-offset-[3px] hover:decoration-ink";
@@ -96,7 +98,7 @@ const link = "underline decoration-rule decoration-1 underline-offset-[3px] hove
         <section class="grid grid-cols-3 gap-3.5">
           {photos.map((p) => (
             <figure class="flex flex-col gap-1.5">
-              <img src={p.src} alt={p.caption} loading="lazy" class="aspect-[4/5] w-full object-cover" />
+              <img src={p.src} alt={p.caption} loading="lazy" class="aspect-square w-full object-cover" style={p.pos && `object-position: ${p.pos}`} />
               <figcaption class="text-[15px] italic leading-snug text-muted">{p.caption}</figcaption>
             </figure>
           ))}
