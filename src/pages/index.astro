@@ -1,353 +1,184 @@
 ---
-import { ArrowRight } from "@lucide/astro";
-import Project from "../components/v2/Project.astro";
-import { PROJECTS } from "../config/Projects";
+import fs from "node:fs";
+import Entry from "../components/Entry.astro";
 import Layout from "../layouts/Layout.astro";
 import { SEO } from "astro-seo";
 
 const me = {
-  name: "Varun Sahni",
-  tagline:
-    "Purdue CS/CE '28 · systems & computer architecture · spanning CS + ECE",
   email: "contact@vsahni.me",
-  phone: "510-944-7378",
   github: "https://github.com/notskamr",
   site: "https://vsahni.me",
   blog: "https://blog.vsahni.me",
   resume: "/resume",
 };
 
-const socials = [
-  { t: "GitHub", u: me.github },
-  { t: "Blog", u: me.blog },
-  { t: "Email", u: `mailto:${me.email}` },
-  { t: "Resume (PDF)", u: me.resume },
+const work = [
+  { name: "CompSi, Purdue", note: "undergraduate researcher", meta: "2026" },
+  { name: "Paasa", note: "software engineer intern", meta: "2026" },
+  { name: "CortX", note: "co-founder", meta: "2022", href: "https://urls.vsahni.me/cortx" },
+  { name: "The Shri Ram School", note: "head of ICT", meta: "2023", href: "https://tsrs.tech" },
 ];
 
-const experience = [
-  {
-    org: "Paasa (YC S24, Fintech Startup)",
-    role: "Software Engineer Intern",
-    when: "May 2026 - Aug. 2026",
-    pts: [
-      "Architected model-portfolio platform end-to-end — analytics engine, auto-rebalancing, market notes for advisors & clients.",
-      "Shipped audited, API-driven execution layer → eliminated manual order placement, saving 200+ ops hrs/week.",
-      "Rebuilt instrument ingestion on IBKR/OpenFIGI (~90K instruments): 6hr cron → minutes.",
-      "Drove redesigns across cash systems + a deeply coupled, ~10K-line trading service file (~10 authored design docs) as AUM grew $15M → $80M; prototyped Paasa's first FIX engine in Kotlin.",
-    ],
-  },
-  {
-    org: "CortX (Healthcare startup)",
-    role: "Co-Founder & Founding Engineer",
-    when: "2021 - 2022",
-    pts: [
-      "One of 5 core founders; led full-stack (React + Express).",
-      "Designed 'health-audit' algorithm to consolidate patient histories.",
-      "Work recognized by Young Changemaker Award (Govt. of India).",
-    ],
-  },
+const made = [
+  { name: "Flux", note: "SSE for serverless", meta: "Bun", href: "https://flux.vsahni.me" },
+  { name: "bun-sqlite-cache", note: "1K+ downloads", meta: "npm", href: "https://www.npmjs.com/package/bun-sqlite-cache" },
+  { name: "CS61CPU", note: "5-stage RISC-V", meta: "Logisim", href: "https://inst.eecs.berkeley.edu/~cs61c/su23/projects/proj3/" },
+  { name: "Crypt Hunt", note: "1.5M requests", meta: "Workers", href: "https://crypthunt.tsrs.tech" },
+  { name: "KageMod", note: "23K downloads", meta: "Java", href: "https://www.curseforge.com/minecraft/mc-mods/kagemod" },
 ];
 
-const projects = PROJECTS.slice(0, 6);
-
-const research = [
-  "Self-directed CV/ML: lightweight CNN for GI disorder detection (97.82% on HyperKvasir).",
-  "Presented at UMich AI Symposium, IEEE CICT, SLAS Data 2024, SCCUR, IFIC Zhejiang Lab.",
-  "First-author IEEE paper pending.",
+const writing = [
+  {
+    name: "Putting the serverless in server-sent events",
+    meta: "blog",
+    href: "https://blog.vsahni.me/posts/putting-the-serverless-in-server-sent-events",
+  },
+  { name: "A lightweight CNN for GI disorder detection", note: "IEEE", meta: "2026", href: "https://ieeexplore.ieee.org/document/11613903" },
 ];
 
-const leadership = [
-  "Head of ICT - The Shri Ram School: ran ShriTeq (90+ schools), AI & Cybersecurity Weeks (800+ students).",
-  "Launched Parallelized - India's first performance-aware programming contest.",
-  "Hack Club - member & mentor; Pure Hearts co-founder (3K+ beneficiaries; 500+ volunteers; $30K+ raised).",
-];
+// images live in public/photos; a row of three moments, then a row of two views
+type Photo = { src: string; caption: string };
+const exists = (p: Photo) => fs.existsSync(`public${p.src}`);
+const moments: Photo[] = [
+  { src: "/photos/buldak.jpg", caption: "The 100x buldak challenge at Berkeley" },
+  { src: "/photos/dispenser.jpg", caption: "A cardboard medicine dispenser" },
+  { src: "/photos/minecraft.jpg", caption: "Beating Minecraft, ten years in" },
+].filter(exists);
+const views: Photo[] = [
+  { src: "/photos/sunset.jpg", caption: "Sunset at Purdue" },
+  { src: "/photos/sand.jpg", caption: "Life is good" },
+].filter(exists);
 
-const education = [
-  {
-    school: "Purdue University",
-    sub: "B.S. Computer Engineering ('28) · spanning CS & ECE",
-    loc: "West Lafayette, IN",
-    items: [
-      "Dean's List",
-      "ECE 264 (Advanced C Programming)",
-      "CS 180 (Object-Oriented Programming)",
-      "Interests: Arch, Systems, AI/ML",
-    ],
-  },
-  {
-    school: "UC Berkeley - Summer Sessions",
-    sub: "CS61C (A-), Data 8 (B+)",
-    loc: "Berkeley, CA",
-    items: [
-      "CS 61C, computer architecture: boolean logic, C, assembly, memory hierarchy, pipelining, parallelism; built a 5-stage pipelined RISC-V CPU in Logisim.",
-      "DATA 8: inference on real-world datasets using Python/NumPy/Pandas.",
-    ],
-  },
-];
-
-const skills = [
-  {
-    k: "Languages",
-    v: "Python, C, Java, JavaScript/TypeScript, SQL (PostgreSQL, libSQL), RISC-V",
-  },
-  {
-    k: "Frameworks",
-    v: "React, Next.js, Svelte, Astro, Bun, Node.js, Flask, FastAPI, Django, NestJS, Express, TailwindCSS",
-  },
-  { k: "ML", v: "NumPy, Pandas, scikit-learn, TensorFlow, PyTorch, Keras" },
-  { k: "Tools", v: "Git, Docker, VS Code" },
-];
+const label = "mb-2 text-base font-medium tracking-[0.14em] lowercase [font-variant:small-caps] text-muted";
+const link = "underline decoration-rule decoration-1 underline-offset-[3px] hover:decoration-ink";
 ---
 
-<Layout title="Varun Sahni" bodyClass="min-h-screen">
+<Layout title="Varun Sahni">
   <SEO
     slot="headTop"
     title="Varun Sahni"
-    description="Varun Sahni - Purdue CS '28. Systems & computer architecture. Open-source, research, and products."
+    description="Varun Sahni. Computer Engineering at Purdue. Backend systems, and lately the hardware underneath them."
     canonical={me.site}
   />
 
-  <main
-    class="mx-auto max-w-5xl px-4 py-8 lg:py-12 selection:bg-yellow-300/40 dark:selection:bg-amber-400/20"
-  >
-    <!-- top -->
-    <header class="flex flex-col gap-3">
-      <div class="flex flex-wrap items-end justify-between gap-3">
-        <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight">
-          {me.name}
-        </h1>
-      </div>
-      <p class="text-neutral-600 dark:text-neutral-200">{me.tagline}</p>
-      <nav class="flex flex-wrap gap-2" aria-label="Primary">
-        {
-          socials.map((s) => (
-            <a
-              href={s.u}
-              class="inline-flex items-center gap-2 rounded-full bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 px-3 py-1 text-sm shadow-sm hover:shadow transition"
-              rel="noopener noreferrer"
-            >
-              {s.t}
-            </a>
-          ))
-        }
-      </nav>
-
-      <!-- song now playing (np.vsahni.me) -->
-      <div class="mt-3 flex flex-wrap items-center gap-2 text-sm">
-        <span class="font-semibold">Now Playing:</span>
-        <span id="np-loading" class="dark:text-neutral-300 text-neutral-500"
-          >Loading…</span
-        >
-        <a
-          id="np-link"
-          href="#"
-          class="opacity-0 transition-opacity underline underline-offset-2"></a>
-      </div>
-    </header>
-
-    <!-- about me -->
-    <section class="mt-8">
-      <h2
-        class="text-xs font-semibold uppercase tracking-[0.18em] dark:text-neutral-300 text-neutral-500"
-      >
-        About
-      </h2>
-      <p class="mt-2 leading-relaxed">
-        I build where hardware meets software - <span class="font-medium"
-          >RISC-V & memory hierarchies</span
-        > up to
-        <span class="font-medium">reliable web systems</span>. I like to find
-        community and share knowledge. I ship fast, document well, and keep
-        things <a href="https://grugbrain.dev/" target="_blank">simple</a>.
+  <main class="mx-auto flex max-w-[600px] flex-col gap-14 px-5 pb-20 pt-20 sm:pt-28 [font-variant-numeric:oldstyle-nums]">
+    <section class="flex flex-col gap-6">
+      <header class="flex flex-col gap-1">
+        <h1 class="text-[34px] font-medium leading-tight tracking-tight">Varun Sahni</h1>
+        <p class="italic text-muted">Computer Engineering at Purdue, class of ’28</p>
+      </header>
+      <p>
+        I build backend systems, and lately the hardware underneath them. I’m an
+        undergraduate researcher in Purdue’s CompSi group, working on RISC-V
+        vector cores and ML accelerators. I keep things
+        <a class={link} href="https://grugbrain.dev/" target="_blank" rel="noopener noreferrer">simple</a>
+        on purpose.
+      </p>
+      <p>
+        This summer I was an engineer at Paasa (YC S24), where I built services
+        for the trading platform, an execution layer that saved the ops team
+        200+ hours a week, and their first FIX engine. Before that, I spent high
+        school starting things: a health startup, a symposium for 90+ schools,
+        and a programming contest about speed.
       </p>
     </section>
 
-    <!-- experience -->
-    <section class="mt-10">
-      <h2
-        class="text-xs font-semibold uppercase tracking-[0.18em] dark:text-neutral-300 text-neutral-500"
-      >
-        Experience
-      </h2>
-      <div class="mt-3 grid gap-3">
-        {
-          experience.map((e) => (
-            <article class="rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-4">
-              <div class="flex flex-wrap items-baseline justify-between gap-2">
-                <h3 class="font-semibold">
-                  {e.org} - {e.role}
-                </h3>
-                <span class="text-xs dark:text-neutral-300 text-neutral-500">
-                  {e.when}
-                </span>
-              </div>
-              <ul class="mt-2 list-disc pl-5 space-y-1">
-                {e.pts.map((p) => (
-                  <li>{p}</li>
-                ))}
-              </ul>
-            </article>
-          ))
-        }
-      </div>
+    <section class="flex flex-col gap-2">
+      <h2 class={label}>work</h2>
+      {work.map((e) => <Entry {...e} />)}
     </section>
 
-    <!-- projects -->
-    <section class="mt-12">
-      <div class="mb-2 flex items-baseline justify-between">
-        <h2
-          class="text-xs font-semibold uppercase tracking-[0.18em] dark:text-neutral-300 text-neutral-500"
-        >
-          Selected Projects
-        </h2>
-        <a href="/projects" class="flex text-sm underline underline-offset-4"
-          ><ArrowRight size="20" class="mr-1" />See All</a
-        >
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {projects.map((p) => <Project {...p} />)}
-      </div>
+    <section class="flex flex-col gap-2">
+      <h2 class={label}>things i made</h2>
+      {made.map((e) => <Entry {...e} />)}
+      <a href="/projects" class="text-[17px] italic text-muted hover:text-ink">all projects →</a>
     </section>
 
-    <!-- research exp. -->
-    <section class="mt-10">
-      <h2
-        class="text-xs font-semibold uppercase tracking-[0.18em] dark:text-neutral-300 text-neutral-500"
-      >
-        Research
-      </h2>
-      <ul class="mt-3 list-disc pl-5 space-y-1">
-        {research.map((r) => <li>{r}</li>)}
-      </ul>
+    <section class="flex flex-col gap-2">
+      <h2 class={label}>writing</h2>
+      {writing.map((e) => <Entry {...e} />)}
     </section>
 
-    <!-- leadership -->
-    <section class="mt-10">
-      <h2
-        class="text-xs font-semibold uppercase tracking-[0.18em] dark:text-neutral-300 text-neutral-500"
-      >
-        Leadership & Community
-      </h2>
-      <ul class="mt-3 list-disc pl-5 space-y-1">
-        {leadership.map((l) => <li>{l}</li>)}
-      </ul>
-    </section>
-
-    <!-- education -->
-    <section class="mt-10">
-      <h2
-        class="text-xs font-semibold uppercase tracking-[0.18em] dark:text-neutral-300 text-neutral-500"
-      >
-        Education & Courses
-      </h2>
-      <div class="mt-3 grid gap-3">
-        {
-          education.map((ed) => (
-            <div class="rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-4">
-              <div class="flex flex-wrap items-baseline justify-between gap-2">
-                <h3 class="font-semibold">{ed.school}</h3>
-                <span class="text-xs text-neutral-500">{ed.loc}</span>
-              </div>
-              <p class="text-sm text-neutral-600 dark:text-neutral-300">
-                {ed.sub}
-              </p>
-              <ul class="mt-2 list-disc pl-5 space-y-1">
-                {ed.items.map((it) => (
-                  <li>{it}</li>
-                ))}
-              </ul>
+    {
+      moments.length + views.length > 0 && (
+        <section class="flex flex-col gap-5">
+          {[moments, views].filter((row) => row.length).map((row) => (
+            <div class:list={["grid gap-3.5", row.length === 3 ? "grid-cols-3" : "grid-cols-2"]}>
+              {row.map((p) => (
+                <figure class="flex flex-col gap-1.5">
+                  <img
+                    src={p.src}
+                    alt={p.caption}
+                    loading="lazy"
+                    class:list={["w-full object-cover", row.length === 3 ? "aspect-square" : "aspect-[4/5]"]}
+                  />
+                  <figcaption class="text-[15px] italic leading-snug text-muted">{p.caption}</figcaption>
+                </figure>
+              ))}
             </div>
-          ))
-        }
-      </div>
+          ))}
+        </section>
+      )
+    }
+
+    <section class="flex flex-col gap-2">
+      <h2 class={label}>favorites</h2>
+      <dl class="grid grid-cols-[minmax(0,9rem)_minmax(0,1fr)] gap-x-5 gap-y-1.5">
+        <dt class="italic text-muted">On right now</dt>
+        <dd><a id="np" class={link} href="https://np.vsahni.me" target="_blank" rel="noopener noreferrer">Loading…</a></dd>
+        <dt class="italic text-muted">Essay</dt>
+        <dd><a class={link} href="https://grugbrain.dev/" target="_blank" rel="noopener noreferrer">The Grug Brained Developer</a></dd>
+        <dt class="italic text-muted">Album</dt>
+        <dd>Mr. Morale &amp; the Big Steppers</dd>
+        <dt class="italic text-muted">Movie</dt>
+        <dd>Spider-Man: Into the Spider-Verse</dd>
+        <dt class="italic text-muted">Games</dt>
+        <dd>Red Dead Redemption 2, Minecraft</dd>
+        <dt class="italic text-muted">Food</dt>
+        <dd>Biryani</dd>
+      </dl>
     </section>
 
-    <!-- skills -->
-    <section class="mt-10">
-      <h2
-        class="text-xs font-semibold uppercase tracking-[0.18em] dark:text-neutral-300 text-neutral-500"
-      >
-        Skills
-      </h2>
-      <div class="mt-3 grid sm:grid-cols-2 gap-3">
-        {
-          skills.map((s) => (
-            <div class="rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-4">
-              <span class="font-semibold">{s.k}:</span>
-              <span class="text-neutral-700 dark:text-neutral-300"> {s.v}</span>
-            </div>
-          ))
-        }
-      </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer class="mt-12 text-xs dark:text-neutral-300 text-neutral-500">
-      Last updated {new Date().toISOString().slice(0, 10)} •
-      <a
-        class="underline underline-offset-2"
-        href={me.github}
-        rel="me noopener"
-      >
-        GitHub</a
-      > •
-      <a class="underline underline-offset-2" href={me.blog} rel="noopener">
-        Blog</a
-      >
+    <footer class="flex flex-wrap gap-x-5 gap-y-2 border-t border-rule pt-5 text-base text-muted">
+      <a class="hover:text-ink" href={`mailto:${me.email}`}>{me.email}</a>
+      <a class="hover:text-ink" href={me.github} rel="me noopener">GitHub</a>
+      <a class="hover:text-ink" href={me.blog}>Blog</a>
+      <a class="hover:text-ink" href={me.resume}>Résumé</a>
     </footer>
   </main>
 
   <script is:inline>
-    const npLoading = document.getElementById("np-loading");
-    const npLink = document.getElementById("np-link");
+    const np = document.getElementById("np");
 
-    function setNowPlaying(text, href) {
-      if (npLoading) npLoading.style.display = "none";
-      if (!npLink) return;
-      npLink.textContent = text;
-      npLink.href = href || "#";
-      npLink.style.opacity = "1";
-      if (href) npLink.setAttribute("target", "_blank");
+    function show(song) {
+      const d = song?.details;
+      if (song?.statusCode === 200 && d?.url) {
+        np.textContent = `${d.name} by ${d.artists.join(", ")}`;
+        np.href = d.url;
+      } else {
+        np.textContent = "Silence…";
+        np.removeAttribute("href");
+      }
     }
 
-    function getDisplay(song) {
+    async function poll() {
       try {
-        const details = song?.details;
-        if (song?.statusCode === 200 && details?.url) {
-          return {
-            text: ` ${details.name} by ${details.artists.join(", ")}`,
-            url: details.url,
-          };
-        }
-      } catch {}
-      return { text: " Silence…", url: undefined };
+        const res = await fetch("https://np.vsahni.me", { cache: "no-store" });
+        show(await res.json());
+      } catch {
+        show();
+      }
     }
 
     try {
       const es = new EventSource("https://np.vsahni.me/sse");
-      es.onmessage = (e) => {
-        const payload = JSON.parse(e.data);
-        const { text, url } = getDisplay(payload);
-        setNowPlaying(text, url);
-      };
+      es.onmessage = (e) => show(JSON.parse(e.data));
       es.onerror = () => {
         es.close();
-        fallbackPoll();
+        poll();
       };
     } catch {
-      fallbackPoll();
-    }
-
-    async function fallbackPoll() {
-      try {
-        const res = await fetch("https://np.vsahni.me", { cache: "no-store" });
-        const data = await res.json();
-        const { text, url } = getDisplay(data);
-        setNowPlaying(text, url);
-      } catch {
-        setNowPlaying(" Silence…");
-      }
+      poll();
     }
   </script>
 </Layout>
