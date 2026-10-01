@@ -10,6 +10,7 @@ import compress from "astro-compress";
 export default defineConfig({
   site: "https://vsahni.me",
   output: "static",
+  trailingSlash: "never",
   integrations: [tailwind(), robots(), sitemap(), compress()],
   adapter: vercel({
     webAnalytics: {
