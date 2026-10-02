@@ -15,12 +15,12 @@ const external = href && !href.startsWith("/");
   href={href}
   target={external ? "_blank" : undefined}
   rel={external ? "noopener noreferrer" : undefined}
-  class="group flex items-baseline gap-2.5"
+  class="group flex items-baseline gap-2.5 leading-[1.45]"
 >
   <span class="min-w-0">
     <span class:list={[href && "group-hover:underline underline-offset-[3px] decoration-1"]}>{name}</span>
     {note && <i class="text-muted"> {note}</i>}
   </span>
   <span class="flex-1 min-w-4 -translate-y-[5px] border-b border-dotted border-rule"></span>
-  {meta && <span class="shrink-0 text-muted">{meta}</span>}
+  {meta && <span class="shrink-0 text-muted tabular-nums">{meta}</span>}
 </Tag>

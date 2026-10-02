@@ -92,20 +92,20 @@ const views: Photo[] = [
   },
 ].filter(exists);
 
-const label = "mb-2 text-base font-medium tracking-[0.14em] lowercase [font-variant:small-caps] text-muted";
+const label = "mb-3 text-[12.5px] font-medium uppercase tracking-[0.1em] text-muted";
 const link = "underline decoration-rule decoration-1 underline-offset-[3px] hover:decoration-ink";
 ---
 
 <Layout title="Varun Sahni" description={description}>
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(person)} />
 
-  <main class="mx-auto flex max-w-[600px] flex-col gap-14 px-5 pb-20 pt-20 sm:pt-28 [font-variant-numeric:oldstyle-nums]">
-    <section class="flex flex-col gap-6">
+  <main class="mx-auto flex max-w-[680px] flex-col gap-14 px-5 pb-20 pt-20 sm:pt-28">
+    <section class="flex flex-col gap-[1.25em]">
       <header class="flex flex-col gap-1">
         <h1 class="text-[34px] font-medium leading-tight tracking-tight">Varun Sahni</h1>
         <p class="italic text-muted">Computer Engineering at Purdue, class of ’28</p>
       </header>
-      <p>
+      <p class="[text-wrap:pretty]">
         I build backend systems, and lately the hardware underneath them. I’m an
         undergraduate researcher in Purdue’s
         <a class={link} href="https://engineering.purdue.edu/compsi" target="_blank" rel="noopener noreferrer">CompSi</a> group, working on RISC-V
@@ -113,9 +113,9 @@ const link = "underline decoration-rule decoration-1 underline-offset-[3px] hove
         <a class={link} href="https://grugbrain.dev/" target="_blank" rel="noopener noreferrer">simple</a>
         on purpose.
       </p>
-      <p>
+      <p class="[text-wrap:pretty]">
         This summer I was an engineer at
-        <a class={link} href="https://paasa.com" target="_blank" rel="noopener noreferrer">Paasa</a> (YC S24), where I built services
+        <a class={link} href="https://paasa.com" target="_blank" rel="noopener noreferrer">Paasa</a> (YC&nbsp;S24), where I built services
         for the trading platform, an execution layer that saved the ops team
         200+ hours a week, and their first FIX engine. Before that, I spent high
         school starting things: a health startup, a symposium for 90+ schools,
@@ -123,18 +123,18 @@ const link = "underline decoration-rule decoration-1 underline-offset-[3px] hove
       </p>
     </section>
 
-    <section class="flex flex-col gap-2">
+    <section class="flex flex-col gap-1.5">
       <h2 class={label}>work</h2>
       {work.map((e) => <Entry {...e} />)}
     </section>
 
-    <section class="flex flex-col gap-2">
+    <section class="flex flex-col gap-1.5">
       <h2 class={label}>things i made</h2>
       {made.map((e) => <Entry {...e} />)}
       <a href="/projects" class="text-[17px] italic text-muted hover:text-ink">all projects →</a>
     </section>
 
-    <section class="flex flex-col gap-2">
+    <section class="flex flex-col gap-1.5">
       <h2 class={label}>writing</h2>
       {writing.map((e) => <Entry {...e} />)}
     </section>
@@ -164,9 +164,9 @@ const link = "underline decoration-rule decoration-1 underline-offset-[3px] hove
       )
     }
 
-    <section class="flex flex-col gap-2">
+    <section class="flex flex-col gap-1.5">
       <h2 class={label}>favorites</h2>
-      <dl class="grid grid-cols-[minmax(0,9rem)_minmax(0,1fr)] gap-x-5 gap-y-1.5">
+      <dl class="grid grid-cols-[minmax(0,9rem)_minmax(0,1fr)] gap-x-5 gap-y-1 leading-normal">
         <dt class="italic text-muted">Listening to</dt>
         <dd id="np" class="italic text-muted" aria-live="polite">checking…</dd>
         <dt class="italic text-muted">Essay</dt>
