@@ -167,8 +167,39 @@ const link = "underline decoration-rule decoration-1 underline-offset-[3px] hove
     <section class="flex flex-col gap-1.5">
       <h2 class={label}>favorites</h2>
       <dl class="grid grid-cols-[minmax(0,9rem)_minmax(0,1fr)] gap-x-5 gap-y-1 leading-normal">
-        <dt class="italic text-muted">Listening to</dt>
-        <dd id="np" class="italic text-muted" aria-live="polite">checking…</dd>
+        <dt class="italic text-muted">
+          <span class="np-info relative inline-flex items-center gap-1.5">
+            Listening to
+            <button
+              id="np-info"
+              type="button"
+              class="rounded-full text-muted/70 hover:text-ink focus-visible:text-ink focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-rule"
+              aria-label="About this row"
+              aria-expanded="false"
+              aria-describedby="np-tip"
+            >
+              <svg class="h-[0.75em] w-[0.75em] overflow-visible" viewBox="-1 -1 18 18" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+                <circle cx="8" cy="8" r="7" />
+                <path d="M8 7.2v4.3" stroke-linecap="round" />
+                <circle cx="8" cy="4.7" r="0.5" fill="currentColor" stroke="none" />
+              </svg>
+            </button>
+            <span
+              id="np-tip"
+              role="tooltip"
+              class="np-tip absolute left-0 top-full z-10 mt-1.5 w-max max-w-[15rem] rounded border border-rule bg-paper px-3 py-2 text-[15px] not-italic leading-snug text-muted shadow-sm"
+            >
+              Whatever I'm playing on Spotify, live. Most of the time that's nothing.
+            </span>
+          </span>
+        </dt>
+        <dd>
+          <span id="np-bars" class="np-bars mr-2" aria-hidden="true" hidden><i></i><i></i><i></i><i></i></span><span
+            id="np"
+            class="italic text-muted"
+            aria-live="polite">checking…</span
+          >
+        </dd>
         <dt class="italic text-muted">Essay</dt>
         <dd><a class={link} href="https://grugbrain.dev/" target="_blank" rel="noopener noreferrer">The Grug Brained Developer</a></dd>
         <dt class="italic text-muted">Album</dt>
@@ -192,14 +223,21 @@ const link = "underline decoration-rule decoration-1 underline-offset-[3px] hove
 
   <script is:inline>
     const np = document.getElementById("np");
+    const bars = document.getElementById("np-bars");
+    const info = document.getElementById("np-info");
+
+    // hover covers desktop; taps toggle the note on touch screens
+    info.addEventListener("click", (e) => {
+      e.stopPropagation();
+      info.setAttribute("aria-expanded", String(info.getAttribute("aria-expanded") !== "true"));
+    });
+    document.addEventListener("click", () => info.setAttribute("aria-expanded", "false"));
+    document.addEventListener("keydown", (e) => e.key === "Escape" && info.setAttribute("aria-expanded", "false"));
 
     // np.vsahni.me only reports a track while one is actually playing
     function show(song) {
       const d = song?.details;
       if (song?.statusCode === 200 && d?.url) {
-        const dot = document.createElement("span");
-        dot.className = "mr-2 inline-block h-2 w-2 -translate-y-[2px] rounded-full bg-ink motion-safe:animate-pulse";
-        dot.title = "Playing now";
         const a = document.createElement("a");
         a.className = "underline decoration-rule decoration-1 underline-offset-[3px] hover:decoration-ink";
         a.href = d.url;
@@ -207,8 +245,10 @@ const link = "underline decoration-rule decoration-1 underline-offset-[3px] hove
         a.rel = "noopener noreferrer";
         a.textContent = `${d.name} by ${d.artists.join(", ")}`;
         np.className = "";
-        np.replaceChildren(dot, a);
+        np.replaceChildren(a);
+        bars.hidden = false;
       } else {
+        bars.hidden = true;
         np.className = "italic text-muted";
         np.textContent = "nothing right now";
       }
@@ -235,3 +275,57 @@ const link = "underline decoration-rule decoration-1 underline-offset-[3px] hove
     }
   </script>
 </Layout>
+
+<style>
+  .np-tip {
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 120ms;
+  }
+  @media (hover: hover) {
+    .np-info:hover .np-tip {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+  .np-info:has(:focus-visible) .np-tip,
+  .np-info:has([aria-expanded="true"]) .np-tip {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .np-bars {
+    display: inline-flex;
+    align-items: center;
+    gap: 2.5px;
+    height: 0.8em;
+    vertical-align: -0.04em;
+  }
+  .np-bars[hidden] {
+    display: none;
+  }
+  .np-bars i {
+    width: 3px;
+    height: 100%;
+    border-radius: 999px;
+    background: currentColor;
+    animation: np-bounce 0.9s ease-in-out infinite alternate;
+  }
+  .np-bars i:nth-child(1) { animation-duration: 0.8s; }
+  .np-bars i:nth-child(2) { animation-duration: 1.1s; animation-delay: -0.4s; }
+  .np-bars i:nth-child(3) { animation-duration: 0.7s; animation-delay: -0.2s; }
+  .np-bars i:nth-child(4) { animation-duration: 1s; animation-delay: -0.6s; }
+
+  @keyframes np-bounce {
+    from { height: 30%; }
+    to { height: 100%; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .np-bars i { animation: none; }
+    .np-bars i:nth-child(1) { height: 50%; }
+    .np-bars i:nth-child(2) { height: 90%; }
+    .np-bars i:nth-child(3) { height: 35%; }
+    .np-bars i:nth-child(4) { height: 70%; }
+  }
+</style>
