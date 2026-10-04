@@ -178,7 +178,7 @@ const link = "underline decoration-rule decoration-1 underline-offset-[3px] hove
               aria-expanded="false"
               aria-describedby="np-tip"
             >
-              <svg class="h-[0.75em] w-[0.75em] overflow-visible" viewBox="-1 -1 18 18" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+              <svg class="h-[0.75em] w-[0.75em] -translate-y-[0.15em] overflow-visible" viewBox="-1 -1 18 18" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
                 <circle cx="8" cy="8" r="7" />
                 <path d="M8 7.2v4.3" stroke-linecap="round" />
                 <circle cx="8" cy="4.7" r="0.5" fill="currentColor" stroke="none" />
@@ -194,7 +194,7 @@ const link = "underline decoration-rule decoration-1 underline-offset-[3px] hove
           </span>
         </dt>
         <dd>
-          <span id="np-bars" class="np-bars mr-2" aria-hidden="true" hidden><i></i><i></i><i></i></span><span
+          <span id="np-bars" class="np-bars mr-2" aria-hidden="true" hidden><i><b></b></i><i><b></b></i><i><b></b></i></span><span
             id="np"
             class="italic text-muted"
             aria-live="polite">checking…</span
@@ -294,37 +294,153 @@ const link = "underline decoration-rule decoration-1 underline-offset-[3px] hove
     opacity: 1;
   }
 
+  /* each bar is two round caps plus a stretched middle, all moved with
+     transforms only, so the pill keeps its shape and runs on the compositor */
   .np-bars {
+    --w: 0.2em;
+    --span: 0.5em;
     display: inline-flex;
-    align-items: center;
-    gap: 3px;
-    height: 0.75em;
-    vertical-align: -0.04em;
+    gap: 0.14em;
+    height: calc(var(--span) + var(--w));
+    vertical-align: 0.02em;
   }
   .np-bars[hidden] {
     display: none;
   }
   .np-bars i {
-    width: 4px;
-    min-height: 4px;
-    height: 100%;
-    border-radius: 999px;
-    background: rgb(var(--muted));
-    animation: np-bounce 0.9s ease-in-out infinite alternate;
+    position: relative;
+    width: var(--w);
   }
-  .np-bars i:nth-child(1) { animation-duration: 0.9s; animation-delay: -0.3s; }
-  .np-bars i:nth-child(2) { animation-duration: 1.2s; animation-delay: -0.7s; }
-  .np-bars i:nth-child(3) { animation-duration: 0.8s; }
+  .np-bars i::before,
+  .np-bars i::after,
+  .np-bars b {
+    position: absolute;
+    left: 0;
+    width: var(--w);
+    background: rgb(var(--muted));
+    will-change: transform;
+    animation: var(--d) cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  }
+  .np-bars i::before,
+  .np-bars i::after {
+    content: "";
+    top: calc(50% - var(--w) / 2);
+    height: var(--w);
+    border-radius: 50%;
+  }
+  .np-bars b {
+    top: calc(50% - var(--span) / 2);
+    height: var(--span);
+  }
+  .np-bars i:nth-child(1) { --d: 1.3s; }
+  .np-bars i:nth-child(1)::before { animation-name: np-top-1; }
+  .np-bars i:nth-child(1)::after { animation-name: np-bot-1; }
+  .np-bars i:nth-child(1) b { animation-name: np-mid-1; }
+  .np-bars i:nth-child(2) { --d: 1.1s; }
+  .np-bars i:nth-child(2)::before { animation-name: np-top-2; }
+  .np-bars i:nth-child(2)::after { animation-name: np-bot-2; }
+  .np-bars i:nth-child(2) b { animation-name: np-mid-2; }
+  .np-bars i:nth-child(3) { --d: 1.5s; }
+  .np-bars i:nth-child(3)::before { animation-name: np-top-3; }
+  .np-bars i:nth-child(3)::after { animation-name: np-bot-3; }
+  .np-bars i:nth-child(3) b { animation-name: np-mid-3; }
 
-  @keyframes np-bounce {
-    from { height: 35%; }
-    to { height: 100%; }
+  @keyframes np-top-1 {
+    0.0% { transform: translateY(-0.0875em); }
+    16.67% { transform: translateY(-0.225em); }
+    33.33% { transform: translateY(-0.125em); }
+    50.0% { transform: translateY(-0.25em); }
+    66.67% { transform: translateY(-0.1em); }
+    83.33% { transform: translateY(-0.1875em); }
+    100.0% { transform: translateY(-0.0875em); }
+  }
+
+  @keyframes np-bot-1 {
+    0.0% { transform: translateY(0.0875em); }
+    16.67% { transform: translateY(0.225em); }
+    33.33% { transform: translateY(0.125em); }
+    50.0% { transform: translateY(0.25em); }
+    66.67% { transform: translateY(0.1em); }
+    83.33% { transform: translateY(0.1875em); }
+    100.0% { transform: translateY(0.0875em); }
+  }
+
+  @keyframes np-mid-1 {
+    0.0% { transform: scaleY(0.35); }
+    16.67% { transform: scaleY(0.9); }
+    33.33% { transform: scaleY(0.5); }
+    50.0% { transform: scaleY(1); }
+    66.67% { transform: scaleY(0.4); }
+    83.33% { transform: scaleY(0.75); }
+    100.0% { transform: scaleY(0.35); }
+  }
+
+  @keyframes np-top-2 {
+    0.0% { transform: translateY(-0.2em); }
+    16.67% { transform: translateY(-0.1em); }
+    33.33% { transform: translateY(-0.25em); }
+    50.0% { transform: translateY(-0.1375em); }
+    66.67% { transform: translateY(-0.225em); }
+    83.33% { transform: translateY(-0.075em); }
+    100.0% { transform: translateY(-0.2em); }
+  }
+
+  @keyframes np-bot-2 {
+    0.0% { transform: translateY(0.2em); }
+    16.67% { transform: translateY(0.1em); }
+    33.33% { transform: translateY(0.25em); }
+    50.0% { transform: translateY(0.1375em); }
+    66.67% { transform: translateY(0.225em); }
+    83.33% { transform: translateY(0.075em); }
+    100.0% { transform: translateY(0.2em); }
+  }
+
+  @keyframes np-mid-2 {
+    0.0% { transform: scaleY(0.8); }
+    16.67% { transform: scaleY(0.4); }
+    33.33% { transform: scaleY(1); }
+    50.0% { transform: scaleY(0.55); }
+    66.67% { transform: scaleY(0.9); }
+    83.33% { transform: scaleY(0.3); }
+    100.0% { transform: scaleY(0.8); }
+  }
+
+  @keyframes np-top-3 {
+    0.0% { transform: translateY(-0.125em); }
+    16.67% { transform: translateY(-0.25em); }
+    33.33% { transform: translateY(-0.0875em); }
+    50.0% { transform: translateY(-0.175em); }
+    66.67% { transform: translateY(-0.1125em); }
+    83.33% { transform: translateY(-0.2375em); }
+    100.0% { transform: translateY(-0.125em); }
+  }
+
+  @keyframes np-bot-3 {
+    0.0% { transform: translateY(0.125em); }
+    16.67% { transform: translateY(0.25em); }
+    33.33% { transform: translateY(0.0875em); }
+    50.0% { transform: translateY(0.175em); }
+    66.67% { transform: translateY(0.1125em); }
+    83.33% { transform: translateY(0.2375em); }
+    100.0% { transform: translateY(0.125em); }
+  }
+
+  @keyframes np-mid-3 {
+    0.0% { transform: scaleY(0.5); }
+    16.67% { transform: scaleY(1); }
+    33.33% { transform: scaleY(0.35); }
+    50.0% { transform: scaleY(0.7); }
+    66.67% { transform: scaleY(0.45); }
+    83.33% { transform: scaleY(0.95); }
+    100.0% { transform: scaleY(0.5); }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .np-bars i { animation: none; }
-    .np-bars i:nth-child(1) { height: 55%; }
-    .np-bars i:nth-child(2) { height: 100%; }
-    .np-bars i:nth-child(3) { height: 70%; }
+    .np-bars i::before,
+    .np-bars i::after,
+    .np-bars b {
+      animation-play-state: paused;
+      animation-delay: -0.2s;
+    }
   }
 </style>
