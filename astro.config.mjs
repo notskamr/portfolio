@@ -22,6 +22,6 @@ export default defineConfig({
   }),
   redirects: {
     "/resume": { destination: "/resume.pdf", status: 301 },
-    "/resume.pdf": { destination: "/resume_aug2026.pdf", status: 301 }
+    "/resume.pdf": { destination: "/resume_oct2026.pdf", status: 301 }
   }
 });
